@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% import "macros/forms.html" as forms %}
+
+{% block pageTitle %}
+  Add reference
+{% endblock %}
+
+{% block beforeContent %}
+    <a class="govuk-back-link" id="navigateBackLink" name="navigateBackLink" href="/form-selection">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" id="referenceForm" name="referenceForm" action="/reference" method="post">
+        <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset">
+                {{ forms.legend("formTypeHeading", "Your reference for this notification") }}
+                 <p class="govuk-body govuk-!-margin-top-3">You can add a name that will help you identify this notification.</p>
+                 <div class="govuk-inset-text">This is not the reference that will be used when we contact you.</div>
+                 {{ forms.textInput(
+                    "Your reference (optional)", "userNotificationReference", "userNotificationReference", data.userNotificationReference, "", "") }}
+            </fieldset>
+        </div>
+        {{ forms.saveAndContinueButton("formTypeSubmitButton") }}
+      </form>
+    </div>
+</div>
+{% endblock %}

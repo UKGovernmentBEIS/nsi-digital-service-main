@@ -1,0 +1,69 @@
+{% set section = 'retrospective' %}
+{% set backlink = "/"+section+"/question1/question1-1" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 1 Page 3
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" id="q1iiiForm" name="q1iiiForm" action="/retrospective/question1/question1-3" method="post">
+            {{ forms.errorSummary(formValidation) }}
+            <fieldset class="govuk-fieldset">
+                {{ forms.legend("q1iiiHeading", "About the notifier and its authorised representative") }}
+
+                {{ forms.textInput(
+                    "Name of notifer", "q1iiiNotifyingPartyName", "q1iiiNotifyingPartyName", data.q1iiiNotifyingPartyName, maxLength="100") }}
+
+                {{ forms.textInput(
+                    "Full name of person within notifier we can contact if needed", "q1iiiNotifyingPartyIndividual",
+                    "q1iiiNotifyingPartyIndividual", data.q1iiiNotifyingPartyIndividual, maxLength="100") }}
+
+                {{ forms.emailInput("q1iiiNotifyingPartyEmail", "q1iiiNotifyingPartyEmail", data.q1iiiNotifyingPartyEmail, maxLength="100", label="Email of person within notifier we can contact if needed") }}
+
+                {{ forms.telephoneInput("q1iiiNotifyingPartyPhone", "q1iiiNotifyingPartyPhone", data.q1iiiNotifyingPartyPhone, label="Telephone of person within notifier we can contact if needed") }}
+
+                <!-- // TODO: Add the addresses info for Acquiring Party and the Represenetative organisation(s)-->
+
+                <!-- // TODO: Add the Position field for the acquiring party contact-->
+
+                {{ forms.textInput(
+                    "Name of representative", "q1iiiRepresentatives", "q1iiiRepresentatives", data.q1iiiRepresentatives, maxLength="100") }}
+
+                {{ forms.textInput(
+                    "Lead representatives", "q1iiiLeadRepresentatives", "q1iiiLeadRepresentatives", data.q1iiiLeadRepresentatives, maxLength="100") }}
+
+                {{ forms.textInput(
+                    "Full name of authorised individual from representative", "q1iiiAuthorisedIndividual", "q1iiiAuthorisedIndividual", data.q1iiiAuthorisedIndividual, maxLength="100", hintText="This is the person we will contact about this notification") }}
+
+                {{ forms.emailInput("q1iiiRepresentativeEmail", "q1iiiRepresentativeEmail", data.q1iiiRepresentativeEmail, label="Email of authorised individual", maxLength="100") }}
+
+                {{ forms.telephoneInput( "q1iiiRepresentativePhone", "q1iiiRepresentativePhone", data.q1iiiRepresentativePhone, label="Telephone of authorised individual") }}
+                    
+                {{ forms.textInput(
+                    "Relationship to notifier", "q1iiiRelationship", "q1iiiRelationship", data.q1iiiRelationship, maxLength="100") }}
+
+                <div class="govuk-form-group">
+                    <fieldset class="govuk-fieldset">
+                        <label class="govuk-label govuk-label--s" for="q1iiAuthorised">Is this individual authorised to accept all correspondence and accept service?</label>
+                        <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+                            {% set isQuestionAnswered = data['q1iiiAuthorised'] %}
+                            {% set isYes = data['q1iiiAuthorised'] === 'Yes' %}
+                            {% set isNo = data['q1iiiAuthorised'] === 'No' %}
+        
+                            {{ forms.radio("Yes",
+                                "q1iiiAuthorisedYes", "q1iiiAuthorised", "Yes", isQuestionAnswered and isYes) }}
+
+                            {{ forms.radio("No",
+                                "q1iiiAuthorisedNo", "q1iiiAuthorised", "No", isQuestionAnswered and isNo) }}
+                        </div>
+                    </fieldset>
+                </div>
+            </fieldset>
+            {{ forms.saveAndContinueButton("q1iiiSubmitButton") }}
+      </form>
+    </div>
+</div>
+{% endblock %}

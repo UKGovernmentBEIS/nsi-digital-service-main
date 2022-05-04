@@ -1,0 +1,263 @@
+{% extends "../layout.html" %}
+
+{% block pageTitle %}
+  Task list
+{% endblock %}
+
+
+{% block beforeContent %}
+  <a class="govuk-back-link" id="navigateBackLink" name="navigateBackLink" href="/dashboard">Return to manage your NSI Act notifications</a>
+{% endblock %}
+
+{% block content %}
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+<!-- Variable initialisers -->
+{% set totalCount = 0 %}
+
+{% set isAsset = data['q3iiQualifyingAssetOrQualifyingEntity'] == 'qualifyingAsset' %}
+
+{% if (questionStatus["question1State"] == "Completed") %} {% set totalCount = totalCount + 1 %} {% endif %}
+{% if (questionStatus["question2State"] == "Completed") %} {% set totalCount = totalCount + 1 %} {% endif %}
+{% if (questionStatus["question3State"] == "Completed") %} {% set totalCount = totalCount + 1 %} {% endif %}
+{% if (questionStatus["question4State"] == "Completed") %} {% set totalCount = totalCount + 1 %} {% endif %}
+
+{% if (data['q3iiQualifyingAssetOrQualifyingEntity']|length == 0) %}
+{% set hideQuestions = true %}
+{% set question5Status = "Cannot Start Yet" %}
+{% set question6Status = "Cannot Start Yet" %}
+{% else %}
+{% set hideQuestions = false %}
+{% if (questionStatus["question5State"] == "Completed") %} {% set totalCount = totalCount + 1 %} {% endif %}
+{% if (questionStatus["question6State"] == "Completed") %} {% set totalCount = totalCount + 1 %} {% endif %}
+{% set question5Status = questionStatus["question5State"] %}
+{% set question6Status = questionStatus["question6State"] %}
+{% endif %}
+
+
+{% if (questionStatus["question7State"] == "Completed") %} {% set totalCount = totalCount + 1 %} {% endif %}
+{% if (questionStatus["question8State"] == "Completed") %} {% set totalCount = totalCount + 1 %} {% endif %}
+{% if (questionStatus["question9State"] == "Completed") %} {% set totalCount = totalCount + 1 %} {% endif %}
+
+      {{ forms.aboutThisNotification(data.userNotificationReference, data.notificationReference, totalCount, "Voluntary", multiNotiferReference=data.multiNotiferReference) }}
+
+      <ol class="app-task-list">
+        <!--<li>
+          <h3 class="app-task-list__section" id="mandatorySection1">
+            <span class="app-task-list__section-number"></span> Make a joint notification submission
+          </h3>
+          <ul class="app-task-list__items" aria-labelledby="mandatorySection1">
+            <li class="app-task-list__item">
+              <span class="app-task-list__task-name">
+                <a href="/voluntary/multinotifier/multinotifierhavereference">
+                  Joint notification submission details
+                </a>
+              </span>
+            </li>
+          </ul>
+        </li>-->
+        <li>
+          <h2 class="app-task-list__section" id="voluntarySection1">
+            <span class="app-task-list__section-number">1. </span> Contact details and related notifications
+          </h2>
+          <ul class="app-task-list__items" aria-labelledby="voluntarySection1">
+            <li class="app-task-list__item">
+              <span class="app-task-list__task-name">
+                <a href="/voluntary/question1/question1-0" aria-describedby="question1-status">
+                  About you and the notifying party
+                </a>
+              </span>
+              {% if (questionStatus["question1State"] == "Completed") %}
+              <strong class="govuk-tag app-task-list__tag" id="question1-status">{{ questionStatus["question1State"] }}</strong>
+              {% elif (questionStatus["question1State"] == "In progress") %}
+                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="question1-status">{{ questionStatus["question1State"] }}</strong>
+              {% else %}
+                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="question1-status">{{ questionStatus["question1State"] }}</strong>
+              {% endif %}
+            </li>
+
+            <li class="app-task-list__item">
+              <span class="app-task-list__task-name">
+                <a href="/voluntary/question2/question2-1" aria-describedby="question2-status">
+                  Related notifications
+                </a>
+              </span>
+              {% if (questionStatus["question2State"] == "Completed") %}
+              <strong class="govuk-tag app-task-list__tag" id="question2-status">{{ questionStatus["question2State"] }}</strong>
+              {% elif (questionStatus["question2State"] == "In progress") %}
+                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="question2-status">{{ questionStatus["question2State"] }}</strong>
+              {% else %}
+                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="question2-status">{{ questionStatus["question2State"] }}</strong>
+              {% endif %}
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <h2 class="app-task-list__section" id="voluntarySection2">
+            <span class="app-task-list__section-number">2. </span> Acquisition details
+          </h2>
+          <ul class="app-task-list__items" aria-labelledby="voluntarySection2">
+            <li class="app-task-list__item">
+              <span class="app-task-list__task-name">
+                <a href="/voluntary/question3/question3-1" aria-describedby="question3-status">
+                  Trigger events
+                </a>
+              </span>
+              {% if (questionStatus["question3State"] == "Completed") %}
+              <strong class="govuk-tag app-task-list__tag" id="question3-status">{{ questionStatus["question3State"] }}</strong>
+              {% elif (questionStatus["question3State"] == "In progress") %}
+                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="question3-status">{{ questionStatus["question3State"] }}</strong>
+              {% else %}
+                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="question3-status">{{ questionStatus["question3State"] }}</strong>
+              {% endif %}
+            </li>
+
+            <li class="app-task-list__item">
+              <span class="app-task-list__task-name">
+                <a href="/voluntary/question4/question4-1" aria-describedby="question4-status">
+                  Key dates
+                </a>
+              </span>
+              {% if (questionStatus["question4State"] == "Completed") %}
+              <strong class="govuk-tag app-task-list__tag" id="question4-status">{{ questionStatus["question4State"] }}</strong>
+              {% elif (questionStatus["question4State"] == "In progress") %}
+                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="question4-status">{{ questionStatus["question4State"] }}</strong>
+              {% else %}
+                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="question4-status">{{ questionStatus["question4State"] }}</strong>
+              {% endif %}
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <h2 class="app-task-list__section" id="voluntarySection3">
+            <span class="app-task-list__section-number">3. </span> Qualifying {% if isAsset %}asset{% else %}entity{% endif %} details
+          </h2>
+          <ul class="app-task-list__items" aria-labelledby="voluntarySection3">
+            <li class="app-task-list__item">
+              {% if hideQuestions == true %}
+              <span class="app-task-list__task-name">
+                About the qualifying {% if isAsset %}asset{% else %}entity{% endif %}
+              </span>
+              {% else %}
+                <span class="app-task-list__task-name">
+                  <a href="/voluntary/question5/question5-1" aria-describedby="question5-status">
+                    About the qualifying {% if isAsset %}asset{% else %}entity{% endif %}
+                  </a>
+                </span>
+              {% endif %}
+              {% if (question5Status == "Completed") %}
+              <strong class="govuk-tag app-task-list__tag" id="question5-status">{{ question5Status }}</strong>
+              {% elif (question5Status == "In progress") %}
+                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="question5-status">{{ question5Status }}</strong>
+              {% elif (question5Status == "Cannot Start Yet") %}
+                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="finalapp-status">{{ question5Status }}</strong>
+              {% else %}
+                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="question5-status">{{ question5Status }}</strong>
+              {% endif %}
+            </li>
+
+            <li class="app-task-list__item">
+              <span class="app-task-list__task-name">
+                {% if hideQuestions == true %}
+                <span class="app-task-list__task-name">
+                  Ownership and structure
+                </span>
+                {% else %}
+                  {% if isAsset == false %}
+                  <a href="/voluntary/question6/question6-1" aria-describedby="familyrelationships">
+                    Ownership and structure
+                  </a>
+                  {% else %}
+                  <a href="/voluntary/question6/question6-1asset" aria-describedby="familyrelationships">
+                    Ownership and structure
+                  </a>
+                  {% endif %}
+                {% endif %}
+              </span>
+              {% if (question6Status == "Completed") %}
+              <strong class="govuk-tag app-task-list__tag" id="finalapp-status">{{ question6Status }}</strong>
+              {% elif (question6Status == "In progress") %}
+                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="finalapp-status">{{ question6Status }}</strong>
+              {% elif (question6Status == "Cannot Start Yet") %}
+              <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="finalapp-status">{{ question6Status }}</strong>
+              {% else %}
+                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="finalapp-status">{{ question6Status }}</strong>
+              {% endif %}
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <h2 class="app-task-list__section" id="voluntarySection4">
+            <span class="app-task-list__section-number">4. </span> Acquiring party details
+          </h2>
+          <ul class="app-task-list__items" aria-labelledby="voluntarySection4">
+            <li class="app-task-list__item">
+              <span class="app-task-list__task-name">
+                <a href="/voluntary/question7/question7-1" aria-describedby="question7-status">
+                  About the acquiring party
+                </a>
+              </span>
+              {% if (questionStatus["question7State"] == "Completed") %}
+              <strong class="govuk-tag app-task-list__tag" id="question7-status">{{ questionStatus["question7State"] }}</strong>
+              {% elif (questionStatus["question7State"] == "In progress") %}
+                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="question7-status">{{ questionStatus["question7State"] }}</strong>
+              {% else %}
+                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="question7-status">{{ questionStatus["question7State"] }}</strong>
+              {% endif %}
+            </li>
+
+            <li class="app-task-list__item">
+              <span class="app-task-list__task-name">
+                <a href="/voluntary/question8/question8-1" aria-describedby="question8-status">
+                  Ownership and structure
+                </a>
+              </span>
+              {% if (questionStatus["question8State"] == "Completed") %}
+              <strong class="govuk-tag app-task-list__tag" id="question8-status">{{ questionStatus["question8State"] }}</strong>
+              {% elif (questionStatus["question8State"] == "In progress") %}
+                <strong class="govuk-tag govuk-tag--blue app-task-list__tag" id="question8-status">{{ questionStatus["question8State"] }}</strong>
+              {% else %}
+                <strong class="govuk-tag govuk-tag--grey app-task-list__tag" id="question8-status">{{ questionStatus["question8State"] }}</strong>
+              {% endif %}
+            </li>
+          </ul>
+        </li>
+
+        <li>
+          <h2 class="app-task-list__section" id="voluntarySection5">
+            <span class="app-task-list__section-number">5. </span> Additional information
+          </h2>
+          <ul class="app-task-list__items" aria-labelledby="voluntarySection5">
+            <li class="app-task-list__item">
+              <span class="app-task-list__task-name">
+                <a href="/voluntary/question9/question9-1">
+                  Other relevant documentation and information 
+                </a>
+              </span>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <h2 class="app-task-list__section" id="voluntarySection6">
+            <span class="app-task-list__section-number">6. </span> Check your answers and Submit Notification
+          </h2>
+          <ul class="app-task-list__items" aria-labelledby="voluntarySection6">
+            <li class="app-task-list__item">
+              <span class="app-task-list__task-name">
+                <a href="/voluntary/check-your-answers/check-your-answers">
+                  Check your answers and Submit Notification
+                </a>
+              </span>
+            </li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+  </div>
+
+{% endblock %}

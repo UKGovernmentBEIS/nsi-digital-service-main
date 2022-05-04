@@ -1,0 +1,56 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/question3/question3-2" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 3 Page 2a
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <form class="form" id="submitQuestion3Pg2a" name="submitQuestion3Pg2a" action="/voluntary/question3/question3-2apost" method="post">
+          {{ forms.errorSummary(formValidation) }}
+
+          <div class="govuk-form-group">
+            {% set isQuestionAnswered = data['question32aQualifyingEntity'] %}
+            {% set isYes = data['question32aQualifyingEntity'] === 'YES' %}
+            {% set isNo = data['question32aQualifyingEntity'] === 'NO' %}
+
+            {{ forms.legend("q3vHeading", "Will the acquisition provide the ability for the acquirer to use, control or direct the asset?") }}
+
+            <fieldset class="govuk-fieldset" aria-describedby="question3vacquisition-hint">
+              <div id="question3vacquisition-hint" class="govuk-hint">
+                This includes the acquirer further increasing any existing ability to use, control or direct the asset.
+              </div>
+              <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+
+                {{ forms.radioConditional("Yes",
+                "question32aQualifyingEntityYes", "question32aQualifyingEntity", "YES", isQuestionAnswered and isYes, "question32aQualifyingEntityYesConditional") }}
+
+                <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="question32aQualifyingEntityYesConditional">
+                    {{ govukCharacterCount({
+                        name: "question32aQualifyingEntityDetails",
+                        value: data.question32aQualifyingEntityDetails,
+                        id: "question32aQualifyingEntityDetails",
+                        maxlength: 5000,
+                        label: {
+                            text: "Describe the nature of the right or interest being acquired and the level of control it provides",
+                            classes: "govuk-label--s",
+                            isPageHeading: false
+                        }
+                    }) }}
+                </div>
+
+                {{ forms.radio("No",
+                    "question32aQualifyingEntityNo", "question32aQualifyingEntity", "NO", isQuestionAnswered and isNo) }}
+              </div>
+          
+            </fieldset>
+        </div>
+        {{ forms.saveAndContinueButton("submitButtonQ3P2a") }}
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

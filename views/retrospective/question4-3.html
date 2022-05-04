@@ -1,0 +1,71 @@
+{% set section = 'retrospective' %}
+{% set backlink = "/"+section+"/question4/question4-2" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 4 Page 3
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        {% set isQuestionAnswered = data['q4icAdditionalKeyDates'] %}
+        {% set isYes = data['q4icAdditionalKeyDates'] === 'Yes' %}
+        {% set isNo = data['q4icAdditionalKeyDates'] === 'No' %}
+
+        {{ forms.legend("q4icHeading", "Key dates") }}
+
+        <div class="govuk-form-group">
+            <dl class="hmrc-add-to-a-list hmrc-add-to-a-list--short">
+                {% for i in range(0, data['q4icKeyDatesList'].length) -%}
+                <div class="hmrc-add-to-a-list__contents">
+                    <dt class="hmrc-add-to-a-list__identifier hmrc-add-to-a-list__identifier--light">
+                        {{ data['q4icKeyDatesList'][i].question4icKeyDate }}
+                    </dt>
+                    <dd class="hmrc-add-to-a-list__change">
+                        <a class="govuk-link"
+                            href="/retrospective/question4/question4-3cya/{{ data['q4icKeyDatesList'][i].id }}">
+                            <span>Change</span>
+                            <span class="govuk-visually-hidden">Change {{
+                                data['q2iPreviousNotificationList'][i].question4icKeyDate }}</span>
+                        </a>
+                    </dd>
+                    <dd class="hmrc-add-to-a-list__remove">
+                        <a class="govuk-link"
+                            href="/retrospective/question4/question4-3rem/{{ data['q4icKeyDatesList'][i].id }}">
+                            <span>Remove</span>
+                            <span class="govuk-visually-hidden">Remove {{
+                                data['q4icKeyDatesList'][i].question4icKeyDate }} from the list</span>
+                        </a>
+                    </dd>
+                </div>
+                {%- endfor %}
+            </dl>
+        </div>
+
+        <form class="form" id="submitQuestion4-3" name="submitQuestion4-3" action="/retrospective/question4/question4-3post"
+            method="post">
+
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend govuk-fieldset__legend--m">
+                        Do you need to add another key date?
+                    </legend>
+                    <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
+                        {{ forms.radio("Yes",
+                        "q4icAdditionalKeyDatesYes", "q4icAdditionalKeyDates", "Yes", isQuestionAnswered and isYes) }}
+
+                        {{ forms.radio("No",
+                            "q4icAdditionalKeyDatesNo", "q4icAdditionalKeyDates", "No", isQuestionAnswered and isNo) }}
+
+                    </div>
+                    
+                </fieldset>
+            </div>
+            {{ forms.saveAndContinueButton("submitButton4-3") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

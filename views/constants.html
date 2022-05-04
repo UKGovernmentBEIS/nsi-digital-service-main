@@ -1,0 +1,83 @@
+{% set cyaH1 = 'Check your answers before submitting notification' %}
+{% set cyaH1Incomplete = 'Check your answers' %}
+
+
+{% set sectors = {
+    'ACADEMICRESEARCHANDDEVELOPMENTINHIGHEREDUCATION': 'Academic research and development in higher education',
+    'ACCOMMODATIONANDFOODSERVICEACTIVITIES': 'Accommodation and food service activities',
+    'ADVANCEDMATERIALS': 'Advanced materials',
+    'ADVANCEDROBOTICS': 'Advanced robotics',
+    'ADMINISTRATIVEANDSUPPORTSERVICEACTIVITIES': 'Administrative and support service activities',
+    'AGRICULTUREFORESTRYANDFISHING': 'Agriculture, forestry and fishing',
+    'ARTIFICIALINTELLIGENCE': 'Artificial intelligence',
+    'ARTSENTERTAINMENTANDRECREATION': 'Arts, entertainment and recreation',
+    'CIVILNUCLEAR': 'Civil nuclear',
+    'COMMUNICATIONS': 'Communications',
+    'COMPUTINGHARDWARE': 'Computing hardware',
+    'CONSTRUCTION': 'Construction',
+    'CRITICALSUPPLIERSTOTHEEMERGENCYSERVICESSECTORS': 'Critical suppliers to the emergency services sector',
+    'CRITICALSUPPLIERSTOTHEGOVERNMENT': 'Critical suppliers to the government',
+    'CRYPTOGRAPHICAUTHENTICATION': 'Cryptographic authentication',
+    'DATAINFRASTRUCTURE': 'Data infrastructure',
+    'DEFENCE': 'Defence',
+    'ENERGY': 'Energy',
+    'ENGINEERINGBIOLOGY': 'Engineering biology',
+    'FINANCIALANDINSURANCEACTIVITIES': 'Financial and insurance activities',
+    'HUMANHEALTHANDSOCIALWORKACTIVITIES': 'Human health and social work activities',
+    'INFORMATIONANDCOMMUNICATION': 'Information and communication',
+    'MANUFACTURING': 'Manufacturing',
+    'MILITARYANDDUALUSE': 'Military and dual-use',
+    'MININGANDQUARRYING': 'Mining and quarrying',
+    'OTHERSERVICEACTIVITIES': 'Other service activities',
+    'PROFESSIONALSCIENTIFICANDTECHNICALACTIVITIES': 'Professional, scientific and technical activities',
+    'PUBLICADMINISTRATIONANDDEFENCECOMPULSORYSOCIALSECURITY': 'Public administration and defence; compulsory social security',
+    'QUANTUMTECHNOLOGIES': 'Quantum technologies',
+    'REALESTATEACTIVITIES': 'Real estate activities',
+    'SATELLITEANDSPACETECHNOLOGY': 'Satellite and space technology',
+    'SUPPLIERSTOTHEEMERGENCYSERVICES': 'Suppliers to the emergency services',
+    'SYNTHETICBIOLOGY': 'Synthetic biology',
+    'TRANSPORT': 'Transport',
+    'TRANSPORTATIONANDSTORAGELOGISTICS': 'Transportation and storage (logistics)',
+    'WATERSUPPLYSEWERAGEWASTEMANAGEMENTANDREMEDIATIONACTIVITIES': 'Water supply, sewerage, waste management and remediation activities',
+    'WHOLESALEANDRETAILTRADEADREPAIROFMOTORVEHICLESANDMOTORCYCLES': 'Wholesale and retail trade, ad repair of motor vehicles and motorcycles'
+} %}
+
+{% set triggerEvents = {
+    '25PERCENT': 'From 25% or less to more than 25% of shareholding and/or voting rights',
+    '50PERCENT': 'From 50% or less to more than 50% of shareholding and/or voting rights',
+    '75PERCENT': 'From 75% or less to more than 75% of shareholding and/or voting rights'
+} %}
+
+{% set govDepartments = {
+    'ago': 'Attorney general’s office',
+    'co': 'Cabinet Office',
+    'beis': 'Department for Business, Energy, and Industrial Strategy',
+    'dcms': 'Department for Digital, Culture, Media & Sport',
+    'dfe': 'Department for Education',
+    'dfefra': 'Department for Environment Food & Rural Affairs',
+    'dit': 'Department for International Trade',
+    'dft': 'Department for Transport',
+    'dwp': 'Department for Work and Pensions',
+    'dhsc': 'Department of Health & Social Care',
+    'fcdo': 'Foreign, Commonwealth and Development Office',
+    'hmt': 'HM Treasury',
+    'ho': 'Home Office',
+    'mod': 'Ministry of Defence',
+    'mhclg': 'Ministry of Housing, Communities & Local Government',
+    'moj': 'Ministry of Justice',
+    'nio': 'Northern Ireland Office',
+    'ootadfs': 'Office of the Advocate General for Scotland',
+    'ootlhc': 'Office of the Leader of the House of Commons',
+    'ootlhl': 'Office of the Leader of the House of Lords',
+    'ootsss': 'Office of the Secretary of State for Scotland',
+    'ootssw': 'Office of the Secretary of State for Wales',
+    'ukef': 'UK Export Finance',
+    'other': 'Other'
+} %}
+
+{% set multipleChoice = {
+ 'Dontknow': 'To the best of your knowledge',
+ 'Yes': 'Yes',
+ 'No': 'No'
+} %}
+

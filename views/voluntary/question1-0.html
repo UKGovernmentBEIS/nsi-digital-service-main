@@ -1,0 +1,44 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/task-list" %}
+{% extends "../question.html" %}
+{% import "macros/forms.html" as forms %}
+
+{% block pageTitle %}
+  Question 1 Page 0
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" id="q10Form" name="q10Form" action="/voluntary/question1/question1-0" method="post">
+        <div class="govuk-form-group">
+            {{ forms.errorSummary(formValidation) }}
+            <fieldset class="govuk-fieldset">
+                {{ forms.legend("q10Heading", "Which type of notifier are you?") }}
+                <div id="q10Heading-hint" class="govuk-hint">If you're a representative of a notifier, select the party you're representing.</div>
+
+                <div class="govuk-radios">
+                    {% set isQuestionAnswered = data['q10WhichType'] %}
+                    {% set isAcquirer = data['q10WhichType'] === 'Acquirer' %}
+                    {% set isSeller = data['q10WhichType'] === 'Seller' %}
+                    {% set isQualifyingEntity = data['q10WhichType'] === 'QualifyingEntity' %}
+
+                    {{ forms.radio("Acquirer",
+                        "q10WhichTypeAcquirer", "q10WhichType", "Acquirer", isQuestionAnswered and isAcquirer) }}
+
+                    {{ forms.radio("Seller",
+                        "q10WhichTypeSeller", "q10WhichType", "Seller", isQuestionAnswered and isSeller) }}
+
+                    {{ forms.radio("Qualifying entity",
+                        "q10WhichTypeQE", "q10WhichType", "QualifyingEntity", isQuestionAnswered and isQualifyingEntity) }}
+                    {{ forms.radio("Other",
+                        "q10Other", "q10WhichType", "Other", isQuestionAnswered and isQualifyingEntity) }}
+                    
+                </div>
+            </fieldset>
+        </div>
+        {{ forms.saveAndContinueButton("q10SubmitButton") }}
+      </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+{% import "macros/forms.html" as forms %}
+
+{% block pageTitle %}
+  In-progress notifications
+{% endblock %}
+
+{% block beforeContent %}
+    <a class="govuk-back-link" id="navigateBackLink" name="navigateBackLink" href="/dashboard">Return to manage your NSI Act notifications</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      <h1 class="govuk-heading-l">Notifications where more information has been requested</h1>
+
+      <details class="govuk-details" data-module="govuk-details">
+        <summary class="govuk-details__summary">
+          <span class="govuk-details__summary-text">
+            Guide to Secretary of State (SoS) review statuses
+          </span>
+        </summary>
+        <div class="govuk-details__text">
+            <h2 class="govuk-heading-s govuk-!-margin-bottom-0">Accepted</h2> 
+            <p class="govuk-body">Your notification meets the requirements and will be reviewed by the SoS within 30 working days</p>
+            <h2 class="govuk-heading-s govuk-!-margin-bottom-0">Rejected</h2>
+            <p class="govuk-body">Your notification does not meet the requirements and may need to be resubmitted or started again - you'll be emailed the reasons for this</p>
+            <h2 class="govuk-heading-s govuk-!-margin-bottom-0">More information needed</h2>
+            <p class="govuk-body">Some information was missing from your notification - you'll need to enter it before resubmitting</p>
+        </div>
+      </details>
+
+      {% if data and data.length >= 1  %}
+      <table class="govuk-table">
+        <thead class="govuk-table__head">
+          <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">Your reference</th>
+            <th scope="col" class="govuk-table__header">Our reference</th>
+            <th scope="col" class="govuk-table__header">Type</th>
+            <th scope="col" class="govuk-table__header">Submission status</th>
+            <th scope="col" class="govuk-table__header">Action</th>
+          </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+        {% for notification in data %}
+          <tr class="govuk-table__row">
+            <th scope="row" class="govuk-table__header">{{ notification.userNotificationReference }}</th>
+            <td class="govuk-table__cell">{{ notification.notificationReference }}</td>
+            <td class="govuk-table__cell">{{ notification.notificationtype }}</td>
+            <td class="govuk-table__cell">{{ notification.status }}</td>
+            <td class="govuk-table__cell">
+                <a href="/select-notification/{{ notification.notificationReference }}" class="govuk-link">Continue</a>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+      {% endif %}
+    </div>
+</div>
+{% endblock %}

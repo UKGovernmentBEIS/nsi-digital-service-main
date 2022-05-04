@@ -1,0 +1,36 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/question4/question4-02" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 4 Page 3
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" id="q4iiiForm" name="q4iiiForm" action="/voluntary/question4/question4-03post" method="post">
+        <div class="govuk-form-group">
+            {{ forms.errorSummary(formValidation) }}
+            <fieldset class="govuk-fieldset">
+                {{ forms.legend("q4iiiHeading", "Are there any other key dates you consider relevant to this notification?") }}
+
+                <div class="govuk-radios">
+                    {% set isQuestionAnswered = data['q4iiiOtherKeyDates'] %}
+                    {% set isYes = data['q4iiiOtherKeyDates'] === 'Yes' %}
+                    {% set isNo = data['q4iiiOtherKeyDates'] === 'No' %}
+
+                    {{ forms.radio("Yes",
+                        "q4iiiOtherKeyDatesYes", "q4iiiOtherKeyDates", "Yes", isQuestionAnswered and isYes) }}
+
+                    {{ forms.radio("No",
+                        "q4iiiOtherKeyDatesNo", "q4iiiOtherKeyDates", "No", isQuestionAnswered and isNo) }}
+
+                </div> 
+            </fieldset>
+        </div>
+        {{ forms.saveAndContinueButton("q4iiiSubmitButton") }}
+      </form>
+    </div>
+</div>
+{% endblock %}

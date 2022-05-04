@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Prototypes Dashboard
+{% endblock %}
+
+{% block beforeContent %}
+    <a class="govuk-back-link" id="navigateBackLink" name="navigateBackLink" href="/task-list">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Prototypes</h1>
+        <ul class="govuk-list">
+            <li>
+              <a class="govuk-link" href="/prototypes/section-a/screen-1">Section A</a>
+            </li>
+          </ul>
+    </div>
+</div>
+{% endblock %}

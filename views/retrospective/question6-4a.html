@@ -1,0 +1,47 @@
+{% set section = 'retrospective' %}
+{% set backlink = "/"+section+"/question6/question6-3" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 6 Page 4a
+{% endblock %}
+
+{% block content %}
+  <!-- CONTINUE HERE -->
+  <div class="govuk-grid-row">
+      {{ forms.errorSummary(formValidation) }}
+
+      <div class="govuk-grid-column-two-thirds">
+        {{ forms.legend("q64aHeading", "Add a non-UK government that has a direct or indirect role in the operation or decision making of the qualifying entity") }}
+
+        <div class="govuk-hint">Provide information about a non-UK government. You’ll be given the option to add more non-UK governments on the next page.</div>
+
+      <form class="form" id="submitQuestion6Pg4a" name="submitQuestion6Pg4a" action="/retrospective/question6/question6-4apost" method="post">
+            {% if (editingItem != null) and editingItem == true %}
+            <input type="hidden" name="q6iiiDataEdit" id="q6iiiDataEdit" value="true" />
+            <input type="hidden" name="itemRef" id="itemRef" value="{{ data['itemRef'] }}" />
+            {% else %}
+            <input type="hidden" name="q6iiiDataEdit" id="q6iiiDataEdit" value="false" />
+            {% endif %}
+
+            {{ forms.textInput(
+              "Name of non-UK government", "q6iiiNonUKGovernmentName", "q6iiiNonUKGovernmentName", data.q6iiiNonUKGovernmentName, maxLength="100") }}
+
+            {{ govukCharacterCount({
+                name: "q6iiiGovernmentInterest",
+                value: data.q6iiiGovernmentInterest,
+                id: "q6iiiGovernmentInterest",
+                maxlength: 5000,
+                label: {
+                    text: "Describe its role and interests",
+                    classes: "govuk-label--s",
+                    isPageHeading: false
+                }
+            }) }}
+
+            {{ forms.saveAndContinueButton("submitButtonQ6P4a") }} 
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

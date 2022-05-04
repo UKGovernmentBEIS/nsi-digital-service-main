@@ -1,0 +1,48 @@
+{% set section = 'retrospective' %}
+{% set backlink = "/"+section+"/question4/question4-3" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 4 Page 3a
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <form class="form" id="submitQuestion4-3a" name="submitQuestion4-3a" action="/retrospective/question4/question4-3apost"
+            method="post">
+            {% if (isEditing != null) and isEditing == true %}
+            <input type="hidden" name="q4icEditingData" id="q4icEditingData" value="true" />
+            <input type="hidden" name="q4icKeyDatelId" id="q4icKeyDatelId" value="{{ data['q4icKeyDatelId'] }}" />
+            {% else %}
+            <input type="hidden" name="q4icEditingData" id="q4icEditingData" value="false" />
+            {% endif %}
+
+            {{ forms.errorSummary(formValidation) }}
+
+            {{ forms.legend("q4-3aiHeading", "Add a key date") }}
+
+            <p class="govuk-hint">Provide information about a key date. You’ll be given the option to add more key dates on the next page.</p>
+
+            {{ forms.dateInput('Key date', 'q4icKeyDate', 'q4icKeyDate', data['q4icKeyDateDay'], data['q4icKeyDateMonth'], data['q4icKeyDateYear']) }}
+
+            {{ govukCharacterCount({
+                name: "question4icShortDescription",
+                value: data.question4icShortDescription,
+                id: "question4icShortDescription",
+                maxlength: 5000,
+                label: {
+                    text: "Why this date is relevant",
+                    classes: "govuk-label--s",
+                    isPageHeading: false
+                }
+            }) }}
+
+            {{ forms.saveAndContinueButton("submitButton4-3a") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

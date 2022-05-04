@@ -1,0 +1,67 @@
+{% set section = 'mandatory' %}
+{% set backlink = "/"+section+"/question4/question4-03" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 4 Page 3a
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <form class="form" id="submitQuestion4-3a" name="submitQuestion4-3a" action="/mandatory/question4/question4-3apost"
+            method="post">
+
+            {{ forms.errorSummary(formValidation) }}
+            
+            {% if (isEditing != null) and isEditing == true %}
+            <input type="hidden" name="q4icEditingData" id="q4icEditingData" value="true" />
+            <input type="hidden" name="q4icKeyDatelId" id="q4icKeyDatelId" value="{{ data['q4icKeyDatelId'] }}" />
+            {% else %}
+            <input type="hidden" name="q4icEditingData" id="q4icEditingData" value="false" />
+            {% endif %}
+
+            {{ forms.legend("q4-3aiHeading", STRINGS.mandatory.q4_3c.pageHeading) }}
+
+            <div class="govuk-hint">{{ STRINGS.mandatory.q4_3c.keyDate.hint }}</div>
+
+            {{ govukDateInput({
+                id: "q4icKeyDate",
+                namePrefix: "q4icKeyDate",
+                fieldset: {
+                    legend: {
+                        text: STRINGS.mandatory.q4_3c.keyDate.legend,
+                        classes: "govuk-fieldset__legend--s",
+                        isPageHeading: false
+                    }
+                },
+                hint: {
+                    text: "Enter an approximate date if you're not sure. For example, 1 11 2022"
+                },
+                items: [
+                    { name: 'day', value: data['q4icKeyDateDay'], classes: "govuk-input--width-2" },
+                    { name: 'month', value: data['q4icKeyDateMonth'], classes: "govuk-input--width-2" },
+                    { name: 'year', value: data['q4icKeyDateYear'], classes: "govuk-input--width-4" }
+                ]
+            }) }}
+
+            {{ govukCharacterCount({
+                name: "question4icShortDescription",
+                value: data.question4icShortDescription, 
+                id: "question4icShortDescription",
+                maxlength: 5000,
+                label: {
+                    text: STRINGS.mandatory.q4_3c.whyRelevant.label,
+                    classes: "govuk-label--s",
+                    isPageHeading: false
+                }
+            }) }}
+
+            {{ forms.saveAndContinueButton("submitButton4-3a") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/question7/question7-5" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 7 Page 5a
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <form class="form" id="submitQuestion7-5a" name="submitQuestion7-5a" action="/voluntary/question7/question7-5apost"
+            method="post">
+            {% if (isEditing != null) and isEditing == true %}
+            <input type="hidden" name="q7iiiEditingData" id="q7iiiEditingData" value="true" />
+            <input type="hidden" name="q7iiiNonUKRoleInOperationId" id="q7iiiNonUKRoleInOperationId" value="{{ data['q7iiiNonUKRoleInOperationId'] }}" />
+            {% else %}
+            <input type="hidden" name="q7iiiEditingData" id="q7iiiEditingData" value="false" />
+            {% endif %}
+            <div class="govuk-form-group">
+                {{ forms.errorSummary(formValidation) }}
+                <fieldset class="govuk-fieldset">
+
+                    {{ forms.legend("q7iHeading", "Add a non-UK government or representative that has a role in the operation or decision making of the acquirer") }}
+
+                    <div class="govuk-hint">Provide information about a non-UK government or representative. You’ll be given the option to add more non-UK governments or representatives on the next page.</div>
+
+                    {{ forms.textInput(
+                        "Name of non-UK government", "q7iiiNameOfNonUKGoverment", "q7iiiNameOfNonUKGoverment", data.q7iiiNameOfNonUKGoverment, maxLength="100") }}
+
+
+                    {{ govukCharacterCount({
+                        name: "q7iiiBriefInterestDescription",
+                        value: data.q7iiiBriefInterestDescription,
+                        id: "q7iiiBriefInterestDescription",
+                        maxlength: 5000,
+                        label: {
+                            text: "Description of the role",
+                            classes: "govuk-label--s",
+                            isPageHeading: false
+                        }
+                    }) }}
+                        
+                </fieldset>
+            </div>
+            {{ forms.saveAndContinueButton("submitButton7-5a") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

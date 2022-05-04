@@ -1,0 +1,1 @@
+!function(){"use strict";var t;(t=document.getElementById("printPage"))&&t.addEventListener("click",(function(t){t.preventDefault(),window.print()}))}();

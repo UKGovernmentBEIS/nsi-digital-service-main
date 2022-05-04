@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="5.4860" tests="10" failures="9">
+  <testsuite name="Root Suite" timestamp="2021-09-17T08:08:56" tests="10" file="cypress/integration/ProdPrototypeVoluntaryForm.js" time="5.4860" failures="9">
+    <testcase name="Can User ACCESS VOLUNTARY FORM" time="5.4860" classname="Can User ACCESS VOLUNTARY FORM">
+    </testcase>
+    <testcase name="Can User Access Question 1" time="0.0000" classname="Can User Access Question 1">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `#q1ivbAddAnotherNo`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `#q1ivbAddAnotherNo`, but never found it.
+    at VTaskListPage.Question1 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:1246:8)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:132:13)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 2" time="0.0000" classname="Can User Access Question 2">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),&apos;Related notifications&apos;)]`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),'Related notifications')]`, but never found it.
+    at CommonFunctions.navigateApplicationLink (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:179:8)
+    at TaskListPage.Question2 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:571:12)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:135:12)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 3" time="0.0000" classname="Can User Access Question 3">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),&apos;Trigger events&apos;)]`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),'Trigger events')]`, but never found it.
+    at CommonFunctions.navigateApplicationLink (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:179:8)
+    at VTaskListPage.Question3 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:1259:12)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:138:13)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 4" time="0.0000" classname="Can User Access Question 4">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),&apos;Key dates&apos;)]`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),'Key dates')]`, but never found it.
+    at CommonFunctions.navigateApplicationLink (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:179:8)
+    at TaskListPage.Question4 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:643:12)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:141:12)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 5" time="0.0000" classname="Can User Access Question 5">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),&apos;About the qualifying asset&apos;)]`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),'About the qualifying asset')]`, but never found it.
+    at CommonFunctions.navigateApplicationLink (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:179:8)
+    at VTaskListPage.Question5 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:1293:12)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:144:13)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 6" time="0.0000" classname="Can User Access Question 6">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `:nth-child(3) &gt; .app-task-list__items &gt; :nth-child(2) &gt; .app-task-list__task-name &gt; a`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `:nth-child(3) > .app-task-list__items > :nth-child(2) > .app-task-list__task-name > a`, but never found it.
+    at VTaskListPage.Question6 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:1378:8)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:147:13)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 7" time="0.0000" classname="Can User Access Question 7">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),&apos;About the acquiring party&apos;)]`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),'About the acquiring party')]`, but never found it.
+    at CommonFunctions.navigateApplicationLink (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:179:8)
+    at TaskListPage7to9.Question7 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:901:12)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:150:13)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 8" time="0.0000" classname="Can User Access Question 8">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `:nth-child(4) &gt; .app-task-list__items &gt; :nth-child(2) &gt; .app-task-list__task-name &gt; a`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `:nth-child(4) > .app-task-list__items > :nth-child(2) > .app-task-list__task-name > a`, but never found it.
+    at VTaskListPage.Question8 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:1405:8)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:153:13)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 9" time="0.0000" classname="Can User Access Question 9">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),&apos;Other relevant documentation and information&apos;)]`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),'Other relevant documentation and information')]`, but never found it.
+    at CommonFunctions.navigateApplicationLink (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:179:8)
+    at TaskListPage7to9.Question9 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:960:12)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeVoluntaryForm.js:156:13)]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>

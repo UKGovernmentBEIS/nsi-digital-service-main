@@ -1,0 +1,44 @@
+{% extends "../add-to-list/add-item-form.html" %}
+{% set section = 'mandatory' %}
+{% set backlink = "/"+section+"/question1/question1-4" %}
+
+{% block pageTitle %}Question 1 - 4a{% endblock %}
+
+{% set formId = "q1iva" %}
+{% set action = "/mandatory/question1/question1-4a" %}
+
+{% block formContent %}
+<div class="govuk-form-group">
+    {{ forms.errorSummary(formValidation) }}
+
+    <fieldset class="govuk-fieldset">
+        {{ forms.legend("q1ivaHeading", "Add an acquirer") }}
+        <div class="govuk-hint">Provide information about an acquirer. You’ll be given the option to add more acquirers on the next page.</div>
+
+        {{ forms.textInput(
+            "Name of acquirer",
+            "q1ivaMultinotifiername", "q1ivaMultinotifiername", data.q1ivaMultinotifiername, maxLength="100") }}
+
+        {{ forms.textInput(
+            "Full name of authorised individual from acquirer",
+            "q1ivaMultinotifierindividualname", "q1ivaMultinotifierindividualname", data.q1ivaMultinotifierindividualname, maxLength="100", hintText="Leave blank if not applicable") }}
+
+        {{ forms.textInput(
+            "Name of authorised representatives for acquiring party",
+            "q1ivaMultinotifierRepresentative", "q1ivaMultinotifierRepresentative", data.q1ivaMultinotifierRepresentative, maxLength="100", hintText="Leave blank if not applicable") }}
+
+        {{ forms.textInput(
+            "Expected or proposed percentage of ownership to be held in the qualifying entity following the acquisition",
+            "q1ivaMultinotifierPercentage", "q1ivaMultinotifierPercentage", data.q1ivaMultinotifierPercentage, maxLength="200") }}
+
+        {{ forms.textArea(
+            "Business address of acquirer",
+            "",
+            "q1ivaMultinotifierAddress", "q1ivaMultinotifierAddress", data.q1ivaMultinotifierAddress, maxLength="200") }}
+
+        {{ forms.telephoneInput( "q1ivaMultinotifierPhone", "q1ivaMultinotifierPhone", data.q1ivaMultinotifierPhone, "Telephone of acquirer") }}
+
+        {{ forms.emailInput("q1ivaMultinotifierEmail", "q1ivaMultinotifierEmail", data.q1ivaMultinotifierEmail, "Email of authorised individual") }}
+    </fieldset>
+</div>
+{% endblock %}

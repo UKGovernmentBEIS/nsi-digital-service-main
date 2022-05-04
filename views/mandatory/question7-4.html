@@ -1,0 +1,70 @@
+{% set section = 'mandatory' %}
+{% set backlink = "/"+section+"/question7/question7-04" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 7 Page 4
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">Non-UK governments or representatives that have share ownership or voting rights in the acquirer</h1>
+
+        <div class="govuk-form-group">
+            <dl class="hmrc-add-to-a-list hmrc-add-to-a-list--short">
+                {% for i in range(0, data['q7iiNonUKGovernmentList'].length) -%}
+                <div class="hmrc-add-to-a-list__contents">
+                    <dt class="hmrc-add-to-a-list__identifier hmrc-add-to-a-list__identifier--light">
+                        {{ data['q7iiNonUKGovernmentList'][i].q7iiNameOfNonUKGoverment }}
+                    </dt>
+                    <dd class="hmrc-add-to-a-list__change">
+                        <a class="govuk-link"
+                            href="/mandatory/question7/question7-4cya/{{ data['q7iiNonUKGovernmentList'][i].id }}">
+                            <span>Change</span>
+                            <span class="govuk-visually-hidden">Change {{
+                                data['q7iiNonUKGovernmentList'][i].q7iiNameOfNonUKGoverment }}</span>
+                        </a>
+                    </dd>
+                    <dd class="hmrc-add-to-a-list__remove">
+                        <a class="govuk-link"
+                            href="/mandatory/question7/question7-4rem/{{ data['q7iiNonUKGovernmentList'][i].id }}">
+                            <span>Remove</span>
+                            <span class="govuk-visually-hidden">Remove {{
+                                data['q7iiNonUKGovernmentList'][i].q7iiNameOfNonUKGoverment }} from the list</span>
+                        </a>
+                    </dd>
+                </div>
+                {%- endfor %}
+            </dl>
+        </div>
+
+        <form class="form" id="submitQuestion7-4" name="submitQuestion7-4" action="/mandatory/question7/question7-4post"
+            method="post">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" aria-describedby="add-another-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                        Do you need to add another non-UK government or representative?
+                    </legend>
+
+                    <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
+                    {% set isQuestionAnswered = data['q7iiNonUKShareVoting'] %}
+                    {% set isYes = data['q7iiNonUKShareVoting'] === 'Yes' %}
+                    {% set isNo = data['q7iiNonUKShareVoting'] === 'No' %}
+
+                    {{ forms.radio("Yes",
+                    "q7iiNonUKShareVotingYes", "q7iiNonUKShareVoting", "Yes", isQuestionAnswered and isYes) }}
+
+                    {{ forms.radio("No",
+                        "q7iiNonUKShareVotingNo", "q7iiNonUKShareVoting", "No", isQuestionAnswered and isNo) }}
+                    </div>
+            
+                </fieldset>
+            </div>
+            {{ forms.saveAndContinueButton("submitButton7-4") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

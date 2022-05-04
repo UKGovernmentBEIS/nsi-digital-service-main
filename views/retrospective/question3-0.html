@@ -1,0 +1,36 @@
+{% set section = 'retrospective' %}
+{% set backlink = "/"+section+"/task-list" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 3
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {{ forms.errorSummary(formValidation) }}
+
+      {{ forms.legend("q3iiHeading", "To the best of your knowledge, explain why the UK government was not notified about this acquisition, as required under the National Security and Investment Act 2021") }}
+
+      <form class="form" id="submitQuestion3Pg0" name="submitQuestion3Pg0" action="/retrospective/question3/question3-0post" method="post">
+
+
+        {{ govukCharacterCount({
+          name: "q30Reason",
+          value: data.q30Reason,
+          id: "q30Reason",
+          maxlength: 5000,
+          label: {
+            text: "",
+            classes: "govuk-label--s",
+            isPageHeading: false
+          }
+        }) }}
+
+        {{ forms.saveAndContinueButton("submitButtonQ3P0") }}
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

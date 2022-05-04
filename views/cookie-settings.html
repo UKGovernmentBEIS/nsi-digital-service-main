@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Cookie Settings
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" id="cookieSelectionForm" name="cookieSelectionForm" action="/cookie-settings" method="post">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    {{ forms.legend("cookieSelectionHeading", "Choose which cookies we use") }}
+
+                    <h2 class="govuk-heading-m">Cookies that measure website use (analytics cookies)</h2>
+                    <p>These cookies store information about how you use our website, such as the links you click on. We use them to help make our website better.</p>
+    
+                    <div class="govuk-radios">
+                        {% set isAnswered = cookie.consented %}
+                        {% set isAccepted = cookie.statistics %}
+
+                        {{ forms.radio("Use cookies to measure my website use",
+                            "useCookie", "cookie", "useCookie", isAnswered and isAccepted) }}
+
+                        {{ forms.radio("Do not use cookies to measure my website use",
+                            "DontUseCookie", "cookie", "DontUseCookie", isAnswered and not isAccepted) }}
+                    </div>
+                </fieldset>
+            </div>
+            {{ forms.saveAndContinueButton("cookieSelectionSubmitButton") }}
+          </form>
+    </div>
+</div>
+{% endblock %}

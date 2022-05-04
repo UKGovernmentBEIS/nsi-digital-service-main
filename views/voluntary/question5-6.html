@@ -1,0 +1,46 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/question5/question5-5" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 5 Page 6
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" id="q5viForm" name="q5viForm" action="/voluntary/question5/question5-6" method="post">
+        <div class="govuk-form-group">
+            {{ forms.errorSummary(formValidation) }}
+            <fieldset class="govuk-fieldset govuk-!-margin-bottom-5">
+                {{ forms.legend("q5viHeading", "To the best of your knowledge, in the last 5 years has the qualifying entity entered into any research and development that has been partly or wholly funded by the UK government in the following areas?") }}
+
+                <p>The areas are:</p>
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>defence</li>
+                    <li>national security responsibilities</li>
+                    <li>law enforcement</li>
+                    <li>national infrastructure sector</li>
+                </ul>
+                <p>This includes research and development funded by any UK government department, agency or public body.</p>
+
+                <div class="govuk-radios">
+                    {% set isQuestionAnswered = data['q5viIsFundedResearch'] %}
+                    {% set isYes = data['q5viIsFundedResearch'] === 'Yes' %}
+                    {% set isNo = data['q5viIsFundedResearch'] === 'No' %}
+
+                    {{ forms.radio("Yes",
+                        "q5viIsFundedResearchYes", "q5viIsFundedResearch", "Yes", isQuestionAnswered and isYes) }}
+                    
+                    {{ forms.radio("No",
+                        "q5viIsFundedResearchNo", "q5viIsFundedResearch", "No", isQuestionAnswered and isNo) }}
+
+                </div>
+            </fieldset>
+
+        </div>
+        {{ forms.saveAndContinueButton("q5viSubmitButton") }}
+      </form>
+    </div>
+</div>
+{% endblock %}

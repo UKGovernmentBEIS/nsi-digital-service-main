@@ -1,0 +1,63 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/task-list" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 8 Page 1
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% if (data['q8iControllingOwnershipFileName']|length == 0) and (uploadvalidation['isValid'] === false) and (uploadvalidation['fileName']|length > 0) %}
+        {{ forms.fileUploadErrorSummary(uploadvalidation) }}
+      {% endif %}
+
+      {{ forms.legend("q8iHeading", "Structure chart of acquirer") }}
+
+      <p>Upload a document which includes details of all shareholders who have share ownership or voting rights of 5% or over. It must include each relevant shareholder's:</p>
+      <p>The document must include:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>full name</li>
+        <li>percentage of ownership</li>
+        <li>details of voting rights</li>
+        <li>nationality (or country of incorporation if it is an entity)</li>
+      </ul>
+
+      <p>The document must also specify whether or not any individual or entity is acquiring indirect control over the qualifying entity.</p>
+
+      <p>If indirect control is being acquired, specify the chain of entities which holds an interest or right in the acquirer, up to the last entity which holds the interest or right.</p>
+
+      <p>The document must also include any other information that is relevant.</p>
+
+      {% if (data['q8iControllingOwnershipFileName']|length > 0) and (data['q8isuccessMessage']|length > 0) %}
+        <form class="form" id="submitQuestion8Pg1Success" action="/voluntary/question8/question8-1postsucccess" name="submitQuestion8Pg1Success" method="post">
+          
+          <table class="govuk-table" style="white-space: pre-wrap;">
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">Document Name</th>
+                <th scope="col" class="govuk-table__header govuk-table__header">Status</th>
+                <th scope="col" class="govuk-table__header govuk-table__header">Action</th>
+              </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">{{ data['q8iControllingOwnershipFileName'] }}</th>
+                <td class="govuk-table__cell govuk-table__cell"><a class="govuk-link" href="/voluntary/question8/question8-1view/{{ data['fileuploadControllingOwnershipChartId'] }}"><span>Download</span></a></td>
+                <td class="govuk-table__cell govuk-table__cell"><a class="govuk-link" href="/voluntary/question8/question8-1rem/{{ data['fileuploadControllingOwnershipChartId'] }}"><span>Remove</span></a></td>
+              </tr>
+            </tbody>
+          </table>
+
+          {{ forms.continueButton("q8iSubmitButton") }}
+        </form>
+      {% else %}
+      <form class="form" id="submitQuestion8-1" name="submitQuestion8-1" enctype="multipart/form-data" action="/voluntary/question8/question8-1post" method="post">
+            {{ forms.fileUploadInput("Upload a file", "fileuploadControllingOwnershipChart", "fileuploadControllingOwnershipChart", hintText="File must be 10MB or less in PDF, DOCX, XLSX or PPTX format") }}
+            {{ forms.saveAndContinueButton("submitButton8-1") }}
+      </form>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

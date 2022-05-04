@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Help Signin
+{% endblock %}
+
+{% block header %}
+{% if isAuthenticated == false %}
+{% include "includes/startHeader.html" %}
+{% include "includes/feedback.html" %}
+{% else %}
+{% include "includes/header.html" %}
+{% include "includes/feedback.html" %}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Create an account: step by step</h1>
+        <p>To create an account you will need:</p>
+        <ul class="govuk-list govuk-list--bullet">
+            <li>an email address</li>
+            <li>a mobile phone</li>
+        </ul>
+        <p>Using both your email address and mobile number is known as ‘multifactor identification’. It increases the security of your account.</p>
+        <p>If you create an account and begin making a notification, you will be the only person who can edit it. You can download or print any information you have entered if you need to share it with colleagues or clients.</p>
+
+        <h2 class="govuk-heading-m">Step 1</h2>
+        <p>Enter your email address and choose ‘Send verification code’.</p>
+
+        <h2 class="govuk-heading-m">Step 2</h2>
+        <p>You will be sent an email that contains a 6-digit code. Enter this into the verification code field and choose ‘Verify code’.</p>
+        <p>If you do not receive your verification email, or if it expires, choose ‘Send new code’ to be sent another email. </p>
+
+        <h2 class="govuk-heading-m">Step 3</h2>
+        <p>Enter a new password in the password field and enter it again to confirm it.</p>
+        <p>Your password must be at least 8 characters and include letters, numbers and symbols.</p>
+
+        <h2 class="govuk-heading-m">Step 4</h2>
+        <p>Select your country, enter your mobile number and choose ‘Send code’.</p>
+        <p>If you do not receive your verification SMS, or if it has expired, choose ‘Send a new code’ to be sent another SMS.</p>
+
+        <h2 class="govuk-heading-m">Step 5</h2>
+        <p>Enter the code you have been sent by SMS and choose ‘Verify code’.</p>
+        <p>You will be taken to the ‘Manage your NSI Act notifications’ screen. From here you can start creating your first notification. </p>
+    </div>
+</div>
+{% endblock %}

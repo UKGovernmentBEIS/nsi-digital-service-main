@@ -1,0 +1,15 @@
+{% set section = 'voluntary' %}
+{% if data['q1iNotifyingPartyOrRepresentative'] === 'notifyingParty' %}
+{% set backlink = "/"+section+"/question1/question1-2" %}
+{% else %}
+{% set backlink = "/"+section+"/question1/question1-3" %}
+{% endif %}
+{% extends "../add-to-list/add-another-form.html" %}
+
+{% block pageTitle %}Question 1 - 4b{% endblock %}
+
+{% set formId = "q1ivb" %}
+{% set action = "/voluntary/question1/question1-4b" %}
+{% set heading = "Additional acquirers" %}
+{% set listKey = "q1ivaAdditionalAcquirerList" %}
+{% set displayKey = "q1ivaMultinotifiername" %}

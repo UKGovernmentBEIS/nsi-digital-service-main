@@ -1,0 +1,131 @@
+--# BEIS Mockup 1 Database
+docker run -d --name beisnpdb-postgres -e POSTGRES_PASSWORD=Pass2020! -v C:/Dev/beisnpdb-data/:/var/lib/postgresql/data -p 5490:5432 postgres
+
+--# DATABASE Scripts
+CREATE DATABASE beisnotification;
+CREATE TABLE public.notifications (                                       
+     id SERIAL PRIMARY KEY,
+     reference varchar(100)  NOT NULL,                    
+     notificationdata text  NULL,                                          
+     ownerid varchar(60)  NULL,                                         
+     createddate date NULL,
+     status int NOT NULL DEFAULT 1,
+     author varchar(60) NULL,
+     inforequestedstage int NULL,
+     notificationtype varchar(20) NOT NULL,
+     ismasternotifier BOOLEAN NULL,
+     multinotifierreference int NULL,
+     datesubmitted date NULL,
+     ownertype varchar(100) NULL,
+     daterejected date NULL,
+     dateaccepted date NULL,
+     datereferred date NULL,
+     signedSubmittedPayload varchar(8000) NULL,
+     signedAcceptedPayload varchar(8000) NULL
+);
+
+CREATE TABLE public.users (                                       
+     id SERIAL PRIMARY KEY,
+     email varchar(100)  NOT NULL,                    
+     password varchar(100) NULL,                                          
+     organisationid int NULL,                                         
+     createddate date NULL,
+     role int NULL,
+     firstname varchar(100) NULL,
+     lastname varchar(100) NULL
+);
+
+CREATE TABLE public.organisations (                                       
+     id SERIAL PRIMARY KEY,
+     name varchar(100)  NOT NULL
+);
+
+CREATE TABLE public.userregistrations (                                       
+     id SERIAL PRIMARY KEY,
+     firstname varchar(100) NOT NULL,
+     lastname varchar(100) NOT NULL,
+     emailaddress varchar(100) NOT NULL,
+     organisationname varchar(100) NOT NULL,   
+     organisationaddress varchar(1000) NOT NULL,                      
+     password varchar(100) NOT NULL,   
+     authorised BOOLEAN NOT NULL,  
+     authoriseddate date NULL,  
+     createddate date NULL
+);
+
+CREATE TABLE public.notificationstatus (                                       
+     id int NOT NULL,
+     name varchar(100)  NOT NULL
+);
+
+CREATE TABLE public.feedback (                                       
+     id SERIAL PRIMARY KEY,
+     userid int NOT NULL,
+     regarding varchar(100) NOT NULL,
+     pageurl varchar(1000) NOT NULL,
+     details text NULL,   
+     satisfaction varchar(100) NOT NULL,                      
+     improvements text NULL,
+	wantreply BOOLEAN NOT NULL,
+     createdon date NOT NULL
+);
+
+CREATE TABLE public.multinotifierreference (                                       
+     id SERIAL PRIMARY KEY,
+     referencecode varchar(100)  NOT NULL,
+	 status varchar(50)  NOT NULL
+);
+
+insert into notificationstatus (id, name) values(1, 'In Progress');
+insert into notificationstatus (id, name) values(2, 'Submitted');
+insert into notificationstatus (id, name) values(3, 'Under Review');
+insert into notificationstatus (id, name) values(4, 'Accepted');
+insert into notificationstatus (id, name) values(5, 'Rejected');
+insert into notificationstatus (id, name) values(6, 'Submitted - Pending Decision');
+insert into notificationstatus (id, name) values(7, 'Request for Information');
+
+CREATE TABLE "session" (
+  "sid" varchar NOT NULL COLLATE "default",
+	"sess" json NOT NULL,
+	"expire" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE);
+
+ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
+
+CREATE INDEX "IDX_session_expire" ON "session" ("expire");
+
+CREATE TABLE public.notificationdocuments (                                       
+     id SERIAL PRIMARY KEY,
+     notificationreference varchar(100) NOT NULL,                    
+     questionref varchar(200) NOT NULL,
+     documentname varchar(255) NULL,
+     documentcontent bytea NULL,
+     documenttype varchar(50) NULL,                                                                            
+     createddate date NULL
+);
+
+CREATE TABLE public.auditdata  (
+     id SERIAL PRIMARY KEY,
+     notificationreference varchar(100)  NOT NULL,
+     userid varchar(100)  NOT NULL,
+     action varchar(100)  NOT NULL,
+     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+/*
+ALTER TABLE notifications ADD COLUMN datesubmitted date NULL;
+ALTER TABLE notifications ADD COLUMN ownertype varchar(100) NULL;
+
+--11/10/2021
+ALTER TABLE notifications ADD COLUMN daterejected date NULL;
+ALTER TABLE notifications ADD COLUMN dateaccepted date NULL;
+ALTER TABLE notifications ADD COLUMN datereferred date NULL;
+
+--27-Nov-2021
+ALTER table notifications Add Column signedSubmittedPayload varchar(8000) NULL;
+ALTER table notifications Add Column signedAcceptedPayload varchar(8000) NULL;
+
+--27/11/2021
+ALTER TABLE notificationdocuments ALTER COLUMN documenttype TYPE varchar(255);
+*/

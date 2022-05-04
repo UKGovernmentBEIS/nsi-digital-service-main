@@ -1,0 +1,41 @@
+{% set section = 'mandatory' %}
+{% if data['q7iEntityOrIndividual'] === "entity" %}
+{% set backlink = "/"+section+"/question7/question7-2" %}
+{% else %}
+{% set backlink = "/"+section+"/question7/question7-1" %}
+{% endif %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 7 Page 3
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <form class="form" id="submitQuestion7-3" name="submitQuestion7-3" action="/mandatory/question7/question7-3post"
+            method="post">
+            <div class="govuk-form-group">
+                {{ forms.errorSummary(formValidation) }}
+                <fieldset class="govuk-fieldset">
+                    {{ forms.legend("q7iHeading", "Acquirer's products, services and activities") }}
+
+                    {{ forms.textArea(
+                    "Describe the acquirer's products, services and activities",
+                    "Enter 500 words or fewer",
+                    "q7iDescriptionProductActivities", "q7iDescriptionProductActivities", data.q7iDescriptionProductActivities, maxLength="3000") }}
+                    
+                    {{ forms.textArea(
+                        "Additional information",
+                        "Enter 400 words or fewer",
+                        "q7iAcquirerAdditionalInformation", "q7iAcquirerAdditionalInformation", data.q7iAcquirerAdditionalInformation, maxLength="2500") }}
+                </fieldset>
+            </div>
+            {{ forms.saveAndContinueButton("submitButton7-3") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

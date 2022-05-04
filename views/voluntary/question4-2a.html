@@ -1,0 +1,42 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/question4/question4-2" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 4 Page 2a
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <form class="form" id="submitQuestion4-2a" name="submitQuestion4-2a" action="/voluntary/question4/question4-2apost"
+            method="post">
+            {% if (isEditing != null) and isEditing == true %}
+            <input type="hidden" name="q4ibEditingData" id="q4ibEditingData" value="true" />
+            <input type="hidden" name="q4ibRegulatoryApprovalId" id="q4ibRegulatoryApprovalId" value="{{ data['q4ibRegulatoryApprovalId'] }}" />
+            {% else %}
+            <input type="hidden" name="q4ibEditingData" id="q4ibEditingData" value="false" />
+            {% endif %}
+            {{ forms.errorSummary(formValidation) }}
+
+            {{ forms.legend("q4ibHeading", "Add a regulatory approval") }}
+
+            <div class="govuk-hint">Provide information about a regulatory approval. You’ll be given the option to add more regulatory approvals on the next page.</div>
+
+            {{ forms.textInput('Name of regulator', 'q4ibRegulatorName', 'q4ibRegulatorName', data.q4ibRegulatorName, '', maxLength="100") }}
+
+            {{ forms.dateInput('Expected date of regulatory approval', 'q4ibRegulatoryApproval', 'q4ibRegulatoryApproval', data['q4ibRegulatoryApprovalDay'], data['q4ibRegulatoryApprovalMonth'], data['q4ibRegulatoryApprovalYear']) }}
+
+            {{ forms.textArea(
+                "Additional information (optional)",
+                "",
+                "q4ibAdditionalInfo", "q4ibAdditionalInfo", data.q4ibAdditionalInfo, maxLength="1200") }}
+
+            {{ forms.saveAndContinueButton("submitButton4-2a") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

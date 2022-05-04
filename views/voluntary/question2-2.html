@@ -1,0 +1,70 @@
+{% set section = 'voluntary' %}
+{% if (data["q2iPreviousNotificationList"]|length > 0) %}
+{% set backlink = "/"+section+"/task-list" %}
+{% else %}
+{% set backlink = "/"+section+"/question2/question2-1" %}
+{% endif %}
+
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 2 Page 2
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      {% set isQuestionAnswered = data['q211addanothernotification'] %}
+      {% set isYes = data['q211addanothernotification'] === 'Yes' %}
+      {% set isNo = data['q211addanothernotification'] === 'No' %}
+
+      {{ forms.legend("q2-2iHeading", "Notifications submitted to overseas investment screening regimes") }}
+
+        <div class="govuk-form-group">
+        <dl class="hmrc-add-to-a-list hmrc-add-to-a-list--short">
+            {% for i in range(0, data['q2iPreviousNotificationList'].length) -%}
+            <div class="hmrc-add-to-a-list__contents">
+            <dt class="hmrc-add-to-a-list__identifier hmrc-add-to-a-list__identifier--light">
+                {{ data['q2iPreviousNotificationList'][i].q2iCaseReference }}
+            </dt>
+            <dd class="hmrc-add-to-a-list__change">
+                <a class="govuk-link" href="/voluntary/question2/question2-2cya/{{ data['q2iPreviousNotificationList'][i].id }}">
+                <span>Change</span>
+                <span class="govuk-visually-hidden">Change {{ data['q2iPreviousNotificationList'][i].q2iCaseReference }}</span>
+                </a>
+            </dd>
+            <dd class="hmrc-add-to-a-list__remove">
+                <a class="govuk-link" href="/voluntary/question2/question2-2rem/{{ data['q2iPreviousNotificationList'][i].id }}">
+                <span>Remove</span>
+                <span class="govuk-visually-hidden">Remove {{ data['q2iPreviousNotificationList'][i].q2iCaseReference }} from the list</span>
+                </a>
+            </dd>
+            </div>
+            {%- endfor %}
+        </dl>
+        </div>
+
+        <form class="form" id="submitQuestion2-2" name="submitQuestion2-2" action="/voluntary/question2/question2-2post" method="post">
+
+          <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend govuk-fieldset__legend--m">
+                    Do you need to add another notification?
+                </legend>
+                <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
+                    {{ forms.radio("Yes",
+                    "q211addanothernotificationYes", "q211addanothernotification", "Yes", isQuestionAnswered and isYes) }}
+
+                    {{ forms.radio("No",
+                        "q211addanothernotificationNo", "q211addanothernotification", "No", isQuestionAnswered and isNo) }}
+                </div>
+                
+            </fieldset>
+        </div>
+        {{ forms.saveAndContinueButton("submitButton2-2") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

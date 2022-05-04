@@ -1,0 +1,70 @@
+{% set section = 'retrospective' %}
+{% set backlink = "/"+section+"/question1/question1-1" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 1 Page 2
+{% endblock %}
+
+{% block beforeContent %}
+<a class="govuk-back-link" id="navigateBackLink" name="navigateBackLink" href="/retrospective/question1/question1-1">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" id="q1iiForm" name="q1iiForm" action="/retrospective/question1/question1-2" method="post">
+            {{ forms.errorSummary(formValidation) }}
+            <fieldset id="question1-subsectionii" class="govuk-fieldset">
+                {{ forms.legend("q1iiHeading", "About the notifier") }}
+
+                {{ forms.textInput(
+                    "Name of notifier", "q1iiNotifyingPartyName", "q1iiNotifyingPartyName", data.q1iiNotifyingPartyName, maxLength="100") }}
+
+                {{ forms.textArea(
+                    "Business address of notifier",
+                    "", "q1iiNotifyingPartyBusinessaddress", "q1iiNotifyingPartyBusinessaddress", data.q1iiNotifyingPartyBusinessaddress, maxLength="200") }}
+
+                {{ forms.textInput(
+                    "Your full name", "q1iiNotifyingPartyIndividual", "q1iiNotifyingPartyIndividual", data.q1iiNotifyingPartyIndividual, "", maxLength="100") }}
+
+                {{ forms.textInput(
+                    "Your position", "q1iiNotifyingPartyPosition", "q1iiNotifyingPartyPosition", data.q1iiNotifyingPartyPosition, maxLength="100") }}
+
+                {{ forms.emailInput("q1iiNotifyingPartyEmail", "q1iiNotifyingPartyEmail", data.q1iiNotifyingPartyEmail, label="Your email", maxLength="100") }}
+
+                {{ forms.telephoneInput("q1iiNotifyingPartyTelephone", "q1iiNotifyingPartyTelephone", data.q1iiNotifyingPartyTelephone, label="Your telephone") }}
+
+                <div class="govuk-form-group">
+                    <fieldset class="govuk-fieldset">
+                        <label class="govuk-label govuk-label--s" for="q1iiAuthorised">Are you authorised to accept all correspondence about this notification? </label>
+                        <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+                            {% set isQuestionAnswered = data['q1iiAuthorised'] %}
+                            {% set isYes = data['q1iiAuthorised'] === 'Yes' %}
+        
+                            {{ forms.radio("Yes",
+                                "q1iiAuthorisedYes", "q1iiAuthorised", "Yes", isQuestionAnswered and isYes) }}
+
+                            {{ forms.radioConditional("No",
+                                "q1iiAuthorisedNo", "q1iiAuthorised", "No", isQuestionAnswered and not isYes, "q1iiAuthorisedNoConditional") }}
+
+                            <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="q1iiAuthorisedNoConditional">
+                                {{ forms.textInput(
+                                    "Full name of authorised person", "q1iiAuthorisedName", "q1iiAuthorisedName", data.q1iiAuthorisedName, maxLength="100", hintText="This is the person we will contact about this notification") }}
+
+                                {{ forms.textInput(
+                                    "Position", "q1iiAuthorisedPosition", "q1iiAuthorisedPosition", data.q1iiAuthorisedPosition, maxLength="100") }}
+
+                                {{ forms.emailInput("q1iiAuthorisedEmail", "q1iiAuthorisedEmail", data.q1iiAuthorisedEmail, label="Email",  maxLength="100") }}
+
+                                {{ forms.telephoneInput("q1iiAuthorisedTelephone", "q1iiAuthorisedTelephone", data.q1iiAuthorisedTelephone) }}
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </fieldset>
+            {{ forms.saveAndContinueButton("q1iiSubmitButton") }}
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/question5/question5-4" %}
+{% extends "../add-to-list/add-item-form.html" %}
+
+{% block pageTitle %}Question 5 alt - 4a{% endblock %}
+
+{% set formId = "q5altiva" %}
+{% set action = "/voluntary/question5/question5-4a" %}
+
+{% block formContent %}
+<div class="govuk-form-group">
+    {{ forms.errorSummary(formValidation) }}
+    <fieldset class="govuk-fieldset">
+        {{ forms.legend(formId + "Heading", "Add dual use items") }}
+
+        {{ forms.textInput(
+            "Name of asset that is considered a dual-use item",
+            formId + "ItemName", formId + "ItemName", data[formId + 'ItemName'], maxLength="100") }}
+
+        {{ govukCharacterCount({
+            name: formId + "Description",
+            value: data[formId + 'Description'],
+            id: formId + "Description",
+            maxlength: 5000,
+            label: {
+                text: "Description of dual-use item and its application",
+                classes: "govuk-label--s",
+                isPageHeading: false
+            }
+        }) }}
+
+    </fieldset>
+</div>
+{% endblock %}

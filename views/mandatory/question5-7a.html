@@ -1,0 +1,26 @@
+{% extends "../add-to-list/add-item-form.html" %}
+{% set section = 'mandatory' %}
+{% set backlink = "/"+section+"/question5/question5-7" %}
+
+{% block pageTitle %}Question 5 - 7a{% endblock %}
+
+{% set formId = "q5viia" %}
+{% set action = "/mandatory/question5/question5-7a" %}
+
+{% block formContent %}
+<div class="govuk-form-group">
+    {{ forms.errorSummary(formValidation) }}
+    <fieldset class="govuk-fieldset">
+        {{ forms.legend(formId + "Heading", "Add a National Security Vetting (NSV) clearance required by personnel") }}
+        <div class="govuk-hint">Provide information about a required NSV security clearance. You’ll be given the option to add other required security clearances on the next page.</div>
+
+        {{ forms.textInput(
+            "Level of NSV security clearance",
+            formId + "Level", formId + "Level", data[formId + 'Level'], maxLength="100", hintText="For example, BPSS") }}
+
+        {{ forms.textInput(
+            "Number of personnel with this level of clearance",
+            formId + "HowMany", formId + "HowMany", data[formId + 'HowMany'], maxLength="100") }}
+    </fieldset>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+
+{% block pageScripts %}
+<script>
+    var prototypeSubmitButton = document.getElementById("prototypeSubmitButton");
+    var branchElements = document.querySelectorAll("[data-go-to-screen]")
+
+    branchElements.forEach(function(item) {
+        item.addEventListener("change", function() {
+            prototypeSubmitButton.href = item.dataset.goToScreen;
+        });
+    })
+</script>
+{% endblock %}

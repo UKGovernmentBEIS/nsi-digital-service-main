@@ -1,0 +1,70 @@
+{% set section = 'mandatory' %}
+{% set backlink = "/"+section+"/question1/question1-1" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 1 Page 2
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" id="q1iiForm" name="q1iiForm" action="/mandatory/question1/question1-2" method="post">
+            {{ forms.errorSummary(formValidation) }}
+
+            <fieldset id="question1-subsectionii" class="govuk-fieldset">
+                {{ forms.legend("q1iiHeading", "About the acquirer") }}
+                
+
+                {{ forms.textInput(
+                    "Name of acquirer", "q1iiAcquirerFullname", "q1iiAcquirerFullname", data.q1iiAcquirerFullname, "", maxLength="100") }}
+
+                {{ forms.textArea(
+                    "Business address of acquirer",
+                    "", "q1iiAcquirerBusinessaddress", "q1iiAcquirerBusinessaddress", value=data.q1iiAcquirerBusinessaddress, maxLength="200") }}
+
+
+               
+                {{ forms.textInput(
+                    "Your full name", "q1iiAcquirerIndividual", "q1iiAcquirerIndividual", data.q1iiAcquirerIndividual, maxLength="100") }}
+
+                {{ forms.textInput(
+                    "Your position", "q1iiAcquirerPosition", "q1iiAcquirerPosition", data.q1iiAcquirerPosition, maxLength="100") }}
+
+                {{ forms.emailInput("q1iiAcquirerEmail", "q1iiAcquirerEmail", data.q1iiAcquirerEmail, label="Your email") }}
+
+                {{ forms.telephoneInput("q1iiAcquirerTelephone", "q1iiAcquirerTelephone", data.q1iiAcquirerTelephone, label="Your telephone") }}
+
+                <div class="govuk-form-group">
+                    <fieldset class="govuk-fieldset">
+                        <label class="govuk-label govuk-label--s" for="q1iiAuthorised">Are you authorised to accept all correspondence about this notification? </label>
+                        <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+                            {% set isQuestionAnswered = data['q1iiAuthorised'] %}
+                            {% set isYes = data['q1iiAuthorised'] === 'Yes' %}
+        
+                            {{ forms.radio("Yes",
+                                "q1iiAuthorisedYes", "q1iiAuthorised", "Yes", isQuestionAnswered and isYes) }}
+
+                            {{ forms.radioConditional("No",
+                                "q1iiAuthorisedNo", "q1iiAuthorised", "No", isQuestionAnswered and not isYes, "q1iiAuthorisedNoConditional") }}
+
+                            <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="q1iiAuthorisedNoConditional">
+                                {{ forms.textInput(
+                                    "Full name of authorised person", "q1iiAuthorisedName", "q1iiAuthorisedName", data.q1iiAuthorisedName, maxLength="100", hintText="This is the person we will contact about this notification") }}
+
+                                {{ forms.textInput(
+                                    "Position", "q1iiAuthorisedPosition", "q1iiAuthorisedPosition", data.q1iiAuthorisedPosition, maxLength="100") }}
+
+                                {{ forms.emailInput("q1iiAuthorisedEmail", "q1iiAuthorisedEmail", value=data.q1iiAuthorisedEmail) }}
+
+                                {{ forms.telephoneInput("q1iiAuthorisedTelephone", "q1iiAuthorisedTelephone", value=data.q1iiAuthorisedTelephone, label="Telephone") }}
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </fieldset>
+            {{ forms.saveAndContinueButton("q1iiSubmitButton") }}
+        </form>
+    </div>
+</div>
+{% endblock %}

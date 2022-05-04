@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% import "macros/forms.html" as forms %}
+
+{% block pageTitle %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Manage your NSI Act notifications</h1>
+
+        <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title"
+            data-module="govuk-notification-banner">
+            <div class="govuk-notification-banner__header">
+                <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+                    Latest updates
+                </h2>
+            </div>
+            <div class="govuk-notification-banner__content">
+                <p class="govuk-notification-banner__heading">
+                    You have <a href="/messages">{% if unreadCount %}{{ unreadCount }}{% else %}0{% endif %} new messages</a> from the Investment Security Unit
+                </p>
+            </div>
+        </div>
+
+        <hr>
+        <ul class="govuk-list task-list">
+            <li>
+                <b><a class="task-link ga-pageLink govuk-link govuk-!-font-size-24" data-ga-category="Type_app"
+                        data-ga-label="appeal" href="/form-selection">Create a new notification</a></b>
+                <p class="govuk-!-font-size-24 govuk-!-padding-top-6">Start a mandatory notification, voluntary notification or retrospective validation.</p>
+            </li>
+            <hr>
+            <li>
+                <b><a class="task-link ga-pageLink govuk-link govuk-!-font-size-24" data-ga-category="Type_app"
+                        data-ga-label="home_login" href="/in-progress-notifications">In progress notifications</a></b>
+                <p class="govuk-!-font-size-24 govuk-!-padding-top-6">View or complete a notification you haven't submitted.</p>
+            </li>
+            <hr>
+            <li>
+                <b><a class="task-link ga-pageLink govuk-link govuk-!-font-size-24" data-ga-category="Type_app"
+                        data-ga-label="home_login" href="/request-info-notifications">Notifications - requiring more information</a></b>
+                <p class="govuk-!-font-size-24 govuk-!-padding-top-6">View or provide more information for the notification.</p>
+            </li>
+            <hr>
+            <li>
+                <b><a class="task-link ga-pageLink govuk-link govuk-!-font-size-24" data-ga-category="Type_app"
+                        data-ga-label="close" href="/submitted-notifications">Submitted notifications</a></b>
+                <p class="govuk-!-font-size-24 govuk-!-padding-top-6">Check the statuses or download copies of notifications you've submitted.</p>
+            </li>
+            <hr>
+        </ul>
+        </div>
+    </div>
+    {% endblock %}

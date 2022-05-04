@@ -1,0 +1,29 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/question5/question5-3" %}
+{% extends "../add-to-list/add-item-form.html" %}
+
+{% block pageTitle %}Question 5 - 3a{% endblock %}
+
+{% set formId = "q5iiia" %}
+{% set action = "/voluntary/question5/question5-3a" %}
+
+{% block formContent %}
+<div class="govuk-form-group">
+    {{ forms.errorSummary(formValidation) }}
+    <fieldset class="govuk-fieldset">
+        {{ forms.legend("q5iiiaHeading", "Add a licence") }}
+
+        <div class="govuk-hint">Provide information about a licence. You’ll be given the option to add more licences on the next page.</div>
+
+        {{ forms.textInput(
+            "Name of licence",
+            "q5iiiaLicence", "q5iiiaLicence", data.q5iiiaLicence, maxLength="100") }}
+
+        {{ forms.textInput(
+            "Name of issuer or regulator",
+            "q5iiiaIssuer", "q5iiiaIssuer", data.q5iiiaIssuer, maxLength="100") }}
+
+        {{ forms.dateInput("Date issued or declined", "q5iiiaIssueDate", "q5iiiaIssueDate", data.q5iiiaIssueDateDay, data.q5iiiaIssueDateMonth, data.q5iiiaIssueDateYear) }}
+    </fieldset>
+</div>
+{% endblock %}

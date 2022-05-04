@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% import "macros/forms.html" as forms %}
+
+{% block pageTitle %}
+  Form selection
+{% endblock %}
+
+{% block beforeContent %}
+    <a class="govuk-back-link" id="navigateBackLink" name="navigateBackLink" href="/dashboard">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" id="q1iForm" name="q1iForm" action="/form-selection" method="post">
+        <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset">
+                {{ forms.legend("formTypeHeading", "Which type of notification are you submitting?") }}
+
+                <div class="govuk-radios">
+
+                    {{ forms.radio("Mandatory",
+                        "formTypeMandatory", "formType", "mandatory", false) }}
+
+                    {{ forms.radio("Voluntary",
+                        "formTypeVoluntary", "formType", "voluntary", false) }}
+
+                    {{ forms.radio("Retrospective validation",
+                        "formTypeRetrospective", "formType", "retrospective", false) }}
+                </div>
+            </fieldset>
+        </div>
+        {{ forms.saveAndContinueButton("formTypeSubmitButton") }}
+      </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/question5/question5-4" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 5 alt Page 5
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" id="q5altvForm" name="q5altvForm" action="/voluntary/question5/question5-5" method="post">
+        <div class="govuk-form-group">
+            {{ forms.errorSummary(formValidation) }}
+            <fieldset class="govuk-fieldset govuk-!-margin-bottom-5">
+                {{ forms.legend("q5altvHeading", "To the best of your knowledge, is the qualifying asset used to gather or hold data on UK citizens?") }}
+
+                <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+                    {% set isQuestionAnswered = data['q5altvData'] %}
+                    {% set isYes = data['q5altvData'] === 'YES' %}
+                    {% set isNo = data['q5altvData'] === 'NO' %}
+
+                    {{ forms.radioConditional("Yes",
+                       "q5altvDataYes", "q5altvData", "YES", isQuestionAnswered and isYes, "q5altvDataConditional") }}
+      
+                    <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="q5altvDataConditional">
+                        {{ govukCharacterCount({
+                            name: "q5altvDescription",
+                            value: data.q5altvDescription,
+                            id: "q5altvDescription",
+                            maxlength: 5000,
+                            label: {
+                                text: "Describe the data gathered or held",
+                                classes: "govuk-label--s",
+                                isPageHeading: false
+                            }
+                        }) }}
+                    </div>
+      
+                    {{ forms.radio("No",
+                        "q5altvDataNo", "q5altvData", "NO", isQuestionAnswered and isNo) }}
+
+                  </div>
+            </fieldset>
+        </div>
+        {{ forms.saveAndContinueButton("q5altvSubmitButton") }}
+      </form>
+    </div>
+</div>
+{% endblock %}

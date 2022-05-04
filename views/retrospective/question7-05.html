@@ -1,0 +1,40 @@
+{% set section = 'retrospective' %}
+{% set backlink = "/"+section+"/question7/question7-4" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 7 Page 5
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        
+        <form class="form" id="submitQuestionQ7Pg05" name="submitQuestionQ7Pg05" action="/retrospective/question7/question7-05post" method="post">
+
+            <div class="govuk-form-group">
+                {{ forms.errorSummary(formValidation) }}
+                <fieldset class="govuk-fieldset">
+                    {% set isQuestionAnswered = data['q7iiiNonUKGovt'] %}
+                    {% set isYes = data['q7iiiNonUKGovt'] === 'Yes' %}
+                    {% set isNo = data['q7iiiNonUKGovt'] === 'No' %}
+
+                    {{ forms.legend("q7iiiHeading", "To the best of your knowledge, does any non-UK government have a direct or indirect role in the operation or decision making of the acquirer?") }}
+
+                    <div class="govuk-radios">
+                        {{ forms.radio("Yes",
+                        "q7iiiNonUKGovtYes", "q7iiiNonUKGovt", "Yes", isQuestionAnswered and isYes) }}
+
+                        {{ forms.radio("No",
+                        "q7iiiNonUKGovtNo", "q7iiiNonUKGovt", "No", isQuestionAnswered and isNo) }}
+
+                    </div>
+                </fieldset>
+            </div>
+            {{ forms.saveAndContinueButton("submitButtonQ7Pg05") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% set section = 'mandatory' %}
+{% set backlink = "/"+section+"/question5/question5-6" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 5 Page 7
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" id="q5viiForm" name="q5viiForm" action="/mandatory/question5/question5-7" method="post">
+        <div class="govuk-form-group">
+            {{ forms.errorSummary(formValidation) }}
+            <fieldset class="govuk-fieldset govuk-!-margin-bottom-5">
+                {{ forms.legend("q5viiHeading", "To the best of your knowledge, is the qualifying entity currently party to any contracts that require personnel to hold National Security Vetting (NSV) clearance?") }}
+
+                <div class="govuk-radios">
+                    {% set isQuestionAnswered = data['q5viiIsNSVSC'] %}
+                    {% set isYes = data['q5viiIsNSVSC'] === 'Yes' %}
+                    {% set isNo = data['q5viiIsNSVSC'] === 'No' %}
+                    {% set isDoNotKnow = data['q5viiIsNSVSC'] === 'DoNotKnow' %}
+
+                    {{ forms.radio("Yes",
+                        "q5viiIsNSVSCYes", "q5viiIsNSVSC", "Yes", isQuestionAnswered and isYes) }}
+                    
+                    {{ forms.radio("No",
+                        "q5viiIsNSVSCNo", "q5viiIsNSVSC", "No", isQuestionAnswered and isNo) }}
+
+                </div>
+            </fieldset>
+
+           <!--  {{ forms.textArea(
+                "Additional Information",
+                "Provide any relevant additional information", "q5viiAdditionalInfo", "q5viiAdditionalInfo", data.q5viiAdditionalInfo, maxLength="1200") }} -->
+        </div>
+        {{ forms.saveAndContinueButton("q5viiSubmitButton") }}
+      </form>
+    </div>
+</div>
+{% endblock %}

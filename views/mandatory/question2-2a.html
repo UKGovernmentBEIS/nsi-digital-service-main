@@ -1,0 +1,47 @@
+{% set section = 'mandatory' %}
+{% set backlink = "/"+section+"/question2/question2-1" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 2 Page 2a
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <form class="form" id="submitQuestion2-2a" name="submitQuestion2-2a" action="/mandatory/question2/question2-2apost"
+            method="post">
+            {{ forms.errorSummary(formValidation) }}
+
+            {% if (isEditing != null) and isEditing == true %}
+            <input type="hidden" name="q2iEditingData" id="q2iEditingData" value="true" />
+            <input type="hidden" name="q2iNotificationId" id="q2iNotificationId" value="{{ data['q2iNotificationId'] }}" />
+            {% else %}
+            <input type="hidden" name="q2iEditingData" id="q2iEditingData" value="false" />
+            {% endif %}
+
+            {{ forms.legend("q2-2aiHeading", "Add an overseas investment screening regime notification") }}
+
+            <div class="govuk-hint">Provide information about a notification the acquirer has submitted to an overseas investment screening regime. You’ll be given the option to add more notifications on the next page.</div>
+
+            {{ govukCharacterCount({
+                name: "q2iCaseReference",
+                value: data.q2iCaseReference,
+                id: "q2iCaseReference",
+                maxlength: 5000,
+                label: {
+                    text: "Enter details including name, reference number and any other relevant information",
+                    classes: "govuk-label--s",
+                    isPageHeading: false
+                }
+            }) }}
+
+            {{ forms.saveAndContinueButton("submitButton2-2a") }}
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

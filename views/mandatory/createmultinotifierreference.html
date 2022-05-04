@@ -1,0 +1,26 @@
+{% set section = 'mandatory' %}
+{% set backlink = "/"+section+"/multinotifier/multinotifierhavereference" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+Multi Notifier Reference
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" id="multinotifier-3" name="multinotifier-3" action="/mandatory/multinotifier/createmultinotifierreference-post" method="post">
+
+            {{ forms.legend("createmultinotifierreference-Heading", "Joint submission reference") }}
+
+            <p>Share this number with other acquiring party members so that the ISU can link the notifications together and treat as a joint submission</p>
+
+            <h2 class="govuk-heading-m">{{ multiNotifierReference }}</h2>
+
+            {{ forms.saveAndContinueButton("multinotifier-3") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,89 @@
+{% set section = 'retrospective' %}
+{% set backlink = "/"+section+"/task-list" %}
+{% extends "../question.html" %}
+{% import "macros/forms.html" as forms %}
+
+{% block pageTitle %}
+  Question 5 Page 1
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" id="q5iForm" name="q5iForm" action="/retrospective/question5/question5-1" method="post">
+        <div class="govuk-form-group">
+            {{ forms.errorSummary(formValidation) }}
+            <fieldset class="govuk-fieldset">
+                {{ forms.legend("q5iHeading", "About the qualifying entity") }}
+
+                {{ forms.textInput(
+                    "Name of qualifying entity", "q5iNameQualifyingEntity", "q5iNameQualifyingEntity", data.q5iNameQualifyingEntity, maxLength="100") }}
+
+                {{ forms.textArea(
+                "Business address of qualifying entity",
+                "", "q5iBusinessAddress", "q5iBusinessAddress", data.q5iBusinessAddress, maxLength="100") }}
+
+                {{ forms.urlInput(
+                "Website of qualifying entity", "q5iWebsite", "q5iWebsite", data.q5iWebsite, maxLength="100", hintText="Leave blank if not applicable") }}
+
+                {{ forms.textArea(
+                "Describe the qualifying entity's UK activities, products and services",
+                "", "q5iDescription", "q5iDescription", data.q5iDescription, maxLength="2500") }}
+
+                <h2 class="govuk-heading-m">Contact details of authorised individual in qualifying entity</h2>
+
+                {{ forms.textInput(
+                    "Full name",
+                    "q5iNameIndividualQualifyingEntity", "q5iNameIndividualQualifyingEntity", data.q5iNameIndividualQualifyingEntity, "", maxLength="100") }}
+
+                {{ forms.emailInput("q5iEmail", "q5iEmail", data.q5iEmail, maxLength="100") }}
+
+                <!-- // TODO: Add the Position field for the target entity contact-->
+
+                {{ forms.telephoneInput("q5iTelephone", "q5iTelephone", data.q5iTelephone) }}
+
+                <h2 class="govuk-heading-m">If incorporated in the UK</h2>
+
+                {{ forms.textInput(
+                    "Companies House registration number", "q5iCompaniesHouse", "q5iCompaniesHouse", data.q5iCompaniesHouse, maxLength="8", hintText="Leave blank if not applicable") }}
+
+                {{ forms.textInput(
+                    "Standard industrial classification (SIC) code", "q5iSIC", "q5iSIC", data.q5iSIC, maxLength="100", hintText="Leave blank if not applicable") }}
+
+                <h2 class="govuk-heading-m">If incorporated outside the UK</h2>
+
+                {{ forms.textInput(
+                    "Country of incorporation", "q5iCountry", "q5iCountry", data.q5iCountry, maxLength="100", hintText="Leave blank if not applicable") }}
+
+                {{ forms.textArea(
+                    "Full registration details within country of incorporation",
+                    "Leave blank if not applicable", "q5iRegistration", "q5iRegistration", data.q5iRegistration, maxLength="100") }}
+
+                <div class="govuk-form-group">
+                    <fieldset class="govuk-fieldset">
+                        <label class="govuk-label govuk-label--s" for="q5iActivities">Does the qualifying entity carry out activities in, or supply goods or services to, the UK?</label>
+                        <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+                            {% set isQuestionAnswered = data['q5iActivities'] %}
+                            {% set isYes = data['q5iActivities'] === 'Yes' %}
+
+                            {{ forms.radioConditional("Yes",
+                                "q5iActivitiesYes", "q5iActivities", "Yes", isQuestionAnswered and isYes, "q5iActivitiesConditional") }}
+
+                            <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="q5iActivitiesConditional">
+                                {{ forms.textArea(
+                                    "Briefly describe the activities carried out in the UK or goods supplied or services supplied to the UK",
+                                    "", "q5iActivitiesDescription", "q5iActivitiesDescription", data.q5iActivitiesDescription, maxLength="2500") }}
+                            </div>
+
+                            {{ forms.radio("No",
+                                "q5iActivitiesNo", "q5iActivities", "No", isQuestionAnswered and not isYes) }}
+                        </div>
+                    </fieldset>
+                </div>
+            </fieldset>
+        </div>
+        {{ forms.saveAndContinueButton("q5iSubmitButton") }}
+      </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/task-list" %}
+{% extends "../question.html" %}
+
+{% import "macros/forms.html" as forms %}
+
+{% block pageTitle %}
+  Question 5 alt Page 1
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" id="q5iForm" name="q5iForm" action="/voluntary/question5/question5-1" method="post">
+        <div class="govuk-form-group">
+            {{ forms.errorSummary(formValidation) }}
+            <fieldset class="govuk-fieldset">
+                {{ forms.legend("q5altiHeading", "About the qualifying asset") }}
+
+                {{ forms.textInput(
+                    "Full name of asset", "q5altiNameOfAsset", "q5altiNameOfAsset", data.q5altiNameOfAsset, maxLength="100") }}
+
+                <div class="govuk-form-group">
+                    <fieldset class="govuk-fieldset">
+                        <label class="govuk-label govuk-label--s" for="q5altiAssetType">Which qualifying asset type does this notification relate to?</label>
+                        <div class="govuk-radios" data-module="govuk-radios">
+                            {% set isQuestionAnswered = data['q5altiAssetType'] %}
+                            {% set isLand = data['q5altiAssetType'] === 'Land' %}
+                            {% set isProperty = data['q5altiAssetType'] === 'Property' %}
+                            {% set isEconomicValue = data['q5altiAssetType'] === 'EconomicValue' %}
+
+                            {{ forms.radio("Land",
+                                "q5altiAssetTypeLand", "q5altiAssetType", "Land", isQuestionAnswered and isLand) }}
+
+                            {{ forms.radio("Tangible (corporeal) moveable property",
+                                "q5altiAssetTypeProperty", "q5altiAssetType", "Property", isQuestionAnswered and isProperty) }}
+
+                            {{ forms.radio("Ideas, information or techniques that have industrial, commercial or other economic value",
+                                "q5altiAssetTypeEconomicValue", "q5altiAssetType", "EconomicValue", isQuestionAnswered and isEconomicValue) }}
+                        </div>
+                    </fieldset>
+                </div>
+
+                {{ forms.textArea(
+                    "Address of qualifying asset",
+                    "Leave blank if not applicable", "q5altiAddress", "q5altiAddress", data.q5altiAddress, maxLength="200") }}
+
+                {{ govukCharacterCount({
+                    name: "q5altiDescription",
+                    value: data.q5altiDescription,
+                    id: "q5altiDescription",
+                    maxlength: 5000,
+                    label: {
+                        text: "Description the qualifying asset",
+                        classes: "govuk-label--s",
+                        isPageHeading: false
+                    }
+                }) }}
+
+                {{ forms.textArea(
+                    "Additional information",
+                    "", "q5altiAdditionalInfo", "q5altiAdditionalInfo", data.q5altiAdditionalInfo, maxLength="1800") }}
+            </fieldset>
+        </div>
+        {{ forms.saveAndContinueButton("q5altiSubmitButton") }}
+      </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+{% block main %}
+  <div class="govuk-width-container {{ containerClasses }}">
+    {% block beforeContent %}
+      <a class="govuk-back-link" id="navigateBackLink" name="navigateBackLink" href="{{backlink}}" title="navigate back">Back</a>
+    {% endblock %}
+      <main class="govuk-main-wrapper {{ mainClasses }}" id="main-content" role="main"{% if mainLang %} lang="{{ mainLang }}"{% endif %}>
+        {% block content %}{% endblock %}
+        <a class="govuk-back-link" id="navigateToTaskList" name="navigateToTaskList" href="/{{section}}/task-list" title="navigate to task list">Return to task list</a>
+      </main>
+  </div>
+{% endblock %}

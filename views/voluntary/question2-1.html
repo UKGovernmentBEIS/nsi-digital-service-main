@@ -1,0 +1,41 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/task-list" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 2 Page 1
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% set isQuestionAnswered = data['q2iSubmitTwelve'] %}
+        {% set isYes = data['q2iSubmitTwelve'] === 'Yes' %}
+        {% set isNo = data['q2iSubmitTwelve'] === 'No' %}
+       
+
+        <form class="form" id="submitQuestion2-1" name="submitQuestion2-1" action="/voluntary/question2/question2-1post" method="post">
+
+            {{ forms.legend("q2-1iHeading", "To the best of your knowledge, has the notifier submitted a notification to any overseas investment screening regimes within the last 12 months?") }}
+
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        {{ forms.radioConditional("Yes",
+                        "q2iSubmitTwelveYes", "q2iSubmitTwelve", "Yes", isQuestionAnswered and isYes) }}
+
+                        {{ forms.radio("No",
+                            "q2iSubmitTwelveNo", "q2iSubmitTwelve", "No", isQuestionAnswered and isNo) }}
+
+               
+                    </div>
+                    
+                </fieldset>
+            </div>
+            {{ forms.saveAndContinueButton("submitButton2-1") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

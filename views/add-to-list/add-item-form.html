@@ -1,0 +1,21 @@
+{% extends "question.html" %}
+
+{% block pageTitle %}{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" id="{{ formId }}Form" name="{{ formId }}Form" action="{{ action }}" method="post">
+        {% if (isEditing != null) and isEditing == true %}
+        <input type="hidden" name="{{ formId }}EditingData" id="{{ formId }}EditingData" value="true" />
+        <input type="hidden" name="{{ formId }}Id" id="{{ formId }}Id" value="{{ data[formId + 'Id'] }}" />
+        {% else %}
+        <input type="hidden" name="{{ formId }}EditingData" id="{{ formId }}EditingData" value="false" />
+        {% endif %}
+
+        {% block formContent %}{% endblock %}
+        {{ forms.saveAndContinueButton("{{ formId }}SubmitButton") }}
+      </form>
+    </div>
+</div>
+{% endblock %}

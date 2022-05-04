@@ -1,0 +1,59 @@
+{% set section = 'mandatory' %}
+{% set backlink = "/"+section+"/question6/question6-1" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 6 Page 2
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {% if (data['q6iiPostAcquisitionChartFileName']|length == 0) and (uploadvalidation['isValid'] === false) and (uploadvalidation['fileName']|length > 0) %}
+        {{ forms.fileUploadErrorSummary(uploadvalidation) }}
+      {% endif %}
+
+      <h1 class="govuk-heading-m">Expected post-acquisition structure chart of qualifying entity</h1>
+
+      <p>Upload a document which includes details of all shareholders who have share ownership or voting rights of 5% or over. It must include each of the relevant shareholder's:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>full name</li>
+        <li>percentage of ownership</li>
+        <li>details of voting rights</li>
+        <li>nationality (or country of incorporation if it is an entity)</li>
+      </ul>
+      <p>The document must also include any other information that is relevant.</p>
+
+      {% if (data['q6iiPostAcquisitionChartFileName']|length > 0) and (data['q6iisuccessMessage']|length > 0) %}
+          <form class="form" id="submitQuestion6Pg2Success" action="/mandatory/question6/question6-2postsucccess" name="submitQuestion6Pg2Success" method="post">
+            
+            <table class="govuk-table" style="white-space: pre-wrap;">
+              <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                  <th scope="col" class="govuk-table__header">Document Name</th>
+                  <th scope="col" class="govuk-table__header govuk-table__header">Status</th>
+                  <th scope="col" class="govuk-table__header govuk-table__header">Action</th>
+                </tr>
+              </thead>
+              <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                  <th scope="row" class="govuk-table__header">{{ data['q6iiPostAcquisitionChartFileName'] }}</th>
+                  <td class="govuk-table__cell govuk-table__cell"><a class="govuk-link" href="/mandatory/question6/question6-2view/{{ data['fileuploadPostAcquisitionChartId'] }}"><span>Download</span></a></td>
+                  <td class="govuk-table__cell govuk-table__cell"><a class="govuk-link" href="/mandatory/question6/question6-2rem/{{ data['fileuploadPostAcquisitionChartId'] }}"><span>Remove</span></a></td>
+                </tr>
+              </tbody>
+            </table>
+
+            {{ forms.continueButton("submitButtonQ6Pg2Success") }}
+          </form>
+      {% else %}
+        <form class="form" id="submitQuestion6Pg2" name="submitQuestion6Pg2" enctype="multipart/form-data" action="/mandatory/question6/question6-2post" method="post">
+
+              {{ forms.fileUploadInput("Upload a file", "fileuploadPostAcquisitionChart", "fileuploadPostAcquisitionChart", hintText="File must be 10MB or less in PDF, DOCX, XLSX or PPTX format") }}
+
+              {{ forms.saveAndContinueButton("submitButtonQ6P2") }}
+        </form>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

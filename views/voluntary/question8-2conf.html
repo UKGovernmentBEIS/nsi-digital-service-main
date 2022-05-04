@@ -1,0 +1,40 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/question8/question8-2" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 8 Page 2a - Confirmation
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        {% set isQuestionAnswered = data['q8iiremove'] %}
+        {% set isYes = data['q8iiremove'] === 'Yes' %}
+        {% set isNo = data['q8iiremove'] === 'No' %}
+        {% set title = "Are you sure you want to remove " + boardMemberRef + "?" %}
+
+        <form class="form" id="submitQuestion8-3ConfPost" name="submitQuestion8-3conf" action="/retrospective/question8/question8-2ConfPost"
+            method="post">
+            <input type="hidden" name="q8iirecordToRemoveId" id="q8iirecordToRemoveId" value="{{ boardMemberId }}" />
+
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                  {{ forms.legend("q8iiHeading", title) }}
+
+                  <div class="govuk-radios" data-module="govuk-radios">
+                    {{ forms.radio("Yes",
+                    "q8iiremoveYes", "q8iiremove", "Yes", isQuestionAnswered and isYes) }}
+
+                    {{ forms.radio("No",
+                        "q8iiremoveNo", "q8iiremove", "No", isQuestionAnswered and isNo) }}
+                    </div>
+                </fieldset>
+            </div>
+           
+            {{ forms.saveAndContinueButton("submitButton8-3conf") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

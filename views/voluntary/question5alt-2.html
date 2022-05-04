@@ -1,0 +1,36 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/question5/question5-1" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 5 alt Page 2
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" id="q5altiiForm" name="q5altiiForm" action="/voluntary/question5/question5-2" method="post">
+        <div class="govuk-form-group">
+            {{ forms.errorSummary(formValidation) }}
+            <fieldset class="govuk-fieldset govuk-!-margin-bottom-5">
+                {{ forms.legend("q5altiiHeading", "To the best of your knowledge, does the qualifying asset have a UK Government Security Classification?") }}
+
+                <div class="govuk-radios">
+                    {% set isQuestionAnswered = data['q5altiiIsAuthorised'] %}
+                    {% set isYes = data['q5altiiIsAuthorised'] === 'Yes' %}
+                    {% set isNo = data['q5altiiIsAuthorised'] === 'No' %}
+
+                    {{ forms.radio("Yes",
+                        "q5altiiIsAuthorisedYes", "q5altiiIsAuthorised", "Yes", isQuestionAnswered and isYes) }}
+
+                    {{ forms.radio("No",
+                        "q5altiiIsAuthorisedNo", "q5altiiIsAuthorised", "No", isQuestionAnswered and isNo) }}
+
+                </div>
+            </fieldset>
+        </div>
+        {{ forms.saveAndContinueButton("q5altiiSubmitButton") }}
+      </form>
+    </div>
+</div>
+{% endblock %}

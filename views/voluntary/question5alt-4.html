@@ -1,0 +1,37 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/question5/question5-3" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 5 alt Page 4
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" id="q5altivForm" name="q5altivForm" action="/voluntary/question5/question5-4" method="post">
+        <div class="govuk-form-group">
+            {{ forms.errorSummary(formValidation) }}
+            <fieldset class="govuk-fieldset govuk-!-margin-bottom-5">
+                {{ forms.legend("q5altivHeading", "To the best of your knowledge, is the qualifying asset considered to be a dual-use item?") }}
+
+                <div class="govuk-radios">
+                    {% set isQuestionAnswered = data['q5altivIsDualUse'] %}
+                    {% set isYes = data['q5altivIsDualUse'] === 'Yes' %}
+                    {% set isNo = data['q5altivIsDualUse'] === 'No' %}
+
+                    {{ forms.radio("Yes",
+                        "q5altivIsDualUseYes", "q5altivIsDualUse", "Yes", isQuestionAnswered and isYes) }}
+
+                    {{ forms.radio("No",
+                        "q5altivIsDualUseNo", "q5altivIsDualUse", "No", isQuestionAnswered and isNo) }}
+
+                </div>
+            </fieldset>
+
+            {{ forms.saveAndContinueButton("q5altivSubmitButton") }}
+        </div>
+      </form>
+    </div>
+</div>
+{% endblock %}

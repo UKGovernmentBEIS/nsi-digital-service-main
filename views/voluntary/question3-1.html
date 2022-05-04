@@ -1,0 +1,156 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/task-list" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 3 Page 1
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    {{ forms.errorSummary(formValidation) }}
+    <div class="govuk-grid-column-full">
+      {{ forms.legend("q3iHeading", "Which sectors are relevant to this notification?") }}
+
+      <form class="form" id="submitQuestion3Pg1" name="submitQuestion3Pg1" action="/voluntary/question3/question3-1post" method="post">
+
+        <!-- Section B - Question 3 (i) - BEGIN -->
+        <div class="govuk-form-group">
+ 
+          <div class="govuk-checkboxes">
+
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('ACADEMICRESEARCHANDDEVELOPMENTINHIGHEREDUCATION' in data['q3iSector']) %}
+            {{ forms.checkBox("Academic research and development in higher education", "q3iSector1", "q3iSector", "ACADEMICRESEARCHANDDEVELOPMENTINHIGHEREDUCATION", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('ACCOMMODATIONANDFOODSERVICEACTIVITIES' in data['q3iSector']) %}
+            {{ forms.checkBox("Accommodation and food service activities", "q3iSector2", "q3iSector", "ACCOMMODATIONANDFOODSERVICEACTIVITIES", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('ADVANCEDMATERIALS' in data['q3iSector']) %}
+            {{ forms.checkBox("Advanced materials", "q3iSector3", "q3iSector", "ADVANCEDMATERIALS", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('ADVANCEDROBOTICS' in data['q3iSector']) %}
+            {{ forms.checkBox("Advanced robotics", "q3iSector4", "q3iSector", "ADVANCEDROBOTICS", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('ADMINISTRATIVEANDSUPPORTSERVICEACTIVITIES' in data['q3iSector']) %}
+            {{ forms.checkBox("Administrative and support service activities", "q3iSector5", "q3iSector", "ADMINISTRATIVEANDSUPPORTSERVICEACTIVITIES", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('AGRICULTUREFORESTRYANDFISHING' in data['q3iSector']) %}
+            {{ forms.checkBox("Agriculture, forestry and fishing", "q3iSector6", "q3iSector", "AGRICULTUREFORESTRYANDFISHING", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('ARTIFICIALINTELLIGENCE' in data['q3iSector']) %}
+            {{ forms.checkBox("Artificial intelligence", "q3iSector7", "q3iSector", "ARTIFICIALINTELLIGENCE", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('ARTSENTERTAINMENTANDRECREATION' in data['q3iSector']) %}
+            {{ forms.checkBox("Arts, entertainment and recreation", "q3iSector8", "q3iSector", "ARTSENTERTAINMENTANDRECREATION", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('CIVILNUCLEAR' in data['q3iSector']) %}
+            {{ forms.checkBox("Civil nuclear", "q3iSector9", "q3iSector", "CIVILNUCLEAR", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('COMMUNICATIONS' in data['q3iSector']) %}
+            {{ forms.checkBox("Communications", "q3iSector10", "q3iSector", "COMMUNICATIONS", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('COMPUTINGHARDWARE' in data['q3iSector']) %}
+            {{ forms.checkBox("Computing hardware", "q3iSector11", "q3iSector", "COMPUTINGHARDWARE", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('CONSTRUCTION' in data['q3iSector']) %}
+            {{ forms.checkBox("Construction", "q3iSector12", "q3iSector", "CONSTRUCTION", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('CRITICALSUPPLIERSTOTHEEMERGENCYSERVICESSECTORS' in data['q3iSector']) %}
+            {{ forms.checkBox("Critical suppliers to the emergency services sector", "q3iSector13", "q3iSector", "CRITICALSUPPLIERSTOTHEEMERGENCYSERVICESSECTORS", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('CRITICALSUPPLIERSTOTHEGOVERNMENT' in data['q3iSector']) %}
+            {{ forms.checkBox("Critical suppliers to the government", "q3iSector14", "q3iSector", "CRITICALSUPPLIERSTOTHEGOVERNMENT", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('CRYPTOGRAPHICAUTHENTICATION' in data['q3iSector']) %}
+            {{ forms.checkBox("Cryptographic authentication", "q3iSector15", "q3iSector", "CRYPTOGRAPHICAUTHENTICATION", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('DATAINFRASTRUCTURE' in data['q3iSector']) %}
+            {{ forms.checkBox("Data infrastructure", "q3iSector16", "q3iSector", "DATAINFRASTRUCTURE", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('DEFENCE' in data['q3iSector']) %}
+            {{ forms.checkBox("Defence", "q3iSector17", "q3iSector", "DEFENCE", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('ENERGY' in data['q3iSector']) %}
+            {{ forms.checkBox("Energy", "q3iSector18", "q3iSector", "ENERGY", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('FINANCIALANDINSURANCEACTIVITIES' in data['q3iSector']) %}
+            {{ forms.checkBox("Financial and insurance activities", "q3iSector20", "q3iSector", "FINANCIALANDINSURANCEACTIVITIES", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('HUMANHEALTHANDSOCIALWORKACTIVITIES' in data['q3iSector']) %}
+            {{ forms.checkBox("Human health and social work activities", "q3iSector21", "q3iSector", "HUMANHEALTHANDSOCIALWORKACTIVITIES", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('INFORMATIONANDCOMMUNICATION' in data['q3iSector']) %}
+            {{ forms.checkBox("Information and communication", "q3iSector22", "q3iSector", "INFORMATIONANDCOMMUNICATION", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('MANUFACTURING' in data['q3iSector']) %}
+            {{ forms.checkBox("Manufacturing", "q3iSector23", "q3iSector", "MANUFACTURING", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('MILITARYANDDUALUSE' in data['q3iSector']) %}
+            {{ forms.checkBox("Military and dual-use", "q3iSector24", "q3iSector", "MILITARYANDDUALUSE", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('MININGANDQUARRYING' in data['q3iSector']) %}
+            {{ forms.checkBox("Mining and quarrying", "q3iSector25", "q3iSector", "MININGANDQUARRYING", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('OTHERSERVICEACTIVITIES' in data['q3iSector']) %}
+            {{ forms.checkBox("Other service activities", "q3iSector26", "q3iSector", "OTHERSERVICEACTIVITIES", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('PROFESSIONALSCIENTIFICANDTECHNICALACTIVITIES' in data['q3iSector']) %}
+            {{ forms.checkBox("Professional, scientific and technical activities", "q3iSector27", "q3iSector", "PROFESSIONALSCIENTIFICANDTECHNICALACTIVITIES", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('PUBLICADMINISTRATIONANDDEFENCECOMPULSORYSOCIALSECURITY' in data['q3iSector']) %}
+            {{ forms.checkBox("Public administration and defence; compulsory social security", "q3iSector28", "q3iSector", "PUBLICADMINISTRATIONANDDEFENCECOMPULSORYSOCIALSECURITY", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('QUANTUMTECHNOLOGIES' in data['q3iSector']) %}
+            {{ forms.checkBox("Quantum technologies", "q3iSector29", "q3iSector", "QUANTUMTECHNOLOGIES", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('REALESTATEACTIVITIES' in data['q3iSector']) %}
+            {{ forms.checkBox("Real estate activities", "q3iSector30", "q3iSector", "REALESTATEACTIVITIES", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('SATELLITEANDSPACETECHNOLOGY' in data['q3iSector']) %}
+            {{ forms.checkBox("Satellite and space technology", "q3iSector31", "q3iSector", "SATELLITEANDSPACETECHNOLOGY", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('SUPPLIERSTOTHEEMERGENCYSERVICES' in data['q3iSector']) %}
+            {{ forms.checkBox("Suppliers to the emergency services", "q3iSector32", "q3iSector", "SUPPLIERSTOTHEEMERGENCYSERVICES", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and (('ENGINEERINGBIOLOGY' in data['q3iSector']) or ('SYNTHETICBIOLOGY' in data['q3iSector'])) %}
+            {{ forms.checkBox("Synthetic biology", "q3iSector33", "q3iSector", "SYNTHETICBIOLOGY", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('TRANSPORT' in data['q3iSector']) %}
+            {{ forms.checkBox("Transport", "q3iSector34", "q3iSector", "TRANSPORT", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('TRANSPORTATIONANDSTORAGELOGISTICS' in data['q3iSector']) %}
+            {{ forms.checkBox("Transportation and storage (logistics)", "q3iSector35", "q3iSector", "TRANSPORTATIONANDSTORAGELOGISTICS", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('WATERSUPPLYSEWERAGEWASTEMANAGEMENTANDREMEDIATIONACTIVITIES' in data['q3iSector']) %}
+            {{ forms.checkBox("Water supply, sewerage, waste management and remediation activities", "q3iSector36", "q3iSector", "WATERSUPPLYSEWERAGEWASTEMANAGEMENTANDREMEDIATIONACTIVITIES", isSectorSelected) }}
+
+            {% set isSectorSelected = (data['q3iSector']|length > 0) and ('WHOLESALEANDRETAILTRADEADREPAIROFMOTORVEHICLESANDMOTORCYCLES' in data['q3iSector']) %}
+            {{ forms.checkBox("Wholesale and retail trade, ad repair of motor vehicles and motorcycles", "q3iSector37", "q3iSector", "WHOLESALEANDRETAILTRADEADREPAIROFMOTORVEHICLESANDMOTORCYCLES", isSectorSelected) }}
+          </div>
+          <br />
+
+          {{ govukCharacterCount({
+            name: "q3iiReason",
+            value: data.q3iiReason,
+            id: "q3iiReason",
+            maxlength: 5000,
+            hint: {
+              text: "Describe the qualifying entity's activities within these sectors."
+            },
+            label: {
+              text: "Additional information",
+              classes: "govuk-label--s",
+              isPageHeading: false
+            },
+            attributes: {'required': true}
+          }) }}
+
+        </div>
+        <!-- Section B - Question 3 (i) - END -->
+        {{ forms.saveAndContinueButton("submitButtonQ3P1") }}
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

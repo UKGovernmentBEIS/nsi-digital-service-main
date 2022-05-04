@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Help
+{% endblock %}
+
+{% block header %}
+{% if isAuthenticated == false %}
+{% include "includes/startHeader.html" %}
+{% include "includes/feedback.html" %}
+{% else %}
+{% include "includes/header.html" %}
+{% include "includes/feedback.html" %}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Help</h1>
+
+        <h2 class="govuk-heading-m">General enquiries</h2>
+
+        <p>You can contact the Investment Security Unit (ISU) for an informal discussion about notifications or a future acquisition.</p>
+        <p>Email: <a href="maito:investment.screening@beis.gov.uk" title="email us at investment.screening@beis.gov.uk">investment.screening@beis.gov.uk</a></p>
+
+        <h2 class="govuk-heading-m">Technical support</h2>
+        <p>You can contact the technical support team if you have any problems using this service.</p>
+        <p>Email: <a href="maito:investment.screening@beis.gov.uk" title="email us at investment.screening@beis.gov.uk">investment.screening@beis.gov.uk</a></p>
+
+        <h2 class="govuk-heading-m">Enquiries about a notification you've submitted</h2>
+        <p>You can contact the ISU if you've submitted a notification form and are awaiting a response.</p>
+        <p>Email: <a href="maito:investment.screening@beis.gov.uk" title="email us at investment.screening@beis.gov.uk">investment.screening@beis.gov.uk</a></p>
+    </div>
+</div>
+{% endblock %}

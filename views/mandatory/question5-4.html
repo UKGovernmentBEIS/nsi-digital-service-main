@@ -1,0 +1,41 @@
+{% set section = 'mandatory' %}
+{% set backlink = "/"+section+"/question5/question5-3" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 5 Page 4
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" id="q5ivForm" name="q5ivForm" action="/mandatory/question5/question5-4" method="post">
+        <div class="govuk-form-group">
+            {{ forms.errorSummary(formValidation) }}
+            <fieldset class="govuk-fieldset govuk-!-margin-bottom-5">
+                {{ forms.legend("q5ivHeading", "To the best of your knowledge, does the qualifying entity hold or own any dual-use items?") }}
+
+                <div class="govuk-radios">
+                    {% set isQuestionAnswered = data['q5ivIsDualUse'] %}
+                    {% set isYes = data['q5ivIsDualUse'] === 'Yes' %}
+                    {% set isNo = data['q5ivIsDualUse'] === 'No' %}
+                    {% set isUncertain = data['q5ivIsDualUse'] === 'Uncertain' %}
+
+                    {{ forms.radio("Yes",
+                        "q5ivIsDualUseYes", "q5ivIsDualUse", "Yes", isQuestionAnswered and isYes) }}
+                        
+                    {{ forms.radio("No",
+                        "q5ivIsDualUseNo", "q5ivIsDualUse", "No", isQuestionAnswered and isNo) }}
+
+                </div>
+            </fieldset>
+            <!-- {{ forms.textArea(
+                "Additional Information",
+                "Provide any relevant additional information", "q5ivAdditionalInfo", "q5ivAdditionalInfo", data.q5ivAdditionalInfo, maxLength="1200") }} -->
+
+            {{ forms.saveAndContinueButton("q5ivSubmitButton") }}
+        </div>
+      </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/question3/question3-1" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 3 Page 1a
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <form class="form" id="submitQuestion3Pg1a" name="submitQuestion3Pg1a" action="/voluntary/question3/question3-1apost" method="post">
+        <div class="govuk-form-group">
+            {{ forms.errorSummary(formValidation) }}
+            <fieldset class="govuk-fieldset">
+              {{ forms.legend("q3iaHeading", "At what stage is the acquisition?") }}
+
+              <div class="govuk-radios">
+                  {% set isQuestionAnswered = data['q3iaAcquisitionInContemplationOrTakenPlace'] %}
+                  {% set isInContemplation = data['q3iaAcquisitionInContemplationOrTakenPlace'] === 'inContemplation' %}
+
+                  {{ forms.radio("In contemplation or in progress",
+                      "q3iaAcquisitionInContemplationOrTakenPlace1", "q3iaAcquisitionInContemplationOrTakenPlace", "inContemplation", isQuestionAnswered and isInContemplation) }}
+
+                  {{ forms.radio("Has taken place",
+                      "q3iaAcquisitionInContemplationOrTakenPlace2", "q3iaAcquisitionInContemplationOrTakenPlace", "takenPlace", isQuestionAnswered and not isInContemplation) }}
+              </div>
+          </fieldset>
+        </div>
+        {{ forms.saveAndContinueButton("submitButtonQ3P1") }}       
+      </form>
+    </div>
+  </div>
+{% endblock %}

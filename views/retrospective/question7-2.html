@@ -1,0 +1,54 @@
+{% set section = 'retrospective' %}
+{% set backlink = "/"+section+"/question7/question7-1" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 7 Page 2
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <form class="form" id="submitQuestion7-2" name="submitQuestion7-2" action="/retrospective/question7/question7-2post"
+            method="post">
+            <div class="govuk-form-group">
+                {{ forms.errorSummary(formValidation) }}
+                <fieldset class="govuk-fieldset">
+                    {% set isQuestionAnswered = data['q7iIncorporatedOutsideUk'] %}
+                    {% set isYes = data['q7iIncorporatedOutsideUk'] === 'Yes' %}
+                    {% set isNo = data['q7iIncorporatedOutsideUk'] === 'No' %}
+
+                    {{ forms.legend("q7iiHeading", "Registration details for the acquiring entity.") }}
+
+                    {{ forms.textInput(
+                    "Companies House registration number",
+                    "q7iCompaniesHouseReference", "q7iCompaniesHouseReference", data.q7iCompaniesHouseReference, maxLength="8", hint) }}
+
+                    {{ forms.textInput(
+                    "SIC reference",
+                    "q7iSICReference", "q7iSICReference", data.q7iSICReference, maxLength="100") }}
+
+                    {{ forms.legendSmall("q7iiHeadingSub", "Registration details if the entity incorporated outside the UK.") }}
+
+                    <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+                    {{ forms.radioConditional("Yes",
+                        "q7iIncorporatedOutsideUkYes", "q7iIncorporatedOutsideUk", "Yes", isQuestionAnswered and isYes, "q7iIncorporatedOutsideUkConditional") }}
+
+                    <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="q7iIncorporatedOutsideUkConditional">
+                        {{ forms.textInput(
+                            "Registration details within country of incorporation", "q7iRegistrationDetailsCountryOfCorporation", "q7iRegistrationDetailsCountryOfCorporation", data.q7iRegistrationDetailsCountryOfCorporation, maxLength="100") }}
+                    </div>
+
+                    {{ forms.radio("No",
+                        "q7iIncorporatedOutsideUkNo", "q7iIncorporatedOutsideUk", "No", isQuestionAnswered and isNo) }}
+                    </div>
+                </fieldset>
+            </div>
+            {{ forms.saveAndContinueButton("submitButton7-2") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% set section = 'retrospective' %}
+{% set backlink = "/"+section+"/question8/question8-1" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 8 Page 2
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% set isQuestionAnswered = data['q8iiBoardMembers'] %}
+        {% set isYes = data['q8iiBoardMembers'] === 'Yes' %}
+        {% set isNo = data['q8iiBoardMembers'] === 'No' %}
+
+        {{ forms.legend("q8iiHeading", "Members of board of directors or equivalent within the acquirer") }}
+
+        <div class="govuk-hint">You must include all members of the board (or the equivalent).</div>
+        <div class="govuk-hint">The information should be correct at the time of submitting this notification.</div>
+
+        <div class="govuk-form-group">
+            <dl class="hmrc-add-to-a-list hmrc-add-to-a-list--short">
+                {% for i in range(0, data['q8iiBoardMembersList'].length) -%}
+                <div class="hmrc-add-to-a-list__contents">
+                    <dt class="hmrc-add-to-a-list__identifier hmrc-add-to-a-list__identifier--light">
+                        {{ data['q8iiBoardMembersList'][i].q8iiNameOfBoardMember }}
+                    </dt>
+                    <dd class="hmrc-add-to-a-list__change">
+                        <a class="govuk-link"
+                            href="/retrospective/question8/question8-2cya/{{ data['q8iiBoardMembersList'][i].id }}">
+                            <span>Change</span>
+                            <span class="govuk-visually-hidden">Change {{
+                                data['q8iiBoardMembersList'][i].q8iiNameOfBoardMember }}</span>
+                        </a>
+                    </dd>
+                    <dd class="hmrc-add-to-a-list__remove">
+                        <a class="govuk-link"
+                            href="/retrospective/question8/question8-2rem/{{ data['q8iiBoardMembersList'][i].id }}">
+                            <span>Remove</span>
+                            <span class="govuk-visually-hidden">Remove {{
+                                data['q8iiBoardMembersList'][i].q8iiNameOfBoardMember }} from the list</span>
+                        </a>
+                    </dd>
+                </div>
+                {%- endfor %}
+            </dl>
+        </div>
+
+        <form class="form" id="submitQuestion8-3" name="submitQuestion8-3" action="/retrospective/question8/question8-2post"
+            method="post">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend govuk-fieldset__legend--m">
+                        Do you need to add another board member or equivalent?
+                    </legend>
+                    <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
+                        {{ forms.radio("Yes",
+                        "q8iiBoardMembersYes", "q8iiBoardMembers", "Yes", isQuestionAnswered and isYes) }}
+
+                        {{ forms.radio("No",
+                            "q8iiBoardMembersNo", "q8iiBoardMembers", "No", isQuestionAnswered and isNo) }}
+                    </div>
+                    
+                </fieldset>
+            </div>
+            {{ forms.saveAndContinueButton("submitButton8-3") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% set section = 'mandatory' %}
+{% set backlink = "/"+section+"/question6/question6-3" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 6 Page 4
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        {{ forms.errorSummary(formValidation) }}
+
+        <form class="form" id="submitQuestion6Pg4" name="submitQuestion6Pg4" action="/mandatory/question6/question6-4post" method="post">
+
+          <h1 class="govuk-heading-xl">Non-UK governments or representatives that have a role in the operation or decision making of the qualifying entity</h1>
+            <div class="govuk-form-group">
+            <dl class="hmrc-add-to-a-list hmrc-add-to-a-list--short">
+                {% for i in range(0, data['nonUKGovernmentList'].length) -%}
+                <div class="hmrc-add-to-a-list__contents">
+                <dt class="hmrc-add-to-a-list__identifier hmrc-add-to-a-list__identifier--light">
+                    {{ data['nonUKGovernmentList'][i].q6iiiNonUKGovernmentName }}
+                </dt>
+                <dd class="hmrc-add-to-a-list__change">
+                    <a class="govuk-link" href="/mandatory/question6/question6-4edit/{{ data['nonUKGovernmentList'][i].itemRef }}">
+                    <span>Change</span>
+                    <span class="govuk-visually-hidden">Change {{ data['nonUKGovernmentList'][i].q6iiiNonUKGovernmentName }}</span>
+                    </a>
+                </dd>
+                <dd class="hmrc-add-to-a-list__remove">
+                    <a class="govuk-link" href="/mandatory/question6/question6-4rem/{{ data['nonUKGovernmentList'][i].itemRef }}">
+                    <span>Remove</span>
+                    <span class="govuk-visually-hidden">Remove {{ data['nonUKGovernmentList'][i].q6iiiNonUKGovernmentName }} from the list</span>
+                    </a>
+                </dd>
+                </div>
+                {%- endfor %}
+            </dl>
+            </div>
+
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" aria-describedby="add-another-hint">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                    Do you need to add details of another non-UK government or representative?
+                </legend>
+
+                <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
+                  {{ forms.radio("Yes",
+                  "addNonUKGovernmentYes", "addNonUKGovernment", "Yes", false) }}
+
+                  {{ forms.radio("No",
+                      "addNonUKGovernmentNo", "addNonUKGovernment", "No", false) }}
+                </div>
+            
+                </fieldset>
+            </div>
+
+            {{ forms.saveAndContinueButton("submitButtonQ6P4") }} 
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

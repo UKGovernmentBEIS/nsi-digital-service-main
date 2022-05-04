@@ -1,0 +1,58 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/question7/question7-4" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 7 Page 4a
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <form class="form" id="submitQuestion7-4a" name="submitQuestion7-4a" action="/voluntary/question7/question7-4apost"
+            method="post">
+            {% if (isEditing != null) and isEditing == true %}
+            <input type="hidden" name="q7iiEditingData" id="q7iiEditingData" value="true" />
+            <input type="hidden" name="q7iiOtherNonUkEntityId" id="q7iiOtherNonUkEntityId" value="{{ data['q7iiOtherNonUkEntityId'] }}" />
+            {% else %}
+            <input type="hidden" name="q7iiEditingData" id="q7iiEditingData" value="false" />
+            {% endif %}
+            <div class="govuk-form-group">
+                {{ forms.errorSummary(formValidation) }}
+                <fieldset class="govuk-fieldset">
+
+                    {{ forms.legend("q7iHeading", "Add a non-UK government or representative that has share ownership or voting rights in the acquirer") }}
+
+                    <div class="govuk-hint">Provide information about a non-UK government or representative. You’ll be given the option to add more non-UK governments or representatives on the next page.</div>
+
+                    {{ forms.textInput(
+                        "Name of non-UK government or representative", "q7iiNameOfNonUKGoverment", "q7iiNameOfNonUKGoverment", data.q7iiNameOfNonUKGoverment, maxLength="100") }}
+
+                    {{ forms.textInput(
+                        "Name of person(s) / entity acting on behalf of non-UK government", "q7iiNameOfPersonActingNonUKGoverment", "q7iiNameOfPersonActingNonUKGoverment", data.q7iiNameOfPersonActingNonUKGoverment, maxLength="100") }}
+
+                    {{ forms.textInput(
+                        "Percentage of share ownership or voting rights it holds", "q7iiShareOwnershipVotingRights", "q7iiShareOwnershipVotingRights", data.q7iiShareOwnershipVotingRights, maxLength="100") }}
+
+                    {{ govukCharacterCount({
+                        name: "q7iiAnythingToDeclare",
+                        value: data.q7iiAnythingToDeclare,
+                        id: "q7iiAnythingToDeclare",
+                        maxlength: 5000,
+                        label: {
+                            text: "Any other information that you consider relevant (optional)",
+                            classes: "govuk-label--s",
+                            isPageHeading: false
+                        }
+                    }) }}
+                        
+                </fieldset>
+            </div>
+            {{ forms.saveAndContinueButton("submitButton7-4a") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/question3/question3-1a" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 3 Page 2
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" id="submitQuestion3Pg2" name="submitQuestion3Pg2" action="/voluntary/question3/question3-2post" method="post">
+        <div class="govuk-form-group">
+            {{ forms.errorSummary(formValidation) }}
+            <fieldset class="govuk-fieldset">
+            {{ forms.legend("q3iiHeading", "What are you notifying about?") }}
+
+            <div class="govuk-radios">
+                {% set isQuestionAnswered = data['q3iiQualifyingAssetOrQualifyingEntity'] %}
+                {% set isQualifyingAsset = data['q3iiQualifyingAssetOrQualifyingEntity'] === 'qualifyingAsset' %}
+
+                {{ forms.radio("Qualifying asset",
+                    "q3iiQualifyingAssetOrQualifyingEntity1", "q3iiQualifyingAssetOrQualifyingEntity", "qualifyingAsset", isQuestionAnswered and isQualifyingAsset) }}
+
+                {{ forms.radio("Qualifying entity",
+                    "q3iiQualifyingAssetOrQualifyingEntity2", "q3iiQualifyingAssetOrQualifyingEntity", "qualifyingEntity", isQuestionAnswered and not isQualifyingAsset) }}
+            </div>
+        </fieldset>
+        </div>
+        {{ forms.saveAndContinueButton("submitButtonQ3P2") }}
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

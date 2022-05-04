@@ -1,0 +1,54 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/question3/question3-3" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 3 Page 4
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      <form class="form" id="submitQuestion3Pg4" name="submitQuestion3Pg4" action="/voluntary/question3/question3-4post" method="post">
+        <div class="govuk-form-group">
+          {% set isQuestionAnswered = data['question3ivMaterialInfluence'] %}
+          {% set isYes = data['question3ivMaterialInfluence'] === 'YES' %}
+          {% set isNo = data['question3ivMaterialInfluence'] === 'NO' %}
+
+          {{ forms.errorSummary(formValidation) }}
+
+          {{ forms.legend("q3vHeading", "Does the acquisition of a right or interest, alone or together with other interests or rights held, enable the acquirer to materially influence the policy of the qualifying entity?") }}
+
+          <fieldset class="govuk-fieldset" aria-describedby="question3vacquisition-hint">
+            <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+
+              {{ forms.radioConditional("Yes",
+              "question3ivMaterialInfluenceYes", "question3ivMaterialInfluence", "YES", isQuestionAnswered and isYes, "question3ivMaterialInfluenceYesConditional") }}
+
+              <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="question3ivMaterialInfluenceYesConditional">
+                {{ govukCharacterCount({
+                  name: "question3ivMaterialInfluenceDetails",
+                  value: data.question3ivMaterialInfluenceDetails,
+                  id: "question3ivMaterialInfluenceDetails",
+                  maxlength: 5000,
+                  label: {
+                    text: "Briefly describe the acquisition and how it enables material influence over the policy of the qualifying entity",
+                    classes: "govuk-label--s",
+                    isPageHeading: false
+                  }
+                }) }}
+              </div>
+
+              {{ forms.radio("No",
+                  "question3ivMaterialInfluenceNo", "question3ivMaterialInfluence", "NO", isQuestionAnswered and isNo) }}
+            </div>
+        
+          </fieldset>
+        </div>
+        {{ forms.saveAndContinueButton("submitButtonQ3P4") }}
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

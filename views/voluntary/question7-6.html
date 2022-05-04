@@ -1,0 +1,53 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/question7/question7-5" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 7 Page 6
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% set isQuestionAnswered = data['q7ivContractualArrangements'] %}
+        {% set isYes = data['q7ivContractualArrangements'] === 'Yes' %}
+        {% set isNo = data['q7ivContractualArrangements'] === 'No' %}
+
+        <form class="form" id="submitQuestion7-6" name="submitQuestion7-6" action="/voluntary/question7/question7-6post"
+            method="post">
+            <div class="govuk-form-group">
+                {{ forms.errorSummary(formValidation) }}
+                <fieldset class="govuk-fieldset">
+                    {{ forms.legend("q7ivHeading", "To the best of your knowledge, when the acquisition completes, will there be any contractual arrangements in place regarding share ownership or voting rights between the acquirer and any other party?") }}
+
+                    <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+                        {{ forms.radioConditional("Yes",
+                            "q7ivContractualArrangementsYes", "q7ivContractualArrangements", "Yes", isQuestionAnswered and isYes, "q7ivContractualArrangementsConditional") }}
+    
+                        <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="q7ivContractualArrangementsConditional">
+                            {{ govukCharacterCount({
+                                name: "q7ivContractualArrangementsSummary",
+                                value: data.q7ivContractualArrangementsSummary,
+                                id: "q7ivContractualArrangementsSummary",
+                                maxlength: 5000,
+                                label: {
+                                    text: "Summary of contractual arrangements",
+                                    classes: "govuk-label--s",
+                                    isPageHeading: false
+                                }
+                            }) }}
+                        </div>
+    
+                        {{ forms.radio("No",
+                            "q7ivContractualArrangementsNo", "q7ivContractualArrangements", "No", isQuestionAnswered and isNo) }}
+                    </div> 
+
+                </fieldset>
+            </div>
+            {{ forms.saveAndContinueButton("submitButton7-6") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

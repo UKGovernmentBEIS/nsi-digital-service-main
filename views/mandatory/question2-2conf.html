@@ -1,0 +1,41 @@
+{% set section = 'mandatory' %}
+{% set backlink = "/"+section+"/question2/question2-2" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 2 Page 2a - Confirmation
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      {% set isQuestionAnswered = data['q2iremove'] %}
+      {% set isYes = data['q2iremove'] === 'Yes' %}
+      {% set isNo = data['q2iremove'] === 'No' %}
+
+        <form class="form" id="submitQuestion2-2ConfPost" name="submitQuestion2-2conf" action="/mandatory/question2/question2-2ConfPost"
+            method="post">
+            <input type="hidden" name="q2irecordToRemoveId" id="q2irecordToRemoveId" value="{{ notificationId }}" />
+            {% set formHeading = 'Are you sure you want to remove ' + notificationRef + '?' %}
+
+            {{ forms.legend("q2-2confiHeading", formHeading) }}
+
+            <div class="govuk-form-group">
+              <fieldset class="govuk-fieldset">
+                <div class="govuk-radios" data-module="govuk-radios">
+                  {{ forms.radio("Yes",
+                  "q2iremoveYes", "q2iremove", "Yes", isQuestionAnswered and isYes) }}
+
+                  {{ forms.radio("No",
+                      "q2iremoveNo", "q2iremove", "No", isQuestionAnswered and isNo) }}
+                  </div>
+              </fieldset>
+          </div>
+
+            {{ forms.saveAndContinueButton("submitButton2-2conf") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

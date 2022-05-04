@@ -1,0 +1,70 @@
+{
+    "mandatory": {
+        "q4_3c": {
+            "pageHeading": "Add a key date",
+            "keyDate": {
+                "legend": "Key date",
+                "hint": "Provide information about a key date. You'll be given the option to add more key dates on the next page."
+            },
+            "whyRelevant": {
+                "label": "Why this date is relevant"
+            }
+        },
+        "q5_1": {
+            "pageHeading": "About the qualifying entity",
+            "businessName": {
+                "label": "Name of qualifying entity"
+            },
+            "contactHeading": "Contact details of authorised individual in qualifying entity",
+            "contactFullName": {
+                "label": "Full name"
+            },
+            "contactEmail": {
+                "label": "Email"
+            },
+            "contactTelephone": {
+                "label": "Telephone"
+            },
+            "incorporationHeading": "If incorporated in the UK",
+            "companyNumber": {
+                "label": "Companies House registration number",
+                "hint": "Leave blank if not applicable"
+            },
+            "sicNumber": {
+                "label": "Standard industrial classification (SIC) code",
+                "hint": "Leave blank if not applicable"
+            },
+            "outsideUKHeading": "If incorporated outside the UK",
+            "incorporationCountry": {
+                "label": "Country of incorporation",
+                "hint": "Leave blank if not applicable"
+            },
+            "registrationDetails": {
+                "label": "Full registration details within country of incorporation",
+                "hint": "Leave blank if not applicable"
+            },
+            "ukActivities": {
+                "label": "Does the qualifying entity carry out activities in, or supply goods or services to, the UK?",
+                "hint": "Leave blank if not applicable"
+            },
+            "businessAddress": {
+                "label": "Business address of qualifying entity"
+            },
+            "businessWebsite": {
+                "label": "Website of qualifying entity"
+            },
+            "businessActivities": {
+                "label": "Describe the qualifying entity's UK activities, products and services "
+            }
+        },
+        "q5_2": {
+            "pageHeading": "To the best of your knowledge, is the qualifying entity authorised to receive or hold information that has a UK Government Security Classification?",
+            "classificationLevel": {
+                "label": "Classification level"
+            },
+            "govDepartment": {
+                "label": "Which government department, agency or public body does the information come from?"
+            }
+        }
+    }
+}

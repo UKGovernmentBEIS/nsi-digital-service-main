@@ -1,0 +1,46 @@
+{% extends "../add-to-list/add-item-form.html" %}
+{% set section = 'mandatory' %}
+{% set backlink = "/"+section+"/question5/question5-6" %}
+
+{% block pageTitle %}Question 5 - 6a{% endblock %}
+
+{% set formId = "q5via" %}
+{% set action = "/mandatory/question5/question5-6a" %}
+
+{% block formContent %}
+<div class="govuk-form-group">
+    {{ forms.errorSummary(formValidation) }}
+    <fieldset class="govuk-fieldset">
+        {{ forms.legend(formId + "Heading", "Add a funded research and development project") }}
+        <div class="govuk-hint">Provide information about a research and development project. You’ll be given the option to add more projects on the next page.</div>
+
+        {{ forms.textInput(
+            "Name of research and development project",
+            formId + "Name", formId + "Name", data[formId + 'Name'], maxLength="100") }}
+
+        {% set areasList = [
+            {val: "Defence", label: "Defence"},
+            {val: "National security responsibilities", label: "National security responsibilities"},
+            {val: "Law enforcement", label: "Law enforcement"},
+            {val: "National infrastructure sector", label: "National infrastructure sector"}] %}
+
+        {{ forms.dropdownInput("Area", formId + "Area", formId + "Area", data[formId + "Area"], areasList) }}
+
+        {{ govukCharacterCount({
+            name: formId + "Description",
+            value: data[formId + 'Description'],
+            id: formId + "Description",
+            maxlength: 5000,
+            label: {
+                text: "Description of the research and development undertaken",
+                classes: "govuk-label--s",
+                isPageHeading: false
+            }
+        }) }}
+
+        {{ forms.textInput(
+            "UK government department, agency or public body that funded the research and development",
+            formId + "Department", formId + "Department", data[formId + 'Department']) }}
+    </fieldset>
+</div>
+{% endblock %}

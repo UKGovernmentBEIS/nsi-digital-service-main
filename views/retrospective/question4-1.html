@@ -1,0 +1,38 @@
+{% set section = 'retrospective' %}
+{% set backlink = "/"+section+"/task-list" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 4 Page 1
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" id="submitQuestion4-1" name="submitQuestion4-1" action="/retrospective/question4/question4-1post"
+            method="post">
+            {{ forms.errorSummary(formValidation) }}
+
+            {{ forms.legend("q4-1iHeading", "When did the acquisition take place?") }}
+
+            {{ forms.dateInput('', 'q4iaquisitionDate', 'q4iaquisitionDate', data['q4iaquisitionDateDay'], data['q4iaquisitionDateMonth'], data['q4iaquisitionDateYear']) }}
+
+            {{ govukCharacterCount({
+                name: "q4iAdditionalInfo",
+                value: data.q4iAdditionalInfo,
+                id: "q4iAdditionalInfo",
+                maxlength: 5000,
+                label: {
+                    text: "Additional information",
+                    classes: "govuk-label--s",
+                    isPageHeading: false
+                }
+            }) }}
+
+            {{ forms.saveAndContinueButton("submitButton4-1") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

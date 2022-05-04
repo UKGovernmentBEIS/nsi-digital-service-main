@@ -1,0 +1,49 @@
+{% set section = 'retrospective' %}
+{% set backlink = "/"+section+"/question2/question2-2" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 2 Page 3
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">        
+        <form class="form" id="submitQuestion2-3" name="submitQuestion2-3" action="/retrospective/question2/question2-3post"
+            method="post">
+            {% set isQuestionAnswered = data['q2iiSubmitTwelve'] %}
+            {% set isYes = data['q2iiSubmitTwelve'] === 'Yes' %}
+            {% set isNo = data['q2iiSubmitTwelve'] === 'No' %}
+
+            {{ forms.errorSummary(formValidation) }}
+
+            {{ forms.legend("q2-2iiHeading", "To the best of your knowledge, has the notifier acquirer submitted a notification to any overseas investment screening regimes within the last 12 months?") }}
+
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+                        {{ forms.radioConditional("Yes",
+                        "q2iiSubmitTwelveYes", "q2iiSubmitTwelve", "Yes", isQuestionAnswered and isYes, "q2iiSubmitTwelveConditional") }}
+
+                        <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="q2iiSubmitTwelveConditional">
+                            {{ forms.textArea(
+                                "Enter details including names, reference numbers and any other relevant information",
+                                "",
+                                "q2iiAdditionalInfo", "q2iiAdditionalInfo", data.q2iiAdditionalInfo, maxLength="2900") }}
+                        </div>
+
+                        {{ forms.radio("No",
+                            "q2iiSubmitTwelveNo", "q2iiSubmitTwelve", "No", isQuestionAnswered and isNo) }}
+
+                    </div>
+                    
+                </fieldset>
+            </div>
+
+            {{ forms.saveAndContinueButton("submitButton2-2") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

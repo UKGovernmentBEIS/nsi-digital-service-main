@@ -1,0 +1,41 @@
+{% set section = 'retrospective' %}
+{% if data['q7iEntityOrIndividual'] === "entity" %}
+{% set backlink = "/"+section+"/question7/question7-2" %}
+{% else %}
+{% set backlink = "/"+section+"/question7/question7-1" %}
+{% endif %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 7 Page 3
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <form class="form" id="submitQuestion7-3" name="submitQuestion7-3" action="/retrospective/question7/question7-3post"
+            method="post">
+            <div class="govuk-form-group">
+                {{ forms.errorSummary(formValidation) }}
+                <fieldset class="govuk-fieldset">
+                    {{ forms.legend("q7iHeading", "Acquirer details.") }}
+
+                    {{ forms.textArea(
+                    "Description of the acquiring party product / activities / services",
+                    "(e.g.  what services / products does the acquiring party provide or carries out) (500 words)",
+                    "q7iDescriptionProductActivities", "q7iDescriptionProductActivities", data.q7iDescriptionProductActivities, maxLength="3000") }}
+                    
+                    {{ forms.textArea(
+                        "Additional information",
+                        "(400 words)",
+                        "q7iAcquirerAdditionalInformation", "q7iAcquirerAdditionalInformation", data.q7iAcquirerAdditionalInformation, maxLength="2500") }}
+                </fieldset>
+            </div>
+            {{ forms.saveAndContinueButton("submitButton7-3") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

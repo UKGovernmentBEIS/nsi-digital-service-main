@@ -1,0 +1,58 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/task-list" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 6 Page 1
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      {% if (data['q6iPreAcquisitionChartFileNameAsset']|length == 0) and (uploadvalidation['isValid'] === false) and (uploadvalidation['fileName']|length > 0) %}
+        {{ forms.fileUploadErrorSummary(uploadvalidation) }}
+      {% endif %}
+
+      {{ forms.legendMedium("q6iassetHeading", "Pre-acquisition ownership") }}
+
+      <p>Upload a document which describes the ownership of the qualifying asset before the acquisition.</p>
+      <p>The document must include:</p>
+      <ul class="govuk-list govuk-list--bullet">
+        <li>the full names of those with rights or interests in the qualifying asset before the acquisition</li>
+        <li>any other information that is relevant</li>
+      </ul>
+
+      {% if (data['q6iPreAcquisitionChartFileNameAsset']|length > 0) and (data['q6isuccessMessageAsset']|length > 0) %}
+        <form class="form" id="submitQuestion6Pg1SuccessAsset" action="/voluntary/question6/question6-1postsucccessasset" name="submitQuestion6Pg1SuccessAssset" method="post">
+          
+          <table class="govuk-table" style="white-space: pre-wrap;">
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">Document Name</th>
+                <th scope="col" class="govuk-table__header govuk-table__header">Status</th>
+                <th scope="col" class="govuk-table__header govuk-table__header">Action</th>
+              </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">{{ data['q6iPreAcquisitionChartFileNameAsset'] }}</th>
+                <td class="govuk-table__cell govuk-table__cell"><a class="govuk-link" href="/voluntary/question6/question6-1viewasset/{{ data['fileuploadPreAcquisitionChartAssetId'] }}"><span>Download</span></a></td>
+                <td class="govuk-table__cell govuk-table__cell"><a class="govuk-link" href="/voluntary/question6/question6-1remasset/{{ data['fileuploadPreAcquisitionChartAssetId'] }}"><span>Remove</span></a></td>
+              </tr>
+            </tbody>
+          </table>
+
+          {{ forms.continueButton("submitButtonQ6Pg1SuccessAsset") }}
+        </form>
+      {% else %}
+      <form class="form" id="submitQuestion6Pg1Asset" name="submitQuestion6Pg1Asset" enctype="multipart/form-data" action="/voluntary/question6/question6-1postasset" method="post">
+
+            {{ forms.fileUploadInput("Upload a file", "fileuploadPreAcquisitionChartAsset", "fileuploadPreAcquisitionChartAsset", hintText="File must be 10MB or less in PDF, DOCX, XLSX or PPTX format") }}
+
+            {{ forms.saveAndContinueButton("submitButtonQ6P1Asset") }}
+      </form>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

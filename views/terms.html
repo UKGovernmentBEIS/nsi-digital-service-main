@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Terms and conditions
+{% endblock %}
+
+{% block header %}
+{% if isAuthenticated == false %}
+{% include "includes/startHeader.html" %}
+{% include "includes/feedback.html" %}
+{% else %}
+{% include "includes/header.html" %}
+{% include "includes/feedback.html" %}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Terms and conditions</h1>
+        <p>This page and any pages it links to explains NSI.BEIS.GOV.UK’s terms of use. You must agree to these to use NSI.BEIS.GOV.UK.</p>
+
+        <h2 class="govuk-heading-m">Using NSI.BEIS.GOV.UK</h2>
+        <p>You agree to use NSI.BEIS.GOV.UK only for lawful purposes. You must also use it in a way that does not infringe the rights of, or restrict or inhibit the use and enjoyment of, this site by anyone else.</p>
+        <p>We update NSI.BEIS.GOV.UK periodically. We can change or remove content at any time without notice.</p>
+
+        <h2 class="govuk-heading-m">Changes to these terms and conditions</h2>
+        <p>Please check these terms and conditions regularly. We can update them at any time without notice.</p>
+        <p>You’ll agree to any changes if you continue to use NSI.BEIS.GOV.UK after the terms and conditions have been updated.</p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+  Start page
+{% endblock %}
+
+{% block header %}
+{% include "includes/startHeader.html" %}
+{% include "includes/feedback.html" %}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+      <h1 class="govuk-heading-xl">
+        {% if serviceName %} {{ serviceName }} {% endif %}
+      </h1>
+
+      <p>Use this service to notify the government of acquisitions that fall under the National Security and Investment Act 2021 (NSI Act).</p>
+      <p>The service can be used by:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>notifying parties (such as acquirers)</li>
+        <li>representatives of notifying parties (such as law firms)</li>
+      </ul>
+
+      <p>You can <a href="/login" title="sign in">sign in</a> to view the status of notifications you've started or submitted.</p>
+
+      <a href="/login" role="button" draggable="false" class="govuk-button govuk-button--start govuk-!-margin-top-2 govuk-!-margin-bottom-8"  data-module="govuk-button">
+        Start now
+        <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"></path>
+        </svg>
+      </a>
+
+      <h2 class="govuk-heading-m">Before you start</h2>
+
+      <p>You should collect all the information you need before using this service to submit your notification.</p>
+
+      <p>Read the <a href="https://www.gov.uk/government/collections/national-security-and-investment-act">NSI Act guidance</a> to check when you:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li>are legally required to notify the government about an acquisition</li>
+        <li>can voluntarily notify the government about an acquisition</li>
+      </ul>
+
+      <p>These documents list all the questions you'll be asked, with guidance and examples to help you provide the right information:</p>
+
+      <ul class="govuk-list govuk-list--bullet">
+        <li><a href="https://www.gov.uk/government/publications/national-security-and-investment-notification-service-mandatory-voluntary-and-retrospective-forms">Mandatory notification questions and guidance (MS Word, 98KB)</a></li>
+        <li><a href="https://www.gov.uk/government/publications/national-security-and-investment-notification-service-mandatory-voluntary-and-retrospective-forms">Voluntary notification questions and guidance (MS Word, 101KB)</a></li>
+        <li><a href="https://www.gov.uk/government/publications/national-security-and-investment-notification-service-mandatory-voluntary-and-retrospective-forms">Retrospective validation questions and guidance (MS Word, 83KB)</a></li>
+      </ul>
+    </div>  
+
+    <div class="govuk-grid-column-one-third">
+      <aside class="app-related-items" role="complementary">
+        <h2 class="govuk-heading-m" id="subsection-title">
+          Related content
+        </h2>
+        <nav role="navigation" aria-labelledby="subsection-title">
+          <ul class="govuk-list govuk-!-font-size-16">
+            <li>
+              <a href="https://www.gov.uk/guidance/national-security-and-investment-act-guidance-on-acquisitions">
+                Prepare for new rules about acquisitions 
+              </a>
+            </li>
+            <li>
+              <a href="https://www.gov.uk/government/publications/check-if-an-acquisition-outside-the-uk-will-be-in-scope-of-the-national-security-and-investment-act">
+                How the NSI Act could affect people or acquisitions outside the UK  
+              </a>
+            </li>
+            <li>
+              <a href="https://www.gov.uk/government/publications/national-security-and-investment-act-guidance-for-the-higher-education-and-research-intensive-sectors">
+                Guidance for the higher education and research-intensive sectors  
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+    </div>
+  </div>
+{% endblock %}

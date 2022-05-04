@@ -1,0 +1,39 @@
+{% set section = 'retrospective' %}
+{% set backlink = "/"+section+"/question4/question4-1" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 4 Page 2
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" id="q4iiForm" name="q4iiForm" action="/retrospective/question4/question4-02post" method="post">
+        <div class="govuk-form-group">
+            {{ forms.errorSummary(formValidation) }}
+
+            <fieldset class="govuk-fieldset">
+                {{ forms.legend("q4iiHeading", "To the best of your knowledge, will the acquisition require approval from any UK regulators?") }}
+
+                <div class="govuk-hint">This includes any approvals that have already been given.</div>
+
+                <div class="govuk-radios">
+                    {% set isQuestionAnswered = data['q4iiRegulatoryApproval'] %}
+                    {% set isYes = data['q4iiRegulatoryApproval'] === 'Yes' %}
+                    {% set isNo = data['q4iiRegulatoryApproval'] === 'No' %}
+
+                    {{ forms.radio("Yes",
+                        "q4iiRegulatoryApprovalYes", "q4iiRegulatoryApproval", "Yes", isQuestionAnswered and isYes) }}
+
+                    {{ forms.radio("No",
+                        "q4iiRegulatoryApprovalNo", "q4iiRegulatoryApproval", "No", isQuestionAnswered and isNo) }}
+
+                </div> 
+            </fieldset>
+        </div>
+        {{ forms.saveAndContinueButton("q1iiSubmitButton") }}
+      </form>
+    </div>
+</div>
+{% endblock %}

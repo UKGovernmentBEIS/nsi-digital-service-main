@@ -1,0 +1,42 @@
+{% extends "prototypes/prototype.html" %}
+
+{% block pageTitle %}
+  Section A Prototype
+{% endblock %}
+
+{% block beforeContent %}
+    <a class="govuk-back-link" id="navigateBackLink" name="navigateBackLink" href="/prototypes">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Are you the acquiring party or a representative of the acquiring party?</h1>
+          
+        <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset">
+              <div class="govuk-radios">
+                <div class="govuk-radios__item">
+                  <!-- To branch to a certain screen after selecting a form element, add the path in the below "data-go-to-screen" attribute -->
+                  <input data-go-to-screen="/prototypes/section-a/screen-3" class="govuk-radios__input" id="aquirerorRepresentative1" name="aquirerorRepresentative" type="radio" value="acquiringParty">
+                  <label class="govuk-label govuk-radios__label" for="aquirerorRepresentative1">
+                    The acquiring party
+                  </label>
+                </div>
+                <div class="govuk-radios__item">
+                  <!-- To branch to a certain screen after selecting a form element, add the path in the below "data-go-to-screen" attribute -->
+                  <input data-go-to-screen="/prototypes/section-a/screen-4" class="govuk-radios__input" id="aquirerorRepresentative2" name="aquirerorRepresentative" type="radio" value="representative">
+                  <label class="govuk-label govuk-radios__label" for="aquirerorRepresentative2">
+                    A representative of the acquiring party
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+        </div>
+        <div class="govuk-form-group">
+            <a id="prototypeSubmitButton" href="/prototypes/section-a/screen-2" class="govuk-button">Save and continue</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

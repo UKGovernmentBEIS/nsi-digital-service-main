@@ -1,0 +1,41 @@
+{% set section = 'retrospective' %}
+{% if data.isMasterNotifier == true %}
+{% set backlink = "/"+section+"/task-list" %}
+{% else %}
+{% set backlink = "/"+section+"/multinotifier/multinotifierhavereference" %}
+{% endif %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+Multi Notifier Reference
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {{ forms.errorSummary(formValidation) }}
+        <form class="form" id="multinotifier-2" name="multinotifier-2" action="/retrospective/multinotifier/entermultinotifierreference-post" method="post">
+
+            {{ forms.legend("entermultinotifierreference-Heading", "Do you have a joint submission reference number?") }}
+
+            <p>This number is used to link acquiring party members notifications together.</p>
+
+            <div class="govuk-inset-text">
+                The first acquiring partly member to start the notification will receive the reference number and share with other members of the acquiring party 
+            </div>
+
+            <div class="govuk-form-group">
+                <h1 class="govuk-label-wrapper"><label class="govuk-label govuk-label--s" for="event-name">
+                    Joint submission reference number
+                  </label>
+                </h1>
+                <input class="govuk-input" id="multiNotiferReference" name="multiNotiferReference" type="text">
+              </div>
+
+            {{ forms.saveAndContinueButton("multinotifier-2") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% set section = 'mandatory' %}
+{% set backlink = "/"+section+"/question5/question5-2" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 5 Page 3
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" id="q5iiiForm" name="q5iiiForm" action="/mandatory/question5/question5-3" method="post">
+        <div class="govuk-form-group">
+            {{ forms.errorSummary(formValidation) }}
+            <fieldset class="govuk-fieldset govuk-!-margin-bottom-5">
+                {{ forms.legend("q5iiiHeading", "To the best of your knowledge, does the qualifying entity hold any licences to operate within its sector in the UK?") }}
+
+                <div class="govuk-radios">
+                    {% set isQuestionAnswered = data['q5iiiIsLicenseRequired'] %}
+                    {% set isYes = data['q5iiiIsLicenseRequired'] === 'Yes' %}
+                    {% set isNo = data['q5iiiIsLicenseRequired'] === 'No' %}
+
+                    {{ forms.radio("Yes",
+                        "q5iiiIsLicenseRequiredYes", "q5iiiIsLicenseRequired", "Yes", isQuestionAnswered and isYes) }}
+
+                    {{ forms.radio("No",
+                        "q5iiiIsLicenseRequiredNo", "q5iiiIsLicenseRequired", "No", isQuestionAnswered and isNo) }}
+
+                </div>
+            </fieldset>
+        </div>
+        {{ forms.saveAndContinueButton("q5iiiSubmitButton") }}
+      </form>
+    </div>
+</div>
+{% endblock %}

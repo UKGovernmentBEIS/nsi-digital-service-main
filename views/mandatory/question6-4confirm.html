@@ -1,0 +1,40 @@
+{% set section = 'mandatory' %}
+{% set backlink = "/"+section+"/question6/question6-4" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 6 Page 4 - Confirmation
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <form class="form" id="submitQuestion6Pg4Confirm" name="submitQuestion6Pg4Confirm" action="/mandatory/question6/question6-4ConfirmPost" method="post">
+            <input type="hidden" name="q6iiiRecordId" id="q6iiiRecordId" value="{{ recordId }}" />
+
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                  {% set isQuestionAnswered = data['q6iiiRemove'] %}
+                  {% set isYes = data['q6iiiRemove'] === 'Yes' %}
+                  {% set isNo = data['q6iiiRemove'] === 'No' %}
+                  {% set hdrTitle = "Are you sure you want to remove " + q6iiiNonUKGovernmentName + "?" %}
+
+                  {{ forms.legend("q64aConfirmHeading", hdrTitle) }}
+                  <div class="govuk-radios" data-module="govuk-radios">
+                    {{ forms.radio("Yes",
+                    "q6iiiRemoveYes", "q6iiiRemove", "Yes", isQuestionAnswered and isYes) }}
+
+                    {{ forms.radio("No",
+                        "q6iiiRemoveNo", "q6iiiRemove", "No", isQuestionAnswered and isNo) }}
+                  </div>
+                </fieldset>
+            </div>
+           
+            <button class="govuk-button" data-module="govuk-button" id="submitButtonQ6P4Confirm" name="submitButtonQ6P4Confirm">Continue</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

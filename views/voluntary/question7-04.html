@@ -1,0 +1,41 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/question7/question7-3" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 7 Page 4
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        
+        <form class="form" id="submitQuestionQ7Pg04" name="submitQuestionQ7Pg04" action="/voluntary/question7/question7-04post" method="post">
+
+            <div class="govuk-form-group">
+                {{ forms.errorSummary(formValidation) }}
+                <fieldset class="govuk-fieldset">
+                    {% set isQuestionAnswered = data['q7iiNonUKGovt'] %}
+                    {% set isYes = data['q7iiNonUKGovt'] === 'Yes' %}
+                    {% set isNo = data['q7iiNonUKGovt'] === 'No' %}
+
+                    {{ forms.legendMedium("q7iiHeading", "To the best of your knowledge, does any non-UK government, or representative of any non-UK government, have share ownership or voting rights in the acquirer?") }}
+
+                    <div class="govuk-radios">
+                        {{ forms.radio("Yes",
+                        "q7iiNonUKGovtYes", "q7iiNonUKGovt", "Yes", isQuestionAnswered and isYes) }}
+
+                        {{ forms.radio("No",
+                        "q7iiNonUKGovtNo", "q7iiNonUKGovt", "No", isQuestionAnswered and isNo) }}
+
+                    </div>
+                </fieldset>
+            </div>
+
+            {{ forms.saveAndContinueButton("submitButtonQ7Pg04") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

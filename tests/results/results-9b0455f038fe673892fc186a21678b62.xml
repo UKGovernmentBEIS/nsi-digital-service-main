@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="6.5850" tests="10" failures="9">
+  <testsuite name="Root Suite" timestamp="2021-09-17T08:05:19" tests="10" file="cypress/integration/ProdPrototypeMandatoryForm.js" time="6.5850" failures="9">
+    <testcase name="Can User ACCESS MANDATORY FORM" time="6.5850" classname="Can User ACCESS MANDATORY FORM">
+    </testcase>
+    <testcase name="Can User Access Question 1" time="0.0000" classname="Can User Access Question 1">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `#q1ivbAddAnotherNo`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `#q1ivbAddAnotherNo`, but never found it.
+    at TaskListPage.Question1 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:561:8)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:130:12)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 2" time="0.0000" classname="Can User Access Question 2">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),&apos;Related notifications&apos;)]`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),'Related notifications')]`, but never found it.
+    at CommonFunctions.navigateApplicationLink (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:177:8)
+    at TaskListPage.Question2 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:569:12)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:133:12)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 3" time="0.0000" classname="Can User Access Question 3">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),&apos;Relevant sectors and trigger events&apos;)]`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),'Relevant sectors and trigger events')]`, but never found it.
+    at CommonFunctions.navigateApplicationLink (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:177:8)
+    at TaskListPage.Question3 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:611:12)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:136:12)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 4" time="0.0000" classname="Can User Access Question 4">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),&apos;Key dates&apos;)]`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),'Key dates')]`, but never found it.
+    at CommonFunctions.navigateApplicationLink (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:177:8)
+    at TaskListPage.Question4 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:641:12)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:139:12)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 5" time="0.0000" classname="Can User Access Question 5">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),&apos;About the qualifying entity&apos;)]`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),'About the qualifying entity')]`, but never found it.
+    at CommonFunctions.navigateApplicationLink (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:177:8)
+    at TaskListPage.Question5 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:681:12)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:142:12)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 6" time="0.0000" classname="Can User Access Question 6">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),&apos;Ownership and structure of qualifying entity&apos;)]`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),'Ownership and structure of qualifying entity')]`, but never found it.
+    at CommonFunctions.navigateApplicationLink (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:177:8)
+    at TaskListPage.Question6 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:766:12)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:145:12)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 7" time="0.0000" classname="Can User Access Question 7">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),&apos;About the acquiring party&apos;)]`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),'About the acquiring party')]`, but never found it.
+    at CommonFunctions.navigateApplicationLink (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:177:8)
+    at TaskListPage7to9.Question7 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:899:12)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:148:13)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 8" time="0.0000" classname="Can User Access Question 8">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),&apos;Ownership and structure of acquiring party&apos;)]`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),'Ownership and structure of acquiring party')]`, but never found it.
+    at CommonFunctions.navigateApplicationLink (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:177:8)
+    at TaskListPage7to9.Question8 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:936:12)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:151:13)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 9" time="0.0000" classname="Can User Access Question 9">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),&apos;Other relevant documentation and information&apos;)]`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),'Other relevant documentation and information')]`, but never found it.
+    at CommonFunctions.navigateApplicationLink (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:177:8)
+    at TaskListPage7to9.Question9 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:958:12)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeMandatoryForm.js:154:13)]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,118 @@
+{% set section = 'retrospective' %}
+{% set backlink = "/"+section+"/question3/question3-1" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 3 Page 3
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+      {{ forms.errorSummary(formValidation) }}
+
+      {% set isSharePercent = ((data['question3iiiDetailsPercentageShare']|length > 0) and ('SHAREPERCENT' in
+      data['question3iiiDetailsPercentageShare'])) %}
+      {% set isVotingPercent = ((data['question3iiiDetailsPercentageVoting']|length > 0) and ('VOTINGPERCENT' in
+      data['question3iiiDetailsPercentageVoting'])) %}
+      {% set isPreventPassage = ((data['question3iiiDetailsPreventPassage']|length > 0) and ('PREVENTPASSAGE' in
+      data['question3iiiDetailsPreventPassage'])) %}
+
+      {{ forms.legend("q3iiiHeading", "Select the ‘trigger events’ that apply to the acquisition") }}
+
+      <form class="form" id="submitQuestion3Pg3" name="submitQuestion3Pg3" action="/retrospective/question3/question3-3post" method="post">
+
+            <!-- Section B - Question 3 (iii)- BEGIN -->
+
+            <div class="govuk-form-group">
+                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                    {{ forms.checkBoxConditional("The percentage of the share that the person holds in the entity meets the relevant control thresholds.", "question3iiiDetailsPercentageShare", "question3iiiDetailsPercentageShare",
+                    "SHAREPERCENT", isSharePercent, "question3iiiDetailsPercentageShareConditional") }}
+                    <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden"
+                        id="question3iiiDetailsPercentageShareConditional">
+                        <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="5000">
+                            <div class="govuk-form-group">
+                                <div id="question3iiiDetailsPercentageShareDetails-hint" class="govuk-hint">
+                                    <label class="govuk-label--s">Additional Information</label>
+                                    <div>
+                                        Describe the acquisition and provide details on the shareholding rights acquired. Specify if percentage of shareholding rights increased
+                                        <li>from 25% or less to more than 25%</li>
+                                        <li>from 50% or less to more than 50%, or</li>
+                                        <li>from less than 75% to 75% or more</li>
+                                    </div>
+                                </div>
+                                <textarea class="govuk-textarea govuk-js-character-count"
+                                    id="question3iiiDetailsPercentageShareDetails"
+                                    name="question3iiiDetailsPercentageShareDetails" rows="5"
+                                    aria-describedby="question3iiiDetailsPercentageShareDetails-info question3iiiDetailsPercentageShareDetails-hint">{{ data.question3iiiDetailsPercentageShareDetails }}</textarea>
+                            </div>
+
+                            <div id="question3iiiDetailsPercentageShareDetails-info"
+                                class="govuk-hint govuk-character-count__message" aria-live="polite">
+                                You can enter up to 5000 characters
+                            </div>
+                        </div>
+                    </div>
+
+                    {{ forms.checkBoxConditional("The percentage of the voting rights that the person holds in the entity meets the relevant control thresholds.", "question3iiiDetailsPercentageVoting", "question3iiiDetailsPercentageVoting",
+                    "VOTINGPERCENT", isVotingPercent, "question3iiiDetailsPercentageVotingConditional") }}
+                    <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden"
+                        id="question3iiiDetailsPercentageVotingConditional">
+                        <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="5000">
+                            <div class="govuk-form-group">
+                                <div id="question3iiiDetailsPercentageVotingDetails-hint" class="govuk-hint">
+                                    <label class="govuk-label--s">Additional Information</label>
+                                    <div>
+                                        Describe the acquisition and provide details on the voting rights acquired. Specify if percentage of voting rights increased
+                                        <li>from 25% or less to more than 25%</li>
+                                        <li>from 50% or less to more than 50%, or</li>
+                                        <li>from less than 75% to 75% or more</li>
+                                    </div>
+                                </div>
+                                <textarea class="govuk-textarea govuk-js-character-count"
+                                    id="question3iiiDetailsPercentageVotingDetails"
+                                    name="question3iiiDetailsPercentageVotingDetails" rows="5"
+                                    aria-describedby="question3iiiDetailsPercentageVotingDetails-info question3iiiDetailsPercentageVotingDetails-hint">{{ data.question3iiiDetailsPercentageVotingDetails }}</textarea>
+                            </div>
+
+                            <div id="question3iiiDetailsPercentageVotingDetails-info"
+                                class="govuk-hint govuk-character-count__message" aria-live="polite">
+                                You can enter up to 5000 characters
+                            </div>
+                        </div>
+                    </div>
+
+                    {{ forms.checkBoxConditional("The acquisition of voting rights in the qualifying entity, whether alone or together with other voting rights held, will enable the acquirer to secure or prevent the passage of any class of resolution governing the affairs of the entity.",
+                    "question3iiiDetailsPreventPassage", "question3iiiDetailsPreventPassage", "PREVENTPASSAGE",
+                    isPreventPassage, "question3iiiDetailsPreventPassageConditional") }}
+                    <div class="govuk-checkboxes__conditional govuk-checkboxes__conditional--hidden"
+                        id="question3iiiDetailsPreventPassageConditional">
+                        <div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="5000">
+                            <div class="govuk-form-group">
+                                <div id="question3iiiDetailsPreventPassageDetails-hint" class="govuk-hint">
+                                    <label class="govuk-label--s">Additional Information</label>
+                                    <div>
+                                        Describe the acquisition and provide details on the voting rights acquired. Specify if percentage of voting rights increased
+                                    </div>
+                                </div>
+                                <textarea class="govuk-textarea govuk-js-character-count"
+                                    id="question3iiiDetailsPreventPassageDetails"
+                                    name="question3iiiDetailsPreventPassageDetails" rows="5"
+                                    aria-describedby="question3iiiDetailsPreventPassageDetails-info question3iiiDetailsPreventPassageDetails-hint">{{ data.question3iiiDetailsPreventPassageDetails }}</textarea>
+                            </div>
+
+                            <div id="question3iiiDetailsPreventPassageDetails-info"
+                                class="govuk-hint govuk-character-count__message" aria-live="polite">
+                                You can enter up to 5000 characters
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <!-- Section B - Question 3 (iii) - END -->
+        {{ forms.saveAndContinueButton("submitButtonQ3P3") }}
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

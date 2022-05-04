@@ -1,0 +1,54 @@
+{% set section = 'mandatory' %}
+{% set backlink = "/"+section+"/question1/question1-1" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 1 Page 3
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form class="form" id="q1iiiForm" name="q1iiiForm" action="/mandatory/question1/question1-3" method="post">
+            {{ forms.errorSummary(formValidation) }}
+            <fieldset class="govuk-fieldset">
+                {{ forms.legend("q1iiiHeading", "About the acquirer and its authorised representative") }}
+
+                {{ forms.textInput(
+                    "Name of acquirer", "q1iiiAcquiringPartyName", "q1iiiAcquiringPartyName", data.q1iiiAcquiringPartyName, maxLength="100") }}
+
+                <!-- // TODO: Add the addresses info for Acquiring Party and the Represenetative organisation(s)-->
+
+                <!-- // TODO: Add the Position field for the acquiring party contact-->
+
+                {{ forms.textInput(
+                    "Full name of person within acquirer we can contact if needed", "q1iiiAcquiringPartyIndividual", "q1iiiAcquiringPartyIndividual", data.q1iiiAcquiringPartyIndividual, maxLength="100") }}
+
+                {{ forms.emailInput("q1iiiAcquiringPartyEmail", "q1iiiAcquiringPartyEmail", data.q1iiiAcquiringPartyEmail, label="Email of person within acquirer we can contact if needed") }}
+
+                {{ forms.telephoneInput( "q1iiiAcquiringPartyTelephone", "q1iiiAcquiringPartyTelephone", data.q1iiiAcquiringPartyTelephone, label="Telephone of person within acquirer we can contact if needed") }}
+
+                             
+                {{ forms.textInput(
+                    "Name of representative", "q1iiiRepresentatives", "q1iiiRepresentatives", data.q1iiiRepresentatives, maxLength="100") }}
+
+               <!--  {{ forms.textInput(
+                    "Lead representatives", "q1iiiLeadRepresentatives", "q1iiiLeadRepresentatives", data.q1iiiLeadRepresentatives, maxLength="100") }} -->
+
+                {{ forms.textInput(
+                    "Full name of authorised individual from representative", "q1iiiAuthorisedIndividual", "q1iiiAuthorisedIndividual", data.q1iiiAuthorisedIndividual, maxLength="100", hintText="This is the person we will contact about this notification") }}
+
+                {{ forms.emailInput("q1iiiRepresentativeEmail", "q1iiiRepresentativeEmail", data.q1iiiRepresentativeEmail, label="Email of authorised individual") }}
+
+                {{ forms.telephoneInput( "q1iiiRepresentativePhone", "q1iiiRepresentativePhone", data.q1iiiRepresentativePhone, label="Telephone of authorised individual") }}
+                    
+                {{ forms.textInput(
+                    "Relationship to acquirer", "q1iiiRelationship", "q1iiiRelationship", data.q1iiiRelationship, maxLength="100") }}
+
+                
+            </fieldset>
+            {{ forms.saveAndContinueButton("q1iiiSubmitButton") }}
+      </form>
+    </div>
+</div>
+{% endblock %}

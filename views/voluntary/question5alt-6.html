@@ -1,0 +1,52 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/question5/question5-5" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 5 alt Page 6
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" id="q5altviForm" name="q5altviForm" action="/voluntary/question5/question5-6" method="post">
+        <div class="govuk-form-group">
+            {{ forms.errorSummary(formValidation) }}
+            <fieldset class="govuk-fieldset govuk-!-margin-bottom-5">
+                {{ forms.legend("q5altviHeading", "Does the qualifying asset hold any UK or internationally recognised standards, accreditations or certifications relevant to the sectors covered by this notification?") }}
+
+                <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+                    {% set isQuestionAnswered = data['q5altviData'] %}
+                    {% set isYes = data['q5altviData'] === 'YES' %}
+                    {% set isNo = data['q5altviData'] === 'NO' %}
+
+                    {{ forms.radioConditional("Yes",
+                    "q5altviDataYes", "q5altviData", "YES", isQuestionAnswered and isYes, "q5altviDataConditional") }}
+
+                    <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="q5altviDataConditional">
+                      {{ forms.textInput("Names of the standards, accreditations or certifications held", "q5altviName", "q5altviName", data.q5altviName) }}
+                    </div>
+
+                    {{ forms.radio("No",
+                        "q5altviDataNo", "q5altviData", "NO", isQuestionAnswered and isNo) }}
+                  </div>
+            </fieldset>
+
+            {{ govukCharacterCount({
+                name: "q5altviAdditionalInfo",
+                value: data.q5altviAdditionalInfo,
+                id: "q5altviAdditionalInfo",
+                maxlength: 5000,
+                label: {
+                    text: "Additional information (optional)",
+                    classes: "govuk-label--s",
+                    isPageHeading: false
+                }
+            }) }}
+
+        </div>
+        {{ forms.saveAndContinueButton("q5altviSubmitButton") }}
+      </form>
+    </div>
+</div>
+{% endblock %}

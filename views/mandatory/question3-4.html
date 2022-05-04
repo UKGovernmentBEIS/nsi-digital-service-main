@@ -1,0 +1,31 @@
+{% set section = 'mandatory' %}
+{% set backlink = "/"+section+"/question3/question3-3" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 3 Page 4
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      {{ forms.errorSummary(formValidation) }}
+
+      {{ forms.legend("q3ivHeading", "Further details about the acquisition") }}
+
+
+      <form class="form" id="submitQuestion3Pg4" name="submitQuestion3Pg4" action="/mandatory/question3/question3-4post" method="post">
+      
+        <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset" aria-describedby="contact-hint">
+              {{ forms.textArea(
+                "Describe the acquisition and provide detail on the voting rights being acquired"," Enter 400 words or fewer",
+                "question3ivAcquisitionDetails", "question3ivAcquisitionDetails", data.question3ivAcquisitionDetails, maxLength="2500") }}
+            </fieldset>
+        </div>
+        {{ forms.saveAndContinueButton("submitButtonQ3P4") }}
+      </form>
+
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% set section = 'retrospective' %}
+{% set backlink = "/"+section+"/question4/question4-3" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 4 Page 3 - Confirmation
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+      {% set isQuestionAnswered = data['q4icremove'] %}
+      {% set isYes = data['q4icremove'] === 'Yes' %}
+      {% set isNo = data['q4icremove'] === 'No' %}
+
+        <form class="form" id="submitQuestion4-3ConfPost" name="submitQuestion4-3conf" action="/retrospective/question4/question4-3ConfPost"
+            method="post">
+            <input type="hidden" name="q4icrecordToRemoveId" id="q4icrecordToRemoveId" value="{{ keyDateId }}" />
+            {% set formHeading = 'Are you sure you want to remove ' + keyDateRef + '?' %}
+
+            {{ forms.legend("q4-3confiHeading", formHeading) }}
+
+            <div class="govuk-form-group">
+              <fieldset class="govuk-fieldset">
+                <div class="govuk-radios" data-module="govuk-radios">
+                  {{ forms.radio("Yes",
+                  "q4icremoveYes", "q4icremove", "Yes", isQuestionAnswered and isYes) }}
+
+                  {{ forms.radio("No",
+                      "q4icremoveNo", "q4icremove", "No", isQuestionAnswered and isNo) }}
+                  </div>
+              </fieldset>
+          </div>
+
+            {{ forms.saveAndContinueButton("submitButton4-3conf") }}
+
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="6.7150" tests="9" failures="8">
+  <testsuite name="Root Suite" timestamp="2021-09-17T08:07:12" tests="9" file="cypress/integration/ProdPrototypeRetrospectiveForm.js" time="6.7150" failures="8">
+    <testcase name="Can User ACCESS RETROSPECTIVE FORM" time="6.7150" classname="Can User ACCESS RETROSPECTIVE FORM">
+    </testcase>
+    <testcase name="Can User Access Question 1" time="0.0000" classname="Can User Access Question 1">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `#q1ivbAddAnotherNo`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `#q1ivbAddAnotherNo`, but never found it.
+    at RTaskListPage.Question1 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeRetrospectiveForm.js:433:8)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeRetrospectiveForm.js:135:13)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 2" time="0.0000" classname="Can User Access Question 2">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),&apos;Related notifications&apos;)]`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),'Related notifications')]`, but never found it.
+    at CommonFunctions.navigateApplicationLink (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeRetrospectiveForm.js:185:8)
+    at TaskListPage.Question2 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeRetrospectiveForm.js:914:12)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeRetrospectiveForm.js:138:12)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 3" time="0.0000" classname="Can User Access Question 3">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),&apos;Trigger events&apos;)]`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),'Trigger events')]`, but never found it.
+    at CommonFunctions.navigateApplicationLink (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeRetrospectiveForm.js:185:8)
+    at RTaskListPage.Question3 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeRetrospectiveForm.js:446:12)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeRetrospectiveForm.js:141:13)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 5" time="0.0000" classname="Can User Access Question 5">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),&apos;About the qualifying entity&apos;)]`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),'About the qualifying entity')]`, but never found it.
+    at CommonFunctions.navigateApplicationLink (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeRetrospectiveForm.js:185:8)
+    at TaskListPage.Question5 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeRetrospectiveForm.js:1026:12)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeRetrospectiveForm.js:150:12)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 6" time="0.0000" classname="Can User Access Question 6">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `:nth-child(3) &gt; .app-task-list__items &gt; :nth-child(2) &gt; .app-task-list__task-name &gt; a`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `:nth-child(3) > .app-task-list__items > :nth-child(2) > .app-task-list__task-name > a`, but never found it.
+    at RTaskListPage.Question6 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeRetrospectiveForm.js:571:8)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeRetrospectiveForm.js:153:13)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 7" time="0.0000" classname="Can User Access Question 7">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),&apos;About the acquiring party&apos;)]`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),'About the acquiring party')]`, but never found it.
+    at CommonFunctions.navigateApplicationLink (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeRetrospectiveForm.js:185:8)
+    at TaskListPage7to9.Question7 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeRetrospectiveForm.js:1244:12)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeRetrospectiveForm.js:156:13)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 8" time="0.0000" classname="Can User Access Question 8">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `:nth-child(4) &gt; .app-task-list__items &gt; :nth-child(2) &gt; .app-task-list__task-name &gt; a`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `:nth-child(4) > .app-task-list__items > :nth-child(2) > .app-task-list__task-name > a`, but never found it.
+    at VTaskListPage.Question8 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeRetrospectiveForm.js:1748:8)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeRetrospectiveForm.js:159:13)]]></failure>
+    </testcase>
+    <testcase name="Can User Access Question 9" time="0.0000" classname="Can User Access Question 9">
+      <failure message="Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),&apos;Other relevant documentation and information&apos;)]`, but never found it." type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 10000ms: Expected to find element: `//*[contains(text(),'Other relevant documentation and information')]`, but never found it.
+    at CommonFunctions.navigateApplicationLink (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeRetrospectiveForm.js:185:8)
+    at TaskListPage7to9.Question9 (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeRetrospectiveForm.js:1303:12)
+    at Context.eval (https://nsinotification.azurewebsites.net/__cypress/tests?p=cypress\integration\ProdPrototypeRetrospectiveForm.js:162:13)]]></failure>
+    </testcase>
+  </testsuite>
+</testsuites>

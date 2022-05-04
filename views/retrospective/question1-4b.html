@@ -1,0 +1,18 @@
+{% set section = 'retrospective' %}
+
+{% if data['q1iNotifyingPartyOrRepresentative'] === 'notifyingParty' %}
+{% set backlink = "/"+section+"/question1/question1-2" %}
+{% else %}
+{% set backlink = "/"+section+"/question1/question1-3" %}
+{% endif %}
+
+{% extends "../add-to-list/add-another-form.html" %}
+
+{% block pageTitle %}Question 1 - 4b{% endblock %}
+
+{% set formId = "q1ivb" %}
+{% set action = "/retrospective/question1/question1-4b" %}
+{% set heading = "Additional acquirers" %}
+{% set listKey = "q1ivaAdditionalAcquirerList" %}
+{% set displayKey = "q1ivaMultinotifiername" %}
+{% set addAnotherLabel = "Do you need to add another acquirer?" %}

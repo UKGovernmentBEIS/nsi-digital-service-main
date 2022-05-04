@@ -1,0 +1,37 @@
+{% set section = 'retrospective' %}
+{% set backlink = "/"+section+"/task-list" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+Multi Notifier Reference
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% set isQuestionAnswered = data['multiNotifierHasReference'] %}
+        {% set isYes = data['multiNotifierHasReference'] === 'Yes' %}
+        {% set isNo = data['multiNotifierHasReference'] === 'No' %}
+
+        <form class="form" id="multinotifier-1" name="multinotifier-1" action="/retrospective/multinotifier/multinotifierhavereference-post" method="post">
+
+            {{ forms.legend("multinotifierhavereference-Heading", "Do you have a joint submission reference number?") }}
+
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        {{ forms.radioConditional("Yes",
+                        "multiNotifierHasReferenceYes", "multiNotifierHasReference", "Yes", isQuestionAnswered and isYes) }}
+
+                        {{ forms.radio("No",
+                            "multiNotifierHasReferenceNo", "multiNotifierHasReference", "No", isQuestionAnswered and isNo) }}
+                    </div>
+                </fieldset>
+            </div>
+            {{ forms.saveAndContinueButton("multinotifier-1") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

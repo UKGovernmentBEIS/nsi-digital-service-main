@@ -1,0 +1,66 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/question5/question5-2" %}
+{% extends "../add-to-list/add-item-form.html" %}
+
+{% block pageTitle %}Question 5 - 2a{% endblock %}
+
+{% set formId = "q5iia" %}
+{% set action = "/voluntary/question5/question5-2a" %}
+
+{% block formContent %}
+<div class="govuk-form-group">
+    {{ forms.errorSummary(formValidation) }}
+    <fieldset class="govuk-fieldset">
+        {{ forms.legend("q5iiaHeading", "Add a UK Government Security Classification") }}
+
+        <div class="govuk-hint">Provide information about a Security Classification. You’ll be given the option to add more classifications on the next page.</div>
+
+        {% set classificationList = [{val: "official", label: "Official"}, {val: "secret", label: "Secret"}, {val: "topSecret", label: "Top Secret"}, {val: "other", label: "Other"}] %}
+        {{ forms.dropdownInput("Classification level", "q5iiaHighestClassification", "q5iiaHighestClassification", data.q5iiaHighestClassification, classificationList) }}
+
+        {% set departmentsList = [
+            {val: "ago", label: " Attorney General’s Office"},
+            {val: "co", label: "Cabinet Office"},
+            {val: "beis", label: "Department for Business, Energy, and Industrial Strategy"},
+            {val: "dcms", label: "Department for Digital, Culture, Media & Sport "},
+            {val: "dfe", label: "Department for Education"},
+            {val: "dfefra", label: "Department for Environment Food & Rural Affairs"},
+            {val: "dit", label: "Department for International Trade"},
+            {val: "dft", label: "Department for Transport"},
+            {val: "dwp", label: "Department for Work and Pensions"},
+            {val: "dhsc", label: "Department of Health & Social Care"},
+            {val: "fcdo", label: "Foreign, Commonwealth and Development Office"},
+            {val: "hmt", label: "HM Treasury"},
+            {val: "ho", label: "Home Office"},
+            {val: "mod", label: "Ministry of Defence"},
+            {val: "mhclg", label: "Ministry of Housing, Communities & Local Government"},
+            {val: "moj", label: "Ministry of Justice"},
+            {val: "nio", label: "Northern Ireland Office"},
+            {val: "ootadfs", label: "Office of the Advocate General for Scotland"},
+            {val: "ootlhc", label: "Office of the Leader of the House of Commons"},
+            {val: "ootlhl", label: "Office of the Leader of the House of Lords"},
+            {val: "ootsss", label: "Office of the Secretary of State for Scotland"},
+            {val: "ootssw", label: "Office of the Secretary of State for Wales"},
+            {val: "ukef", label: "UK Export Finance"},
+            {val: "other", label: "Other"}] 
+        %}
+
+        {{ forms.dropdownInput("Which government department, agency or public body does the information come from?", "q5iiaDepartment", "q5iiaDepartment", data.q5iiaDepartment, departmentsList) }}
+        
+        {{ forms.textInput(
+            "Name of other government department, agency or public body", "q5iiaOther", "q5iiaOther", data.q5iiaOther, maxLength="100", hintText="Leave blank unless you've selected 'Other'") }}
+
+        {{ govukCharacterCount({
+            name: "q5iiaDescription",
+            value: data.q5iiaDescription,
+            id: "q5iiaDescription",
+            maxlength: 5000,
+            label: {
+                text: "Description of information received or held",
+                classes: "govuk-label--s",
+                isPageHeading: false
+            }
+        }) }}
+    </fieldset>
+</div>
+{% endblock %}

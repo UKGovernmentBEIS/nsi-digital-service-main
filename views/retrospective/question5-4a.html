@@ -1,0 +1,36 @@
+{% set section = 'retrospective' %}
+{% set backlink = "/"+section+"/question5/question5-4" %}
+{% extends "../add-to-list/add-item-form.html" %}
+
+{% block pageTitle %}Question 5 - 4a{% endblock %}
+
+{% set formId = "q5iva" %}
+{% set action = "/retrospective/question5/question5-4a" %}
+
+{% block formContent %}
+<div class="govuk-form-group">
+    {{ forms.errorSummary(formValidation) }}
+    <fieldset class="govuk-fieldset">
+        {{ forms.legend(formId + "Heading", "Add a dual-use item") }}
+
+        <div class="govuk-hint">Provide information about a dual-use item. You’ll be given the option to add more items on the next page.</div>
+
+        {{ forms.textInput(
+            "Name of item",
+            formId + "ItemName", formId + "ItemName", data[formId + 'ItemName'], maxLength="100") }}
+
+        {{ govukCharacterCount({
+            name: formId + "Description",
+            value: data[formId + 'Description'],
+            id: formId + "Description",
+            maxlength: 5000,
+            label: {
+                text: "Description of item",
+                classes: "govuk-label--s",
+                isPageHeading: false
+            }
+        }) }}
+
+    </fieldset>
+</div>
+{% endblock %}

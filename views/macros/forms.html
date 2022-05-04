@@ -1,0 +1,304 @@
+{% macro legend(id, text) %}
+<legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+  <h1 class="govuk-fieldset__heading" id="{{ id }}">{{ text }}</h1>
+</legend>
+{% endmacro %}
+
+{% macro legendMedium(id, text) %}
+<legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+  <h1 class="govuk-fieldset__heading" id="{{ id }}">{{ text }}</h1>
+</legend>
+{% endmacro %}
+
+{% macro legendSmall(id, text) %}
+<legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+  <h1 class="govuk-fieldset__heading" id="{{ id }}">{{ text }}</h1>
+</legend>
+{% endmacro %}
+
+{% macro textInput(label, id, name, value="", placeholder="", maxLength="100", hintText="", hintTextAfter="" ) %}
+<div class="govuk-form-group">
+  <label class="govuk-label govuk-label--s" for="{{ id }}">{{ label }}</label>
+  <div id="{{ id }}-hint" class="govuk-hint">{{ hintText }}</div>
+  <input class="govuk-input" id="{{ id }}" name="{{ name }}" placeholder="{{ placeholder }}" type="text" value="{{ value }}" maxlength="{{ maxLength }}" />
+  <div id="{{ id }}-hintAfter" class="govuk-hint">{{ hintTextAfter }}</div>
+</div>
+{% endmacro %}
+
+{% macro urlInput(label, id, name, value="", placeholder="", maxLength="100", hintText="", hintTextAfter="") %}
+<div class="govuk-form-group">
+  <label class="govuk-label govuk-label--s" for="{{ id }}">{{ label }}</label>
+  <div id="{{ id }}-hint" class="govuk-hint">{{ hintText }}</div>
+  <input class="govuk-input" id="{{ id }}" name="{{ name }}" placeholder="{{ placeholder }}" value="{{ value }}" maxlength="{{ maxLength }}" />
+  <div id="{{ id }}-hintAfter" class="govuk-hint">{{ hintTextAfter }}</div>
+</div>
+{% endmacro %}
+
+
+{% macro textInputOneHalf(label, id, name, value="", placeholder="", maxLength="100") %}
+<div class="govuk-form-group">
+  <label class="govuk-label govuk-label--s" for="{{ id }}">{{ label }}</label>
+  <input class="govuk-input govuk-!-width-one-half" id="{{ id }}" name="{{ name }}" placeholder="{{ placeholder }}" type="text" value="{{ value }}" maxlength="{{ maxLength }}" />
+</div>
+{% endmacro %}
+
+{% macro emailInput(id, name, value="", label="Email", maxLength="100", hintText="") %}
+<div class="govuk-form-group">
+  <label class="govuk-label govuk-label--s" for="{{ id }}">{{ label }}</label>
+  {% if hintText %}<div id="{{ id }}-hint" class="govuk-hint">{{ hintText }}</div>{% endif %}
+  <input class="govuk-input" id="{{ id }}" name="{{ name }}" type="email" value="{{ value }}" maxlength="{{ maxLength }}" autocomplete="email" />
+</div>
+{% endmacro %}
+
+{% macro telephoneInput(id, name, value="", label="Telephone", maxLength="20", hintText="") %}
+<div class="govuk-form-group">
+  <label class="govuk-label govuk-label--s" for="{{ id }}">{{ label }}</label>
+  {% if hintText %}<div id="{{ id }}-hint" class="govuk-hint">{{ hintText }}</div>{% endif %}
+  <input class="govuk-input" id="{{ id }}" name="{{ name }}" type="tel" value="{{ value }}" maxlength="{{ maxLength }}" autocomplete="tel" />
+</div>
+{% endmacro %}
+
+{% macro textArea(label, hintText, id, name, value="", maxLength="1200") %}
+<div class="govuk-form-group">
+  <label class="govuk-label govuk-label--s" for="{{ id }}">{{ label }}</label>
+  <div id="{{ id }}-hint" class="govuk-hint">{{ hintText }}</div>
+  <textarea class="govuk-textarea" id="{{ id }}" name="{{ name }}" rows="3" aria-describedby="{{ id }}-hint" maxlength="{{ maxLength }}">{{ value }}</textarea>
+</div>
+{% endmacro %}
+
+{% macro radio(label, id, name, value, isChecked, isRequired=true) %}
+<div class="govuk-radios__item">
+  <input class="govuk-radios__input" id="{{ id }}" name="{{ name }}" type="radio" value="{{ value }}" {% if isChecked %}checked{% endif %} {% if isRequired %}required{% endif %} />
+  <label class="govuk-label govuk-radios__label" for="{{ id }}">{{ label }}</label>
+</div>
+{% endmacro %}
+
+{% macro radioConditional(label, id, name, value, isChecked, controlsId) %}
+<div class="govuk-radios__item">
+  <input class="govuk-radios__input" id="{{ id }}" name="{{ name }}" type="radio" value="{{ value }}" data-aria-controls="{{ controlsId }}" {% if isChecked %}checked{% endif %} />
+  <label class="govuk-label govuk-radios__label" for="{{ id }}">{{ label }}</label>
+</div>
+{% endmacro %}
+
+{% macro saveAndContinueButton(id, buttonText="Save and continue") %}
+<div class="govuk-form-group" >
+  <button id="{{ id }}" class="govuk-button" data-module="govuk-button">{{ buttonText }}</button>
+</div>
+{% endmacro %}
+
+{% macro dropdownInput(label, id, name, value, dropdownListItems, hintText) %}
+<div class="govuk-form-group">
+  <label class="govuk-label govuk-label--s" for="{{ id }}">
+      {{ label }}
+  </label>
+  {% if hintText %}<div id="{{ id }}-hint" class="govuk-hint">{{ hintText }}</div>{% endif %}
+  <select class="govuk-select" id="{{ id }}" name="{{ name }}">
+    <option value="">Select...</opion>
+    {% for i in dropdownListItems %}
+        <option value='{{ i.val }}' {% if value == i.val %}selected{% endif %}>{{ i.label }}</option>
+    {% endfor %}
+    </select>
+</div>
+{% endmacro %}
+
+{% macro notificationBanner(label, value="") %}
+<div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+  <div class="govuk-notification-banner__header">
+    <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+      {{ label }}
+    </h2>
+  </div>
+  <div class="govuk-notification-banner__content">
+    <p class="govuk-notification-banner__heading">
+      {{ value }} 
+    </p>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro continueButton(id) %}
+<div class="govuk-form-group" >
+  <button id="{{ id }}" class="govuk-button" data-module="govuk-button">Continue</button>
+</div>
+{% endmacro %}
+
+{% macro fileUploadInput(label, id, name, hintText) %}
+<div class="govuk-form-group">
+  <label class="govuk-label govuk-label--s" for="{{ id }}">
+    {{ label }}
+  </label>
+  {% if hintText %}<div id="{{ id }}-hint" class="govuk-hint">{{ hintText }}</div>{% endif %}
+  <input class="govuk-file-upload" id="{{ id }}" name="{{ name }}" type="file">
+</div>
+{% endmacro %}
+
+{% macro checkBox(label, id, name, value, isChecked, isRequired=false) %}
+<div class="govuk-checkboxes__item">
+  <input class="govuk-checkboxes__input" id="{{ id }}" name="{{ name }}" type="checkbox" value="{{ value }}" {% if isChecked %}checked{% endif %} {% if isRequired %}required{% endif %} />
+  <label class="govuk-label govuk-checkboxes__label" for="{{ id }}">
+    {{ label }}
+  </label>
+</div>
+{% endmacro %}
+
+{% macro checkBoxConditional(label, id, name, value, isChecked, controlsId) %}
+  <div class="govuk-checkboxes__item">
+    <input class="govuk-checkboxes__input" id="{{ id }}" name="{{ name }}" type="checkbox" value="{{ value }}" data-aria-controls="{{ controlsId }}"  {% if isChecked %}checked{% endif %} />
+    <label class="govuk-label govuk-checkboxes__label" for="{{ id }}">
+      {{ label }}
+    </label>
+  </div>
+{% endmacro %}
+
+{% macro dateInput(label, id, name, valueDay, valueMonth, valueYear, hintText="Enter an approximate date if you're not sure. For example, 1 11 2022") %}
+<div class="govuk-form-group">
+  <fieldset class="govuk-fieldset" role="group" aria-describedby="{{ id }}-hint">
+    <legend class="govuk-fieldset__legend govuk-label--s govuk-!-padding-bottom-1">
+      {{ label }}
+    </legend>
+    <div id="{{ id }}-hint" class="govuk-hint">
+      {{ hintText }}
+    </div>
+    <div class="govuk-date-input" id="{{ id }}">
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-date-input__label" for="{{ id }}Day">
+            Day
+          </label>
+          <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="{{ id }}Day" name="{{ id }}Day" type="number" min="1" max="31" pattern="[0-9]*" inputmode="numeric" value="{{ valueDay }}"></div>
+      </div>
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-date-input__label" for="{{ id }}Month">
+            Month
+          </label>
+          <input class="govuk-input govuk-date-input__input govuk-input--width-2" id="{{ id }}Month" name="{{ id }}Month" type="number" min="1" max="12" pattern="[0-9]*" inputmode="numeric" value="{{ valueMonth }}"></div>
+      </div>
+      <div class="govuk-date-input__item">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-date-input__label" for="{{ id }}Year">
+            Year
+          </label>
+          <input class="govuk-input govuk-date-input__input govuk-input--width-4" id="{{ id }}Year" name="{{ id }}Year" type="number" min="1900" max="2090" pattern="[0-9]*" inputmode="numeric" value="{{ valueYear }}"></div>
+      </div>
+    </div>
+
+  </fieldset>
+</div>
+{% endmacro %}
+
+{% macro checkboxConditional(label, id, name, value, isChecked, controlsId) %}
+<div class="govuk-checkboxes__item">
+  <input class="govuk-checkboxes__input" id="{{ id }}" name="{{ name }}" type="checkbox" value="{{ value }}" data-aria-controls="{{ controlsId }}" {% if isChecked %}checked{% endif %} />
+  <label class="govuk-label govuk-checkboxes__label" for="{{ id }}">{{ label }}</label>
+</div>
+{% endmacro %}
+
+{% macro checkYourAnswerDetails(data, ids=[], labels={}, map={}) %}
+  {% for id in ids %}
+    {% if data[id] and labels[id] %}
+    <p class="govuk-body"><strong>{{ labels[id] }}</strong>: 
+        {% if map[data[id]] %}{{ map[data[id]] }}{% else %}{{ data[id] }}{% endif %}
+    </p>
+    {% endif %}
+  {% endfor %}
+{% endmacro %}
+
+{% macro checkYourAnswerDetailsNoLabel(value, map={}) %}
+  {% if value %}
+  <p class="govuk-body">
+    {% if map[value] %}{{ map[value] }}{% else %}{{ value }}{% endif %}
+  </p>
+  {% endif %}
+{% endmacro %}
+
+{% macro checkYourAnswersInfoBox() %}
+<div class="govuk-inset-text hide-for-print">
+  <p class="govuk-body">Need to share this information before submitting?</p>
+  <p class="govuk-body">You can either:</p>
+  <ul class="govuk-list govuk-list--bullet">
+    <li>print this page</li>
+    <li>save it as a PDF by choosing 'Print' then 'Print to PDF' on your device</li>
+  </ul>
+</div>
+{% endmacro %}
+
+{% macro checkYourAnswersDisclaimer() %}
+<h2 class="govuk-heading-m">Disclaimer</h2>
+
+<p class="govuk-body">By submitting this notification, you agree that:</p>
+
+<ol class="govuk-list govuk-list--number">
+  <li>Any non-compliance or false information provided could lead to the acquiring party (and not the representative) being subject to penalties.</li>
+  <li>The representative whose contact details appear in this notification will be the person the Investment Security Unit will contact about this notification.</li>
+</ol>
+{% endmacro %}
+
+{% macro printThisPage() %}
+<div class="govuk-inset-text hide-for-print">
+  <a href="" id="printPage" class="govuk-link">
+    Print or download your answers.
+  </a>
+</div>
+{% endmacro %}
+
+{% macro errorSummary(errorList) %}
+{% if (errorList|length != 0) or (errorList['isValid'] == false) %}
+<div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
+  <h2 class="govuk-error-summary__title" id="error-summary-title">
+    There is a problem
+  </h2>
+  <div class="govuk-error-summary__body">
+    <ul class="govuk-list govuk-error-summary__list">
+      {% for controlId, errorMessage in errorList %}
+      {% if (controlId|length > 0) and (controlId != "isValid") and (controlId != "fileName") %}
+      <li><a href="#{{controlId}}">{{errorMessage}}</a></li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}
+{% endmacro %}
+
+{% macro fileUploadErrorSummary(errorList) %}
+{% if (errorList|length != 0) or (errorList['isValid'] == false) %}
+  <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
+    <h2 class="govuk-error-summary__title" id="error-summary-title">
+      There is a problem
+    </h2>
+    <div class="govuk-error-summary__body">
+      <ul class="govuk-list govuk-error-summary__list">
+        {% for controlId, errorMessage in errorList %}
+        {% if (controlId|length > 0) and (controlId != "isValid") and (controlId != "fileName") %}
+        <li style="white-space: pre-wrap;"><a href="#{{controlId}}">{{errorMessage}}</a></li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endif %}
+{% endmacro %}
+
+
+{% macro aboutThisNotification(projectName, reference, totalCount, section, isRetrospective=false, multiNotiferReference="") %}
+<h1 class="govuk-heading-xl">NSI notification: task list</h1>
+<div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+  <div class="govuk-notification-banner__header">
+    <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+      {{section}} {% if not isRetrospective %}notification{% endif %}
+    </h2>
+  </div>
+  <div class="govuk-notification-banner__content">
+    <p class="govuk-notification-banner__heading">Your reference: {{ projectName }}</p>
+    <p>Our reference: {{reference}}</p>
+    {% if multiNotiferReference|length > 0 %}
+    <p>Joint notification submission reference: {{multiNotiferReference}}</p>
+    {% endif %}
+  </div>
+</div>
+<p class="govuk-body govuk-!-margin-bottom-7">You have completed {{ totalCount }} of 8 sections.</p>
+<div class="govuk-inset-text">
+  <a href="/{{ section }}/check-your-answers/check-your-answers">View the information you’ve entered so far</a>
+</div>
+{% endmacro %}

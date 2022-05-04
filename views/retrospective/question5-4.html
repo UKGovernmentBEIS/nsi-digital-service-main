@@ -1,0 +1,37 @@
+{% set section = 'retrospective' %}
+{% set backlink = "/"+section+"/question5/question5-3" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 5 Page 4
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" id="q5ivForm" name="q5ivForm" action="/retrospective/question5/question5-4" method="post">
+        <div class="govuk-form-group">
+            {{ forms.errorSummary(formValidation) }}
+            <fieldset class="govuk-fieldset govuk-!-margin-bottom-5">
+                {{ forms.legend("q5ivHeading", "To the best of your knowledge, does the qualifying entity hold or own any dual-use items?") }}
+
+                <div class="govuk-radios">
+                    {% set isQuestionAnswered = data['q5ivIsDualUse'] %}
+                    {% set isYes = data['q5ivIsDualUse'] === 'Yes' %}
+                    {% set isNo = data['q5ivIsDualUse'] === 'No' %}
+
+                    {{ forms.radio("Yes",
+                        "q5ivIsDualUseYes", "q5ivIsDualUse", "Yes", isQuestionAnswered and isYes) }}
+                        
+                    {{ forms.radio("No",
+                        "q5ivIsDualUseNo", "q5ivIsDualUse", "No", isQuestionAnswered and isNo) }}
+
+                </div>
+            </fieldset>
+
+            {{ forms.saveAndContinueButton("q5ivSubmitButton") }}
+        </div>
+      </form>
+    </div>
+</div>
+{% endblock %}

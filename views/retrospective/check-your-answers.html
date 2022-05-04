@@ -1,0 +1,758 @@
+{% extends "../layout.html" %}
+{% import "../macros/forms.html" as forms %}
+
+{% block pageTitle %}
+  Check your answers and Submit Notification
+{% endblock %}
+
+{% if data['status'] == 1 or data['status'] == 7 %}
+{% set isEditable = true %}
+{% else %}
+{% set isEditable = false %}
+{% endif %}
+
+{% block beforeContent %}
+  {% if isEditable %}
+    <a class="govuk-back-link" id="navigateBackLink" name="navigateBackLink" href="/retrospective/task-list">Back</a>
+  {% else %}
+    <a class="govuk-back-link" id="navigateBackLink" name="navigateBackLink" href="/dashboard">Back</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+      {% set isNotifyingParty = data['q1iNotifyingPartyOrRepresentative'] == 'notifyingParty' %}
+      {% set isRepresentative = data['q1iNotifyingPartyOrRepresentative'] == 'representative' %}
+      {% set isStatementSelected = (data['cyaIAgree']|length > 0) and ('Yes' in data['cyaIAgree']) %}
+
+      <h1 class="govuk-heading-l">{% if isComplete %}{{ OPTIONS.cyaH1 }}{% else %}{{ OPTIONS.cyaH1Incomplete }}{% endif %}</h1>
+      <p class="govuk-body">You can only submit this notification when all the necessary information has been provided.</p>
+      {{ forms.printThisPage() }}
+      <h2 class="govuk-heading-m">1. Contact details and related notifications</h2>
+
+      <div class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            Which type of notifier are you?
+          </div>
+          <div class="govuk-summary-list__value">
+            <p>{{data.q10WhichType}}</p>
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question1/question1-0">
+              Change<span class="govuk-visually-hidden"> Question 1 - 0</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+        
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            Are you the notifier or a representative of the notifier?
+          </div>
+          <div class="govuk-summary-list__value">
+            {{ forms.checkYourAnswerDetailsNoLabel(data.q1iNotifyingPartyOrRepresentative, OPTIONS.valueMappings) }}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question1/question1-1">
+              Change<span class="govuk-visually-hidden"> Question 1 - 1</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        {% if isNotifyingParty or isRepresentative %}
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            {% if isNotifyingParty %}About the notifier{% endif %}
+            {% if isRepresentative %}About the notifier and its authorised representative{% endif %}
+          </div>
+          <div class="govuk-summary-list__value">
+            {% if isNotifyingParty %}
+              {{ forms.checkYourAnswerDetails(data, ['q1iiNotifyingPartyName', 'q1iiNotifyingPartyBusinessaddress'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+            
+              {{ forms.checkYourAnswerDetails(data, 
+                ['q1iiNotifyingPartyIndividual', 'q1iiNotifyingPartyPosition', 'q1iiNotifyingPartyEmail', 'q1iiNotifyingPartyTelephone', 'q1iiAuthorised'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+
+              {% if data['q1iiAuthorised'] == 'No' %}
+              {{ forms.checkYourAnswerDetails(data, 
+                ['q1iiAuthorisedName', 'q1iiAuthorisedPosition', 'q1iiAuthorisedEmail', 'q1iiAuthorisedTelephone'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+              {% endif %}
+            {% endif %}
+
+            {% if isRepresentative %}
+              {{ forms.checkYourAnswerDetails(data,
+                ['q1iiiNotifyingPartyName', 'q1iiiNotifyingPartyIndividual', 'q1iiiNotifyingPartyEmail', 'q1iiiNotifyingPartyPhone'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+                {{ forms.checkYourAnswerDetails(data,
+                  ['q1iiiRepresentatives', 'q1iiiLeadRepresentatives', 'q1iiiAuthorisedIndividual', 'q1iiiRepresentativeEmail', 'q1iiiRepresentativePhone', 'q1iiiRelationship', 'q1iiiAuthorised'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+            {% endif %}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question1/question1-{% if isNotifyingParty %}2{% else %}3{% endif %}">
+              Change<span class="govuk-visually-hidden"> Question 1 - {% if isNotifyingParty %}2{% else %}3{% endif %}</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            Is there more than one acquirer involved in this acquisition?
+          </div>
+          <div class="govuk-summary-list__value">
+            {% if data.q1ivAdditionalAcquirer|length > 0 %}
+              {{ forms.checkYourAnswerDetailsNoLabel(data.q1ivAdditionalAcquirer, OPTIONS.valueMappings) }}
+            {% endif %}
+
+            {% if data['q1ivAdditionalAcquirer'] == 'Yes' and data['q1ivaAdditionalAcquirerList'].length >= 1 %}
+              <ul class="govuk-list  govuk-list--bullet">
+              {% for item in data['q1ivaAdditionalAcquirerList'] %}
+              <li>{{ forms.checkYourAnswerDetails(item, ['q1ivaMultinotifiername', 'q1ivaMultinotifierindividualname', 'q1ivaMultinotifierRepresentative', 'q1ivaMultinotifierPercentage', 'q1ivaMultinotifierAddress', 'q1ivaMultinotifierPhone', 'q1ivaMultinotifierEmail'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}</li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question1/question1-4">
+              Change<span class="govuk-visually-hidden"> Question 1 - 4</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            To the best of your knowledge, has the notifying party submitted a notification to any other investment screening regimes within the last 12 months?
+          </div>
+          <div class="govuk-summary-list__value">
+            {% if data.q2iSubmitTwelve|length > 0 %}
+              {{ forms.checkYourAnswerDetailsNoLabel(data.q2iSubmitTwelve, OPTIONS.valueMappings) }}
+            {% endif %}
+
+            {% if data['q2iPreviousNotificationList'] and data['q2iPreviousNotificationList'].length >= 1 %}
+              <ul class="govuk-list  govuk-list--bullet">
+              {% for item in data['q2iPreviousNotificationList'] %}
+              <li>{{ forms.checkYourAnswerDetails(item, ['q2iCaseReference'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}</li>
+              {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question2/question2-2">
+              Change<span class="govuk-visually-hidden"> Question 2 - 2</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <h2 class="govuk-heading-m">2. Acquisition details</h2>
+
+      <div class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            To the best of your knowledge, explain why the UK government was not notified about this acquisition, as required under the National Security and Investment Act 2021
+          </div>
+          <div class="govuk-summary-list__value">
+            {{ forms.checkYourAnswerDetails(data, ['q30Reason'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question3/question3-0">
+              Change<span class="govuk-visually-hidden"> Question 3 - 0</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            Which sectors are relevant to this notification?
+          </div>
+          <div class="govuk-summary-list__value">
+            {% if data['q3iSector'].length >= 1 %}
+              <p><strong>Sectors</strong>:</p>
+              {% for item in data['q3iSector'] %}
+                {% if OPTIONS.sectors[item] %}<p class="govuk-body">{{ OPTIONS.sectors[item] }}</p>{% endif %}
+              {% endfor %}
+
+              {% if OPTIONS.sectors[data['q3iSector']] %}<p class="govuk-body">{{ OPTIONS.sectors[data['q3iSector']] }}</p>{% endif %}
+            {% endif %}
+
+            {% if data['q3iMoreInfo'] %}
+              {{ forms.checkYourAnswerDetails(data, ['q3iMoreInfo'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+            {% endif %}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question3/question3-1">
+              Change<span class="govuk-visually-hidden"> Question 3 - 1</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            Which 'trigger events' apply to the acquisition?
+          </div>
+          <div class="govuk-summary-list__value">
+            {% if data["question3iiiDetailsPercentageShare"]|length != 0 %}
+            <p>{{OPTIONS.triggerEvents[data.question3iiiDetailsPercentageShare]}}</p>
+            <p class="govuk-body"><strong>{{ OPTIONS.cyaLabels.retrospective.question3iiiDetailsPercentageShare }}</strong>: 
+              {{ data["question3iiiDetailsPercentageShareDetails"] }}
+            </p>
+            {% endif %}
+
+            {% if data["question3iiiDetailsPercentageVoting"]|length != 0 %}
+            <p>{{OPTIONS.triggerEvents[data.question3iiiDetailsPercentageVoting]}}</p>
+            <p class="govuk-body"><strong>{{ OPTIONS.cyaLabels.retrospective.question3iiiDetailsPercentageVoting }}</strong>: 
+              {{ data["question3iiiDetailsPercentageVotingDetails"] }}
+            </p>
+            {% endif %}
+            
+            {% if data["question3iiiDetailsPreventPassage"]|length != 0 %}
+            <p>{{OPTIONS.triggerEvents[data.question3iiiDetailsPreventPassage]}}</p>
+            <p class="govuk-body"><strong>{{ OPTIONS.cyaLabels.retrospective.question3iiiDetailsPreventPassage }}</strong>: 
+              {{ data["question3iiiDetailsPreventPassageDetails"] }}
+            </p>
+            {% endif %}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question3/question3-3">
+              Change<span class="govuk-visually-hidden"> Question 3 - 3</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            When is the acquisition expected to take place?
+          </div>
+          <div class="govuk-summary-list__value">
+            
+            {% if data['q4iaquisitionDateDay'] and data['q4iaquisitionDateMonth'] and data['q4iaquisitionDateYear'] %}
+            <p><strong>Date</strong>: {{data['q4iaquisitionDateDay']}}/{{data['q4iaquisitionDateMonth']}}/{{data['q4iaquisitionDateYear']}}</p>
+            {% endif %}
+
+            {{ forms.checkYourAnswerDetails(data, ['q4iAdditionalInfo', 'q3iDontKnow'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question4/question4-1">
+              Change<span class="govuk-visually-hidden"> Question 4 - 1</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            UK regulatory approvals
+          </div>
+          <div class="govuk-summary-list__value">
+            {% if data.q4iiRegulatoryApproval|length > 0 %}
+            <p>{{data.q4iiRegulatoryApproval}}</p>
+            {% endif %}
+            {% if data['q4ibRegulatoryApprovalList']|length >= 1 %}
+              <ul class="govuk-list  govuk-list--bullet">
+                {% for item in data['q4ibRegulatoryApprovalList'] %}
+                  <li>
+                    {{ forms.checkYourAnswerDetails(item, ['q4ibRegulatorName', 'q4ibAdditionalInfo'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+                    {% if item['q4ibRegulatoryApprovalDate'] %}
+                    <p><strong>Date</strong>: {{ item['q4ibRegulatoryApprovalDate'] }}</p>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            {% if data['q4ibRegulatoryApprovalList']|length >= 1 %}
+              <a class="govuk-link" href="/retrospective/question4/question4-2">
+                Change<span class="govuk-visually-hidden"> Question 4 - 2</span>
+              </a>
+            {% else %}
+              <a class="govuk-link" href="/retrospective/question4/question4-02">
+                Change<span class="govuk-visually-hidden"> Question 4 - 02</span>
+              </a>
+            {% endif %}
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            Other key dates
+          </div>
+          <div class="govuk-summary-list__value">
+            {{ forms.checkYourAnswerDetails(data, ['q4iiiOtherKeyDates'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+
+            {% if data['q4icKeyDatesList']|length >= 1 %}
+            <ul class="govuk-list  govuk-list--bullet">
+              {% for item in data['q4icKeyDatesList'] %}
+                <li>
+                  <p><strong>Key Date</strong>: {{ item['question4icKeyDate'] }}</p>
+                  {{ forms.checkYourAnswerDetails(item, ['question4icShortDescription'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+                </li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            {% if data['q4icKeyDatesList']|length >= 1 %}
+              <a class="govuk-link" href="/retrospective/question4/question4-3">
+                Change<span class="govuk-visually-hidden"> Question 4 - 3</span>
+              </a>
+            {% else %}
+              <a class="govuk-link" href="/retrospective/question4/question4-03">
+                Change<span class="govuk-visually-hidden"> Question 4 - 03</span>
+              </a>
+            {% endif %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <h2 class="govuk-heading-m">3. Qualifying entity details</h2>
+
+      <div class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            About the qualifying entity
+          </div>
+          <div class="govuk-summary-list__value">
+            {{ forms.checkYourAnswerDetails(data, ['q5iNameQualifyingEntity', 'q5iNameIndividualQualifyingEntity', 'q5iEmail', 'q5iTelephone', 'q5iCountry', 'q5iRegistration', 'q5iActivities', 'q5iActivitiesDescription', 'q5iBusinessAddress', 'q5iWebsite', 'q5iDescription', 'q5iCompaniesHouse', 'q5iSIC'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question5/question5-1">
+              Change<span class="govuk-visually-hidden"> Question 5 - 1</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            To the best of your knowledge, is the qualifying entity authorised to receive or hold information that has a UK Government Security Classification?
+          </div>
+          <div class="govuk-summary-list__value">
+            {{ forms.checkYourAnswerDetailsNoLabel(data.q5iiIsAuthorised, OPTIONS.valueMappings) }}
+
+            {% if data['q5iiIsAuthorised'] == 'Yes' and data['q5iiaClassificationListItems'].length >= 1 %}
+            <ul class="govuk-list govuk-list--bullet">
+              {% for item in data['q5iiaClassificationListItems'] %}
+                <li>{{ forms.checkYourAnswerDetails(item, ['q5iiaHighestClassification', 'q5iiaDepartment', 'q5iiaOther', 'q5iiaDescription', 'q5iiaAdditionalInfo'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question5/question5-2{% if data['q5iiIsAuthorised'] == 'Yes' and data['q5iiaClassificationListItems'].length >= 1 %}b{% endif %}">
+              Change<span class="govuk-visually-hidden"> Question 5 - 2{% if data['q5iiIsAuthorised'] == 'Yes' and data['q5iiaClassificationListItems'].length >= 1 %}b{% endif %}</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            To the best of your knowledge, does the qualifying entity hold any licences to operate within its sector in the UK?
+          </div>
+          <div class="govuk-summary-list__value">
+            {{ forms.checkYourAnswerDetailsNoLabel(data.q5iiiIsLicenseRequired, OPTIONS.valueMappings) }}
+
+            {% if data['q5iiiIsLicenseRequired'] == 'Yes' and data['q5iiiaLicenceListItems'].length >= 1 %}
+            <ul class="govuk-list govuk-list--bullet">
+              {% for item in data['q5iiiaLicenceListItems'] %}
+                <li>{{ forms.checkYourAnswerDetails(item, ['q5iiiaLicence', 'q5iiiaIssuer'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+                  <p class="govuk-body"><strong>Date issued or declined</strong>: 
+                    {{ item.q5iiiaIssueDateDay }}/{{ item.q5iiiaIssueDateMonth }}/{{ item.q5iiiaIssueDateYear }}
+                  </p>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question5/question5-3{% if data['q5iiiIsLicenseRequired'] == 'Yes' and data['q5iiiaLicenceListItems'].length >= 1 %}b{% endif %}">
+              Change<span class="govuk-visually-hidden"> Question 5 - 3{% if data['q5iiiIsLicenseRequired'] == 'Yes' and data['q5iiiaLicenceListItems'].length >= 1 %}b{% endif %}</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            To the best of your knowledge, does the qualifying entity hold or own any dual-use items?
+          </div>
+          <div class="govuk-summary-list__value">
+            {{ forms.checkYourAnswerDetailsNoLabel(data.q5ivIsDualUse, OPTIONS.valueMappings) }}
+
+            {% if data['q5ivIsDualUse'] == 'Yes' and data['q5ivaDualUseListItems'].length >= 1 %}
+            <ul class="govuk-list govuk-list--bullet">
+              {% for item in data['q5ivaDualUseListItems'] %}
+                <li>{{ forms.checkYourAnswerDetails(item, ['q5ivaItemName', 'q5ivaDescription'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question5/question5-4{% if data['q5ivIsDualUse'] == 'Yes' and data['q5ivaDualUseListItems'].length >= 1 %}b{% endif %}">
+              Change<span class="govuk-visually-hidden"> Question 5 - 4{% if data['q5ivIsDualUse'] == 'Yes' and data['q5ivaDualUseListItems'].length >= 1 %}b{% endif %}</span>
+            </a>
+          </div>
+          {% endif %}         
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            To the best of your knowledge, in the last 5 years has the qualifying entity had a supply relationship with the UK government in any of the following areas?
+          </div>
+          <div class="govuk-summary-list__value">
+            {{ forms.checkYourAnswerDetailsNoLabel(data.q5vIsPartyTo, OPTIONS.valueMappings) }}
+
+            {% if data['q5vIsPartyTo'] == 'Yes' and data['q5vaPartyToListItems'].length >= 1 %}
+            <ul class="govuk-list govuk-list--bullet">
+              {% for item in data['q5vaPartyToListItems'] %}
+                <li>{{ forms.checkYourAnswerDetails(item, ['q5vaSupplyRelationship', 'q5vaArea', 'q5vaDepartment'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question5/question5-5{% if data['q5vIsPartyTo'] == 'Yes' and data['q5vaPartyToListItems'].length >= 1 %}b{% endif %}">
+              Change<span class="govuk-visually-hidden"> Question 5 - 5{% if data['q5vIsPartyTo'] == 'Yes' and data['q5vaPartyToListItems'].length >= 1 %}b{% endif %}</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            To the best of your knowledge, in the last 5 years has the qualifying entity entered into any research and development that has been partly or wholly funded by the UK government in the following areas?
+          </div>
+          <div class="govuk-summary-list__value">
+            {{ forms.checkYourAnswerDetailsNoLabel(data.q5viIsFundedResearch, OPTIONS.valueMappings) }}
+
+            {% if data['q5viIsFundedResearch'] == 'Yes' and data['q5viaFundedResearchListItems'].length >= 1 %}
+            <ul class="govuk-list govuk-list--bullet">
+              {% for item in data['q5viaFundedResearchListItems'] %}
+                <li>{{ forms.checkYourAnswerDetails(item, ['q5viaName', 'q5viaArea', 'q5viaDescription', 'q5viaDepartment'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question5/question5-6{% if data['q5viIsFundedResearch'] == 'Yes' and data['q5viaFundedResearchListItems'].length >= 1 %}b{% endif %}">
+              Change<span class="govuk-visually-hidden"> Question 5 - 6{% if data['q5viIsFundedResearch'] == 'Yes' and data['q5viaFundedResearchListItems'].length >= 1 %}b{% endif %}</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            To the best of your knowledge, is the qualifying entity currently party to any contracts that require personnel to hold National Security Vetting (NSV) clearance?
+          </div>
+          <div class="govuk-summary-list__value">
+            {{ forms.checkYourAnswerDetailsNoLabel(data.q5viiIsNSVSC, OPTIONS.valueMappings) }}
+
+            {% if data['q5viiIsNSVSC'] == 'Yes' and data['q5viiaNSVSCListItems'].length >= 1 %}
+            <ul class="govuk-list govuk-list--bullet">
+              {% for item in data['q5viiaNSVSCListItems'] %}
+                <li>{{ forms.checkYourAnswerDetails(item, ['q5viiaLevel', 'q5viiaHowMany'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question5/question5-7{% if data['q5viiIsNSVSC'] == 'Yes' and data['q5viiaNSVSCListItems'].length >= 1 %}b{% endif %}">
+              Change<span class="govuk-visually-hidden"> Question 5 - 7{% if data['q5viiIsNSVSC'] == 'Yes' and data['q5viiaNSVSCListItems'].length >= 1 %}b{% endif %}</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            Pre-acquisition structure chart of qualifying entity
+          </div>
+          <div class="govuk-summary-list__value">
+            {{ forms.checkYourAnswerDetails(data, ['q6iPreAcquisitionChartFileName'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question6/question6-1">
+              Change<span class="govuk-visually-hidden"> Question 6 - 1</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            Expected post-acquisition structure chart of qualifying entity
+          </div>
+          <div class="govuk-summary-list__value">
+            {{ forms.checkYourAnswerDetails(data, ['q6iiPostAcquisitionChartFileName'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question6/question6-2">
+              Change<span class="govuk-visually-hidden"> Question 6 - 2</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            To the best of your knowledge, does any non-UK government have a direct or indirect role in the operation or decision making of the qualifying entity?
+          </div>
+          <div class="govuk-summary-list__value">
+            {{ forms.checkYourAnswerDetailsNoLabel(data.q6iiiNonUKGovt, OPTIONS.valueMappings) }}
+
+            {% if data['q6iiiNonUKGovt'] == 'Yes' and data['nonUKGovernmentList'].length >= 1 %}
+            <ul class="govuk-list govuk-list--bullet">
+              {% for item in data['nonUKGovernmentList'] %}
+                <li>{{ forms.checkYourAnswerDetails(item, ['q6iiiNonUKGovernmentName', 'q6iiiGovernmentInterest'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+
+            {{ forms.checkYourAnswerDetails(data, ['q6vAdditionalInformation'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            {% if data['nonUKGovernmentList']|length >= 1 %}
+            <a class="govuk-link" href="/retrospective/question6/question6-4">
+              Change<span class="govuk-visually-hidden"> Question 6 - 4</span>
+            </a>
+            {% else %}
+              <a class="govuk-link" href="/retrospective/question6/question6-3">
+                Change<span class="govuk-visually-hidden"> Question 6 - 3</span>
+              </a>
+            {% endif %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <h2 class="govuk-heading-m">4. Acquiring party details</h2>
+
+      <div class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            About the acquirer
+          </div>
+          <div class="govuk-summary-list__value">
+            {{ forms.checkYourAnswerDetails(data, ['q7iNameOfAcquirer', 'q7iCountryOfOrigin', 'q7iEntityOrIndividual'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question7/question7-1">
+              Change<span class="govuk-visually-hidden"> Question 7 - 1</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            Registration details for the acquiring entity
+          </div>
+          <div class="govuk-summary-list__value">
+            {{ forms.checkYourAnswerDetails(data, ['q7iIncorporatedOutsideUk', 'q7iRegistrationDetailsCountryOfCorporation', 'q7iCompaniesHouseReference', 'q7iSICReference'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question7/question7-2">
+              Change<span class="govuk-visually-hidden"> Question 7 - 2</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            Acquirer details
+          </div>
+          <div class="govuk-summary-list__value">
+            {{ forms.checkYourAnswerDetails(data, ['q7iDescriptionProductActivities', 'q7iAcquirerAdditionalInformation'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question7/question7-3">
+              Change<span class="govuk-visually-hidden"> Question 7 - 3</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            Non-UK governments or representatives that have share ownership or voting rights in the acquirer
+          </div>
+          <div class="govuk-summary-list__value">
+            {% if data.q7iiNonUKGovt|length > 0 %}
+              {{ forms.checkYourAnswerDetailsNoLabel(data.q7iiNonUKGovt, OPTIONS.valueMappings) }}
+            {% endif %}    
+            {% if data['q7iiNonUKGovernmentList'].length >= 1 %}
+            <ul class="govuk-list govuk-list--bullet">
+              {% for item in data['q7iiNonUKGovernmentList'] %}
+                <li>{{ forms.checkYourAnswerDetails(item, ['q7iiNameOfNonUKGoverment', 'q7iiNameOfPersonActingNonUKGoverment', 'q7iiShareOwnershipVotingRights', 'q7iiAnythingToDeclare'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question7/question7-4">
+              Change<span class="govuk-visually-hidden"> Question 7 - 4</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            Non-UK governments that have a direct or indirect role in the operation or decision making of the acquirer
+          </div>
+          <div class="govuk-summary-list__value">
+            {% if data.q7iiiNonUKGovt|length > 0 %}
+              {{ forms.checkYourAnswerDetailsNoLabel(data.q7iiiNonUKGovt, OPTIONS.valueMappings) }}
+            {% endif %}
+            {% if data['q7iiiNonUKRoleInOperationList'].length >= 1 %}
+              <ul class="govuk-list govuk-list--bullet">
+                {% for item in data['q7iiiNonUKRoleInOperationList'] %}
+                  <li>{{ forms.checkYourAnswerDetails(item, ['q7iiiNameOfNonUKGoverment', 'q7iiiBriefInterestDescription'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question7/question7-5">
+              Change<span class="govuk-visually-hidden"> Question 7 - 5</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            To the best of your knowledge, when the acquisition completes, will there be any contractual arrangements in place regarding share ownership or voting rights between the acquirer and any other party?
+          </div>
+          <div class="govuk-summary-list__value">
+            {{ forms.checkYourAnswerDetailsNoLabel(data.q7ivContractualArrangements, OPTIONS.valueMappings) }}
+            {{ forms.checkYourAnswerDetails(data, ['q7ivContractualArrangementsSummary', 'q7viAdditionalInformation'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question7/question7-6">
+              Change<span class="govuk-visually-hidden"> Question 7 - 6</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            Structure chart of acquirer
+          </div>
+          <div class="govuk-summary-list__value">
+            {{ forms.checkYourAnswerDetails(data, ['q8iControllingOwnershipFileName'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question8/question8-1">
+              Change<span class="govuk-visually-hidden"> Question 8 - 1</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            Members of board of directors or equivalent within the acquirer
+          </div>
+          <div class="govuk-summary-list__value">
+            {% if data['q8iiBoardMembersList'].length >= 1 %}
+            <ul class="govuk-list govuk-list--bullet">
+              {% for item in data['q8iiBoardMembersList'] %}
+                <li>{{ forms.checkYourAnswerDetails(item, ['q8iiNameOfBoardMember', 'q8iiDateOfBirth', 'q8iiPositionHeld', 'q8iiClassifiedPolitically'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question8/question8-2">
+              Change<span class="govuk-visually-hidden"> Question 8 - 2</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <h2 class="govuk-heading-m">5. Additional information</h2>
+
+      <div class="govuk-summary-list govuk-!-margin-bottom-9">
+        <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__key">
+            Other relevant documentation and information on the acquisition
+          </div>
+          <div class="govuk-summary-list__value">
+            {{ forms.checkYourAnswerDetails(data, ['fileuploadAdditionalDocumentation1Name', 'fileuploadAdditionalDocumentation2Name', 'fileuploadAdditionalDocumentation3Name', 'fileuploadAdditionalDocumentation4Name', 'q9iOtherComments'], OPTIONS.cyaLabels.retrospective, OPTIONS.valueMappings) }}
+          </div>
+          {% if isEditable %}
+          <div class="govuk-summary-list__actions">
+            <a class="govuk-link" href="/retrospective/question9/question9-1">
+              Change<span class="govuk-visually-hidden"> Question 9 - 1</span>
+            </a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      {{ forms.checkYourAnswersDisclaimer() }}
+
+      <form action="/retrospective/check-your-answers/check-your-answers" method="post">
+        <div class="hide-for-print">
+          {{ forms.checkBox("I agree", "cyaIAgree", "cyaIAgree", "Yes", isStatementSelected, true) }}
+        </div>
+
+        <input type="hidden" name="answers-checked" value="true">
+
+        {% if isComplete and isEditable %}
+        <button class="govuk-button hide-for-print govuk-!-margin-top-6" data-module="govuk-button">
+        {% else %}
+        <button class="govuk-button hide-for-print govuk-!-margin-top-6" data-module="govuk-button" disabled>
+        {% endif %}
+          Accept and send
+        </button>
+      </form>
+    </div>
+</div>
+{% endblock %}
+

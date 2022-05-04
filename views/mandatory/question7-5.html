@@ -1,0 +1,74 @@
+{% set section = 'mandatory' %}
+{% if data["q7iiNonUKGovernmentList"]|length == 0 %}
+{% set backlink = "/"+section+"/question7/question7-04" %}
+{% else %}
+{% set backlink = "/"+section+"/question7/question7-4" %}
+{% endif %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 7 Page 5
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <h1 class="govuk-heading-xl">Non-UK governments or representatives that have a role in the operation or decision making of the acquirer</h1>
+        <div class="govuk-form-group">
+            <dl class="hmrc-add-to-a-list hmrc-add-to-a-list--short">
+                {% for i in range(0, data['q7iiiNonUKRoleInOperationList'].length) -%}
+                <div class="hmrc-add-to-a-list__contents">
+                    <dt class="hmrc-add-to-a-list__identifier hmrc-add-to-a-list__identifier--light">
+                        {{ data['q7iiiNonUKRoleInOperationList'][i].q7iiiNameOfNonUKGoverment }}
+                    </dt>
+                    <dd class="hmrc-add-to-a-list__change">
+                        <a class="govuk-link"
+                            href="/mandatory/question7/question7-5cya/{{ data['q7iiiNonUKRoleInOperationList'][i].id }}">
+                            <span>Change</span>
+                            <span class="govuk-visually-hidden">Change {{
+                                data['q7iiiNonUKRoleInOperationList'][i].q7iiiNameOfNonUKGoverment }}</span>
+                        </a>
+                    </dd>
+                    <dd class="hmrc-add-to-a-list__remove">
+                        <a class="govuk-link"
+                            href="/mandatory/question7/question7-5rem/{{ data['q7iiiNonUKRoleInOperationList'][i].id }}">
+                            <span>Remove</span>
+                            <span class="govuk-visually-hidden">Remove {{
+                                data['q7iiiNonUKRoleInOperationList'][i].q7iiiNameOfNonUKGoverment }} from the list</span>
+                        </a>
+                    </dd>
+                </div>
+                {%- endfor %}
+            </dl>
+        </div>
+
+        <form class="form" id="submitQuestion7-5" name="submitQuestion7-5" action="/mandatory/question7/question7-5post"
+            method="post">
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset" aria-describedby="add-another-hint">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--s">
+                        Do you need to add another non-UK government or representative?
+                    </legend>
+
+                    <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
+                        {% set isQuestionAnswered = data['q7iiiNonUKRoleInOperation'] %}
+                        {% set isYes = data['q7iiiNonUKRoleInOperation'] === 'Yes' %}
+                        {% set isNo = data['q7iiiNonUKRoleInOperation'] === 'No' %}
+
+                        {{ forms.radio("Yes",
+                        "q7iiiNonUKRoleInOperationYes", "q7iiiNonUKRoleInOperation", "Yes", isQuestionAnswered and isYes) }}
+
+                        {{ forms.radio("No",
+                            "q7iiiNonUKRoleInOperationNo", "q7iiiNonUKRoleInOperation", "No", isQuestionAnswered and isNo) }}
+                    </div>
+            
+                </fieldset>
+            </div>
+            {{ forms.saveAndContinueButton("submitButton7-5") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

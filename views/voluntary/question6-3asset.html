@@ -1,0 +1,54 @@
+{% set section = 'voluntary' %}
+{% set backlink = "/"+section+"/question6/question6-2asset" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 6 Page 3
+{% endblock %}
+
+{% block content %}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        
+        <form class="form" id="submitQuestionQ6P3Asset" name="submitQuestionQ6P3Asset" action="/voluntary/question6/question6-3postasset" method="post">
+
+            <div class="govuk-form-group">
+                {{ forms.errorSummary(formValidation) }}
+                <fieldset class="govuk-fieldset">
+                    {% set isQuestionAnswered = data['q6iiiContractualArrangementAsset'] %}
+                    {% set isYes = data['q6iiiContractualArrangementAsset'] === 'Yes' %}
+                    {% set isNo = data['q6iiiContractualArrangementAsset'] === 'No' %}
+
+                    {{ forms.legend("q6iiiHeadingAsset", "To the best of your knowledge, does any non-UK government have a direct or indirect role in controlling how the qualifying asset is used?") }}
+
+                    <div class="govuk-radios govuk-radios--conditional" data-module="govuk-radios">
+                        {{ forms.radioConditional("Yes",
+                        "q6iiiContractualArrangementAssetYes", "q6iiiContractualArrangementAsset", "Yes", isQuestionAnswered and isYes, "q6iiiContractualArrangementAssetYesConditional") }}
+        
+                        <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="q6iiiContractualArrangementAssetYesConditional">
+                            {{ govukCharacterCount({
+                                name: "q6vAdditionalInformation",
+                                value: data.q6vAdditionalInformation,
+                                id: "q6vAdditionalInformation",
+                                maxlength: 5000,
+                                label: {
+                                    text: "Description of non-UK governments or representatives, and their roles and interests",
+                                    classes: "govuk-label--s",
+                                    isPageHeading: false
+                                }
+                            }) }}
+                        </div>
+
+                        {{ forms.radio("No",
+                        "q6iiiContractualArrangementAssetNo", "q6iiiContractualArrangementAsset", "No", isQuestionAnswered and isNo) }}
+
+                    </div>
+                </fieldset>
+            </div>
+            {{ forms.saveAndContinueButton("submitButtonQ6P3Asset") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

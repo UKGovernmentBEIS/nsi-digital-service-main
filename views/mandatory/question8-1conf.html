@@ -1,0 +1,39 @@
+{% set section = 'mandatory' %}
+{% set backlink = "/"+section+"/question8/question8-1" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 8 Page 1 - Confirmation
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        {% set isQuestionAnswered = data['q8iremove'] %}
+        {% set isYes = data['q8iremove'] === 'Yes' %}
+        {% set isNo = data['q8iremove'] === 'No' %}
+        {% set title = "Are you sure you want to remove " + uploadedFileName + "?" %}
+        <form class="form" id="submitQuestion8-1ConfPost" name="submitQuestion8-1ConfPost" action="/mandatory/question8/question8-1ConfPost"
+            method="post">
+            <input type="hidden" name="q8iRecordToRemoveId" id="q8iRecordToRemoveId" value="{{ uploadedFileId }}" />
+
+            <div class="govuk-form-group">
+                <fieldset class="govuk-fieldset">
+                  {{ forms.legendMedium("q8iHeading", title) }}
+
+                  <div class="govuk-radios" data-module="govuk-radios">
+                    {{ forms.radio("Yes",
+                    "q8iremoveYes", "q8iremove", "Yes", isQuestionAnswered and isYes) }}
+
+                    {{ forms.radio("No",
+                        "q8iremoveNo", "q8iremove", "No", isQuestionAnswered and isNo) }}
+                    </div>
+                </fieldset>
+            </div>
+           
+            {{ forms.saveAndContinueButton("submitButton8-1conf") }}
+        </form>
+    </div>
+</div>
+
+{% endblock %}

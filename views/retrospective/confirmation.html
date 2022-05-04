@@ -1,0 +1,48 @@
+{% extends "../layout.html" %}
+{% import "../macros/forms.html" as forms %}
+
+{% block pageTitle %}
+  Confirmation
+{% endblock %}
+
+{% block beforeContent %}
+    <a class="govuk-back-link" id="navigateBackLink" name="navigateBackLink" href="/retrospective/task-list">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds-from-desktop">
+        <div class="govuk-panel govuk-panel--confirmation">
+            <h1 class="govuk-panel__title">
+              Notification submitted
+            </h1>
+            <div class="govuk-panel__body">
+                <div class="govuk-!-margin-bottom-6">Your reference <br /><strong>{{ data.userNotificationReference }}</strong></div>
+                <div>ISU reference <br /><strong>{{ data.notificationReference }}</strong></div>
+            </div>
+        </div>
+        <p class="govuk-body">We've sent you a confirmation email.</p>
+        <div class="govuk-inset-text">
+            You can view, download or check the status of this notification on your <a class="govuk-link" href="/submitted-notifications">submitted notifications page.</a>
+        </div>
+        <h2 class="govuk-heading-m">What happens next</h2>
+        <p class="govuk-body">The Secretary of State will confirm whether this notification has been accepted or rejected as soon as is reasonably practicable.</p>
+        <p class="govuk-body">The notification will be accepted if it meets the requirements and includes all the necessary information. You may have to resubmit the notification if it does not. </p>
+        <p class="govuk-body"> Once accepted, the Secretary of State has up to 30 working days to:</p>
+        <ul class="govuk-list govuk-list--bullet">
+            <li>review your acquisition</li>
+            <li>ask for more information if needed</li>
+            <li>decide whether to further assess('call in') your acquisition or take no further action</li>
+        </ul>
+        <p class="govuk-body">You'll be emailed when:</p>
+        <ul class="govuk-list govuk-list--bullet">
+            <li>the notification has been accepted or rejected</li>
+            <li>a decision has been made on whether or not to call in the acquisition</li>
+        </ul>
+        <a href="/dashboard" class="govuk-button" data-module="govuk-button">
+            Manage your notifications
+        </a>
+    </div>
+</div>
+{% endblock %}
+

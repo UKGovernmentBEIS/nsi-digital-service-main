@@ -1,0 +1,37 @@
+{% set section = 'mandatory' %}
+{% set backlink = "/"+section+"/task-list" %}
+{% extends "../question.html" %}
+{% import "macros/forms.html" as forms %}
+
+{% block pageTitle %}
+  Question 1 Page 1
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" id="q1iForm" name="q1iForm" action="/mandatory/question1/question1-1" method="post">
+
+          {{ forms.errorSummary(formValidation) }}
+
+          <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset">
+                {{ forms.legend("q1iHeading", "Are you the acquirer or a representative of the acquirer?") }}
+
+                <div class="govuk-radios">
+                    {% set isQuestionAnswered = data['q1iAcquirerOrRepresentative'] %}
+                    {% set isAcquirer = data['q1iAcquirerOrRepresentative'] === 'acquirer' %}
+
+                    {{ forms.radio("Acquirer",
+                        "q1iAcquirerOrRepresentative1", "q1iAcquirerOrRepresentative", "acquirer", isQuestionAnswered and isAcquirer) }}
+
+                    {{ forms.radio("Representative of acquirer",
+                        "q1iAcquirerOrRepresentative2", "q1iAcquirerOrRepresentative", "representative", isQuestionAnswered and not isAcquirer) }}
+                </div>
+            </fieldset>
+        </div>
+        {{ forms.saveAndContinueButton("q1iSubmitButton") }}
+      </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% set section = 'retrospective' %}
+{% set backlink = "/"+section+"/task-list" %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+    Question 9 Page 1
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        {% if (uploadvalidation['isValid'] === false) %}
+          {{ forms.fileUploadErrorSummary(uploadvalidation) }}
+        {% endif %}
+        {{ forms.legend("q9iHeading", "Other relevant documentation and information on the acquisition") }}
+
+        {% if (data['fileuploadAdditionalDocumentation1Name']|length > 0) or 
+        (data['fileuploadAdditionalDocumentation2Name']|length > 0) or 
+        (data['fileuploadAdditionalDocumentation3Name']|length > 0) or 
+        (data['fileuploadAdditionalDocumentation4Name']|length > 0) %}
+
+            <table class="govuk-table" style="white-space: pre-wrap;">
+                <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header">Document Name</th>
+                    <th scope="col" class="govuk-table__header govuk-table__header">Status</th>
+                    <th scope="col" class="govuk-table__header govuk-table__header">Action</th>
+                </tr>
+                </thead>
+                <tbody class="govuk-table__body">
+                    {% if (data['fileuploadAdditionalDocumentation1Name']|length > 0) %}
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header">{{ data['fileuploadAdditionalDocumentation1Name'] }}</th>
+                            <td class="govuk-table__cell govuk-table__cell"><a class="govuk-link" href="/retrospective/question9/question9-1view/{{ data['fileuploadAdditionalDocumentation1Id'] }}"><span>Download</span></a></td>
+                            <td class="govuk-table__cell govuk-table__cell"><a class="govuk-link" href="/retrospective/question9/question9-1rem/{{ data['fileuploadAdditionalDocumentation1Id'] }}/fileuploadAdditionalDocumentation1"><span>Remove</span></a></td>
+                        </tr>
+                    {% endif %}
+                    {% if (data['fileuploadAdditionalDocumentation2Name']|length > 0) %}
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header">{{ data['fileuploadAdditionalDocumentation2Name'] }}</th>
+                            <td class="govuk-table__cell govuk-table__cell"><a class="govuk-link" href="/retrospective/question9/question9-1view/{{ data['fileuploadAdditionalDocumentation2Id'] }}"><span>Download</span></a></td>
+                            <td class="govuk-table__cell govuk-table__cell"><a class="govuk-link" href="/retrospective/question9/question9-1rem/{{ data['fileuploadAdditionalDocumentation2Id'] }}/fileuploadAdditionalDocumentation2"><span>Remove</span></a></td>
+                        </tr>
+                    {% endif %}
+                    {% if (data['fileuploadAdditionalDocumentation3Name']|length > 0) %}
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header">{{ data['fileuploadAdditionalDocumentation3Name'] }}</th>
+                            <td class="govuk-table__cell govuk-table__cell"><a class="govuk-link" href="/retrospective/question9/question9-1view/{{ data['fileuploadAdditionalDocumentation3Id'] }}"><span>Download</span></a></td>
+                            <td class="govuk-table__cell govuk-table__cell"><a class="govuk-link" href="/retrospective/question9/question9-1rem/{{ data['fileuploadAdditionalDocumentation3Id'] }}/fileuploadAdditionalDocumentation3"><span>Remove</span></a></td>
+                        </tr>
+                    {% endif %}
+                    {% if (data['fileuploadAdditionalDocumentation4Name']|length > 0) %}
+                        <tr class="govuk-table__row">
+                            <th scope="row" class="govuk-table__header">{{ data['fileuploadAdditionalDocumentation4Name'] }}</th>
+                            <td class="govuk-table__cell govuk-table__cell"><a class="govuk-link" href="/retrospective/question9/question9-1view/{{ data['fileuploadAdditionalDocumentation4Id'] }}"><span>Download</span></a></td>
+                            <td class="govuk-table__cell govuk-table__cell"><a class="govuk-link" href="/retrospective/question9/question9-1rem/{{ data['fileuploadAdditionalDocumentation4Id'] }}/fileuploadAdditionalDocumentation4"><span>Remove</span></a></td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        {% endif %}
+        <form class="form" id="submitQuestion9-1" name="submitQuestion9-1" enctype="multipart/form-data"
+            action="/retrospective/question9/question9-1post" method="post">
+            <div class="govuk-hint">You can upload up to 4 documents that are relevant to the acquisition.</div>
+
+            {% if (data['fileuploadAdditionalDocumentation1Name']|length == 0) %}
+                {{ forms.fileUploadInput("Upload first file (optional)", "fileuploadAdditionalDocumentation1",
+                "fileuploadAdditionalDocumentation1", hintText="File must be 10MB or less in PDF, DOCX, XLSX or PPTX format") }}
+                <hr>
+            {% endif %}
+
+            {% if (data['fileuploadAdditionalDocumentation2Name']|length == 0) %}
+                {{ forms.fileUploadInput("Upload second file (optional)", "fileuploadAdditionalDocumentation2",
+                "fileuploadAdditionalDocumentation2", hintText="File must be 10MB or less in PDF, DOCX, XLSX or PPTX format") }}
+                <hr>
+            {% endif %}
+
+            {% if (data['fileuploadAdditionalDocumentation3Name']|length == 0) %}
+                {{ forms.fileUploadInput("Upload third file (optional)", "fileuploadAdditionalDocumentation3",
+                "fileuploadAdditionalDocumentation3", hintText="File must be 10MB or less in PDF, DOCX, XLSX or PPTX format") }}
+                <hr>
+            {% endif %}
+
+            {% if (data['fileuploadAdditionalDocumentation4Name']|length == 0) %}
+                {{ forms.fileUploadInput("Upload fourth file (optional)", "fileuploadAdditionalDocumentation4",
+                "fileuploadAdditionalDocumentation4", hintText="File must be 10MB or less in PDF, DOCX, XLSX or PPTX format") }}
+                <hr>
+            {% endif %}
+
+            {{ govukCharacterCount({
+                name: "q9iOtherComments",
+                value: data.q9iOtherComments,
+                id: "q9iOtherComments",
+                maxlength: 5000,
+                label: {
+                    text: "Add any additional comments or information that you consider relevant to the acquisition (optional)",
+                    classes: "govuk-label--s",
+                    isPageHeading: false
+                }
+            }) }}
+
+            {% if (data['fileuploadAdditionalDocumentation1Name']|length > 0) and  
+            (data['fileuploadAdditionalDocumentation2Name']|length > 0) and 
+            (data['fileuploadAdditionalDocumentation3Name']|length > 0) and 
+            (data['fileuploadAdditionalDocumentation4Name']|length > 0) %}
+                {{ forms.continueButton("q9iSubmitButton") }}
+            {% else %}
+                {{ forms.saveAndContinueButton("q9iSubmitButton") }}
+            {% endif %}
+        </form>
+    </div>
+</div>
+{% endblock %}

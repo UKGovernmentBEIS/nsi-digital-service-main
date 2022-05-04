@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block pageTitle %}
+Cookies
+{% endblock %}
+
+{% block header %}
+{% if isAuthenticated == false %}
+{% include "includes/startHeader.html" %}
+{% include "includes/feedback.html" %}
+{% else %}
+{% include "includes/header.html" %}
+{% include "includes/feedback.html" %}
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <h1 class="govuk-heading-l">Cookies</h1>
+        <div class="">
+            <p>Cookies are small text files that are placed on your computer by websites that you visit. They are used to make websites work more efficiently, as well as to provide information to the owners of the site.</p>
+
+            <p>To find out more about cookies, including how to see what cookies have been set and how to manage and delete them, visit <a rel="external" href="https://www.allaboutcookies.org/" class="govuk-link">www.allaboutcookies.org</a>.</p>
+
+            <p>We use cookies for online services such as our licensing site, our criminal record indicator or the search for a training provider tool.</p>
+
+            <p>The tables below explain the cookies we use and why.</p>
+
+            <h2 class="govuk-heading-m"></h2>
+
+            <table class="govuk-table">
+                <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                        <th scope="col" class="govuk-table__header">Cookie</th>
+                        <th scope="col" class="govuk-table__header">Name</th>
+                        <th scope="col" class="govuk-table__header">Purpose</th>
+                        <th scope="col" class="govuk-table__header">Expires</th>
+                    </tr>
+                </thead>
+                <tbody class="govuk-table__body">
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Cookie acceptance cookie</th>
+                        <td class="govuk-table__cell">nsi-cookie-consent</td>
+                        <td class="govuk-table__cell">Remembers your cookies settings on our website</td>
+                        <td class="govuk-table__cell">1 year</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Session cookie</th>
+                        <td class="govuk-table__cell">connect.sid</td>
+                        <td class="govuk-table__cell">Remembers your pages input and states across multiple pages to improve your experience</td>
+                        <td class="govuk-table__cell">When you close your browser</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

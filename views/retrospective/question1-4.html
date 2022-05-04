@@ -1,0 +1,41 @@
+{% set section = 'retrospective' %}
+{% if data['q1iNotifyingPartyOrRepresentative'] === 'notifyingParty' %}
+{% set backlink = "/"+section+"/question1/question1-2" %}
+{% else %}
+{% set backlink = "/"+section+"/question1/question1-3" %}
+{% endif %}
+{% extends "../question.html" %}
+
+{% block pageTitle %}
+  Question 1 Page 4
+{% endblock %}
+
+{% block content %}
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <form class="form" id="q1ivForm" name="q1ivForm" action="/retrospective/question1/question1-4" method="post">
+        <div class="govuk-form-group">
+            {{ forms.errorSummary(formValidation) }}
+            <fieldset class="govuk-fieldset">
+                {{ forms.legend("q1ivHeading", "Is there more than one acquirer involved in this acquisition?") }}
+
+                <div class="govuk-radios">
+                    {% set isQuestionAnswered = data['q1ivAdditionalAcquirer'] %}
+                    {% set isYes = data['q1ivAdditionalAcquirer'] === 'Yes' %}
+                    {% set isNo = data['q1ivAdditionalAcquirer'] === 'No' %}
+                    {% set isDoNotKnow = data['q1ivAdditionalAcquirer'] === 'DoNotKnow' %}
+
+                    {{ forms.radio("Yes",
+                        "q1ivAdditionalAcquirerYes", "q1ivAdditionalAcquirer", "Yes", isQuestionAnswered and isYes) }}
+
+                    {{ forms.radio("No",
+                        "q1ivAdditionalAcquirerNo", "q1ivAdditionalAcquirer", "No", isQuestionAnswered and isNo) }}
+
+                </div> 
+            </fieldset>
+        </div>
+        {{ forms.saveAndContinueButton("q1ivSubmitButton") }}
+      </form>
+    </div>
+</div>
+{% endblock %}
