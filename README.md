@@ -19,7 +19,7 @@ npm install
 
 In order to run the application you will need to modify the "LOCAL_ENV" section of the config.js file.
 
-You will need to configre the Azure B2C access seperately see the nsi-azure-b2c repository.
+You will need to configure the Azure B2C access seperately see the nsi-azure-b2c repository.
 
 This portal also requires a Postgres database, the creation scripts for the the container for this can be found and the AppNotes.txt file within the project.  Here is a sample script for creating the basic Postgres Docker container:
 
